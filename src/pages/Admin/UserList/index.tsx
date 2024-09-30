@@ -121,14 +121,7 @@ const UserList: React.FC = () => {
     {
       title: '权限',
       dataIndex: 'userRole',
-      valueEnum: {
-        admin: {
-          text: '管理员',
-        },
-        user: {
-          text: '用户',
-        },
-      },
+      valueEnum: userRoleEnum,
       render: (_, record) => {
         // @ts-ignore
         const role = userRoleEnum[record.userRole];
