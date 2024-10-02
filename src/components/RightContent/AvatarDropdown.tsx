@@ -1,6 +1,6 @@
 import { LogoutOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
 import { history, Link, useModel } from '@umijs/max';
-import { Button, Space } from 'antd';
+import {Avatar, Button, Space} from 'antd';
 import { stringify } from 'querystring';
 import type { MenuInfo } from 'rc-menu/lib/interface';
 import React, { useCallback } from 'react';
@@ -114,7 +114,13 @@ export const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({ menu }) => {
       }}
     >
       <Space>
-        <UserAvatarCard user={currentUser} />
+        <Space>
+          {currentUser?.userAvatar ? (
+            <UserAvatarCard user={currentUser} />
+          ) : (
+            <Avatar icon={<UserOutlined />} />
+          )}
+        </Space>
       </Space>
     </HeaderDropdown>
   );
