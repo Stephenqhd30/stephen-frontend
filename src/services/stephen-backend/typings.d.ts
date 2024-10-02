@@ -235,6 +235,7 @@ declare namespace API {
 
   type Post = {
     content?: string;
+    cover?: string;
     createTime?: string;
     favourNum?: number;
     id?: number;
@@ -248,12 +249,14 @@ declare namespace API {
 
   type PostAddRequest = {
     content?: string;
+    cover?: string;
     tags?: string[];
     title?: string;
   };
 
   type PostEditRequest = {
     content?: string;
+    cover?: string;
     id?: number;
     tags?: string[];
     title?: string;
@@ -294,6 +297,7 @@ declare namespace API {
 
   type PostUpdateRequest = {
     content?: string;
+    cover?: string;
     id?: number;
     tags?: string[];
     title?: string;
@@ -301,6 +305,7 @@ declare namespace API {
 
   type PostVO = {
     content?: string;
+    cover?: string;
     createTime?: string;
     favourNum?: number;
     hasFavour?: boolean;
@@ -310,8 +315,8 @@ declare namespace API {
     thumbNum?: number;
     title?: string;
     updateTime?: string;
-    user?: UserVO;
     userId?: number;
+    userVO?: UserVO;
   };
 
   type Tag = {
@@ -417,6 +422,7 @@ declare namespace API {
     userEmail?: string;
     userGender?: number;
     userName?: string;
+    userPassword?: string;
     userPhone?: string;
     userProfile?: string;
   };
@@ -459,6 +465,7 @@ declare namespace API {
     userEmail?: string;
     userGender?: number;
     userName?: string;
+    userPassword?: string;
     userPhone?: string;
     userProfile?: string;
     userRole?: string;
