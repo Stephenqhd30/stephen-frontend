@@ -7,6 +7,6 @@
  */
 import Footer from './Footer';
 import { AvatarDropdown, AvatarName } from './RightContent/AvatarDropdown';
-import MdEditor from '@/components/MdEditor';
-import MdViewer from '@/components/MdViewer';
-export { Footer, AvatarDropdown, AvatarName, MdEditor, MdViewer };
+import { MdEditor, MdViewer, TableOfContents } from '@/components/Markdown';
+
+export { Footer, AvatarDropdown, AvatarName, MdViewer, MdEditor, TableOfContents };

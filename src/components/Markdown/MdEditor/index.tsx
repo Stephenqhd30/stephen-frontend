@@ -3,11 +3,13 @@ import gfm from "@bytemd/plugin-gfm";
 import highlight from "@bytemd/plugin-highlight";
 import mediumZoom from "@bytemd/plugin-medium-zoom";
 import gemoji from "@bytemd/plugin-gemoji";
-
-
-import "bytemd/dist/index.css";
+import breaks from '@bytemd/plugin-breaks';
+import footnotes from '@bytemd/plugin-footnotes';
+import frontmatter from '@bytemd/plugin-frontmatter';
+import 'bytemd/dist/index.css'
+import 'juejin-markdown-themes/dist/juejin.min.css'
 import "highlight.js/styles/vs.css";
-
+import "./index.less";
 
 interface Props {
   value?: string;
@@ -15,7 +17,7 @@ interface Props {
   placeholder?: string;
 }
 
-const plugins = [gfm(), highlight(), gemoji(), mediumZoom()];
+const plugins = [gfm(), highlight(), mediumZoom(), gemoji(), breaks(), frontmatter(), footnotes()];
 
 /**
  * Markdown 编辑器

@@ -1,82 +1,51 @@
-import {Image, message, Space, Typography} from 'antd';
-import React, {useEffect, useRef, useState} from 'react';
-import {ActionType, PageContainer, ProCard, ProList} from '@ant-design/pro-components';
-import {listPostVoByPageUsingPost} from '@/services/stephen-backend/postController';
-import UserAvatarCard from '@/components/ReUser/UserAvatarCard';
-import {MdViewer} from '@/components';
-import {LikeOutlined, LikeTwoTone, StarOutlined, StarTwoTone} from '@ant-design/icons';
+import { Grid } from 'antd';
+import React, { useRef } from 'react';
+import { ActionType, PageContainer, ProCard, ProList } from '@ant-design/pro-components';
+import { listPostVoByPageUsingPost } from '@/services/stephen-backend/postController';
+import { PostCard } from '@/pages/Post/components';
+import { WELCOME_TITLE } from '@/constants';
+
+// 响应式组件
+const { useBreakpoint } = Grid;
 
 const Welcome: React.FC = () => {
   const actionRef = useRef<ActionType>();
-  // 数据列表
-  const [dataSource, setDataSource] = useState<API.PostVO[]>([]);
+  // 响应式
+  const screens = useBreakpoint();
+  const isMobile = !screens.md;
 
-  const loadData = async () => {
-    try {
-      const res = await listPostVoByPageUsingPost({});
-      if (res.code === 0 && res.data) {
-        setDataSource(res?.data?.records as API.PostVO[]);
-      }
-    } catch (error: any) {
-      message.error(`获取帖子数据失败${error.message}` + '请重试！');
-    }
-  };
-  useEffect(() => {
-    loadData();
-  }, []);
   return (
-    <PageContainer header={{title: ''}}>
-      <ProCard gutter={[24, 24]} bordered hoverable={false}>
+    <PageContainer title={WELCOME_TITLE} extra={isMobile ? '' : new Date().toLocaleDateString()}>
+      <ProCard bordered bodyStyle={{ padding: isMobile ? '0' : '16px' }}>
         <ProList<API.PostVO>
+          onChange={() => {
+            actionRef.current?.reload();
+          }}
           pagination={{
-            pageSize: 20,
-            showSizeChanger: true
+            pageSize: 10,
+            showSizeChanger: true,
           }}
           itemLayout="vertical"
           rowKey="id"
           bordered
           actionRef={actionRef}
           rowHoverable={false}
-          dataSource={dataSource}
-          renderItem={(item) => {
-            return (
-              <ProCard gutter={[16, 16]} headerBordered={true}>
-                <ProCard title={<UserAvatarCard user={item.userVO ?? {}}/>} colSpan={"70%"}>
-                  <Typography.Title level={4}>{item?.title}</Typography.Title>
-                  <div style={{margin: '10px 0'}}>
-                    <MdViewer value={item.content}/>
-                  </div>
-                  <Space>
-                    {item.hasFavour ? (
-                      <Space>
-                        <LikeTwoTone/>
-                        {item.favourNum}
-                      </Space>
-                    ) : (
-                      <Space>
-                        <LikeOutlined/>
-                        {item.favourNum}
-                      </Space>
-                    )}
-                    {item?.hasThumb ? (
-                      <Space>
-                        <StarTwoTone/>
-                        {item.thumbNum}
-                      </Space>
-                    ) : (
-                      <Space>
-                        <StarOutlined/>
-                        {item.thumbNum}
-                      </Space>
-                    )}
-                  </Space>
-                </ProCard>
-                <ProCard colSpan={"30%"} layout={'center'}>
-                  <Image src={item?.cover} width={256}/>
-                </ProCard>
-              </ProCard>
-            );
+          request={async (params, sort, filter) => {
+            const sortField = Object.keys(sort)?.[0];
+            const sortOrder = sort?.[sortField] ?? undefined;
+            const { data, code } = await listPostVoByPageUsingPost({
+              ...params,
+              ...filter,
+              sortField,
+              sortOrder,
+            } as API.PostQueryRequest);
+            return {
+              success: code === 0,
+              data: data?.records || [],
+              total: data?.total || 0,
+            };
           }}
+          renderItem={(item) => <PostCard key={item.id} post={item} isMobile={isMobile} />}
         />
       </ProCard>
     </PageContainer>

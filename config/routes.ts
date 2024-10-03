@@ -1,6 +1,7 @@
 export default [
   { path: '/', redirect: '/welcome' },
   { path: '/welcome', name: '欢迎', icon: 'smile', component: './Welcome' },
+  { path: '/post/:id', name: '帖子', hideInMenu: true, component: './Post' },
   {
     path: '/user',
     layout: false,
