@@ -1,4 +1,4 @@
-import { ActionType, ProColumns, ProTable } from '@ant-design/pro-components';
+import { ActionType, ProColumns, ProFormTreeSelect, ProTable } from '@ant-design/pro-components';
 import '@umijs/max';
 import { Button, message, Popconfirm, Space, Typography } from 'antd';
 import React, { useRef, useState } from 'react';
@@ -8,6 +8,7 @@ import {
   listPostByPageUsingPost,
 } from '@/services/stephen-backend/postController';
 import { PlusOutlined } from '@ant-design/icons';
+import { listTagByTreeUsingGet } from '@/services/stephen-backend/tagController';
 
 /**
  * 删除节点
@@ -64,12 +65,6 @@ const PostList: React.FC = () => {
       ellipsis: true,
     },
     {
-      title: '描述',
-      dataIndex: 'description',
-      valueType: 'textarea',
-      ellipsis: true,
-    },
-    {
       title: '封面',
       dataIndex: 'cover',
       valueType: 'image',
@@ -81,21 +76,54 @@ const PostList: React.FC = () => {
     {
       title: '点赞数',
       dataIndex: 'favourNum',
-      valueType: 'digit',
       hideInSearch: true,
       hideInForm: true,
     },
     {
       title: '收藏数',
       dataIndex: 'thumbNum',
-      valueType: 'digit',
       hideInSearch: true,
       hideInForm: true,
     },
     {
       title: '标签',
       dataIndex: 'tags',
-      valueType: 'text',
+      valueType: 'select',
+      renderFormItem: () => {
+        return (
+          <ProFormTreeSelect
+            name={'tags'}
+            secondary
+            allowClear
+            request={async () => {
+              const res = await listTagByTreeUsingGet();
+              return (
+                res.data?.map((tag) => ({
+                  label: tag.tagName ?? '',
+                  value: tag.tagName ?? '',
+                  children:
+                    tag.children?.map((child) => ({
+                      label: child.tagName ?? '',
+                      value: child.tagName ?? '',
+                    })) || [],
+                })) || []
+              );
+            }}
+            fieldProps={{
+              filterTreeNode: true,
+              showSearch: true,
+              autoClearSearchValue: true,
+              multiple: true,
+              treeNodeFilterProp: 'label',
+              fieldNames: {
+                label: 'label',
+                value: 'value',
+                children: 'children',
+              },
+            }}
+          />
+        );
+      },
     },
     {
       title: '创建用户id',
@@ -165,7 +193,7 @@ const PostList: React.FC = () => {
       <ProTable<API.Post, API.PageParams>
         headerTitle={'帖子列表'}
         actionRef={actionRef}
-        rowKey={'key'}
+        rowKey={'id'}
         search={{
           labelWidth: 120,
         }}
@@ -206,12 +234,7 @@ const PostList: React.FC = () => {
           onCancel={() => {
             setCreateModalVisible(false);
           }}
-          onSubmit={async () => {
-            setCreateModalVisible(false);
-            actionRef.current?.reload();
-          }}
           visible={createModalVisible}
-          columns={columns}
         />
       )}
       {/*更新表单的Modal框*/}
@@ -220,14 +243,13 @@ const PostList: React.FC = () => {
           onCancel={() => {
             setUpdateModalVisible(false);
           }}
+          visible={updateModalVisible}
+          oldData={currentRow}
+          columns={columns}
           onSubmit={async () => {
             setUpdateModalVisible(false);
-            setCurrentRow(undefined);
             actionRef.current?.reload();
           }}
-          visible={updateModalVisible}
-          columns={columns}
-          oldData={currentRow}
         />
       )}
     </>

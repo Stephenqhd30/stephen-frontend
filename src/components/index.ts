@@ -8,5 +8,16 @@
 import Footer from './Footer';
 import { AvatarDropdown, AvatarName } from './RightContent/AvatarDropdown';
 import { MdEditor, MdViewer, TableOfContents } from '@/components/Markdown';
+import UserAvatarCard from '@/components/ReUser/UserAvatarCard';
+import { CreatePostForm } from '@/components/RePost';
 
-export { Footer, AvatarDropdown, AvatarName, MdViewer, MdEditor, TableOfContents };
+export {
+  Footer,
+  AvatarDropdown,
+  AvatarName,
+  MdViewer,
+  MdEditor,
+  TableOfContents,
+  UserAvatarCard,
+  CreatePostForm,
+};

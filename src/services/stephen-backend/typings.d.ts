@@ -337,14 +337,14 @@ declare namespace API {
   };
 
   type TagChildren = {
+    children?: TagChildren[];
     id?: number;
-    tagChildrenList?: TagChildren[];
     tagName?: string;
   };
 
   type TagDTO = {
+    children?: TagChildren[];
     id?: number;
-    tagChildrenList?: TagChildren[];
     tagName?: string;
   };
 

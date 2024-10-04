@@ -1,13 +1,13 @@
 export default [
   { path: '/', redirect: '/welcome' },
-  { path: '/welcome', name: '欢迎', icon: 'smile', component: './Welcome' },
+  {path: '/welcome', name: '主页', icon: 'smile', component: './Welcome'},
   { path: '/post/:id', name: '帖子', hideInMenu: true, component: './Post' },
   {
-    path: '/user',
-    layout: false,
+    path: '/create',
+    name: '创建页面',
+    icon: 'AppstoreAddOutlined',
     routes: [
-      { name: '用户登录', path: '/user/login', component: './User/Login' },
-      { name: '用户注册', path: '/user/register', component: './User/Register' },
+      { name: '创建帖子', path: '/create/post', component: './Create/Post' },
     ],
   },
   {
@@ -31,6 +31,14 @@ export default [
       { name: '个人中心', path: '/account/center', component: './Account/Center' },
       { name: '个人设置', path: '/account/settings', component: './Account/Settings' },
     ],
+  },
+  {
+    path: '/user',
+    layout: false,
+    routes: [
+      {name: '用户登录', path: '/user/login', component: './User/Login'},
+      {name: '用户注册', path: '/user/register', component: './User/Register'}
+    ]
   },
   {
     name: 'exception',

@@ -23,7 +23,6 @@ const Welcome: React.FC = () => {
           }}
           pagination={{
             pageSize: 10,
-            showSizeChanger: true,
           }}
           itemLayout="vertical"
           rowKey="id"
@@ -31,8 +30,8 @@ const Welcome: React.FC = () => {
           actionRef={actionRef}
           rowHoverable={false}
           request={async (params, sort, filter) => {
-            const sortField = Object.keys(sort)?.[0];
-            const sortOrder = sort?.[sortField] ?? undefined;
+            const sortField = 'createTime';
+            const sortOrder = 'descend';
             const { data, code } = await listPostVoByPageUsingPost({
               ...params,
               ...filter,
