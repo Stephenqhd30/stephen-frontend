@@ -8,7 +8,7 @@ import {
   downloadUsingGet,
   listUserByPageUsingPost,
 } from '@/services/stephen-backend/userController';
-import {userRoleEnum} from '@/enums/UserRoleEnum';
+import { UserRole, userRoleEnum } from '@/enums/UserRoleEnum';
 import {
   CreateUserModal,
   UpdateUserModal,
@@ -50,7 +50,9 @@ const UserList: React.FC = () => {
   // 当前用户的所点击的数据
   const [currentRow, setCurrentRow] = useState<API.User>();
 
-
+  /**
+   * 现在用户信息
+   */
   const downloadUserInfo = async () => {
     try {
       const res = await downloadUsingGet({
@@ -123,8 +125,7 @@ const UserList: React.FC = () => {
       dataIndex: 'userRole',
       valueEnum: userRoleEnum,
       render: (_, record) => {
-        // @ts-ignore
-        const role = userRoleEnum[record.userRole];
+        const role = userRoleEnum[record.userRole as UserRole];
         return <Tag color={role.color}>{role.text}</Tag>;
       },
     },
@@ -222,7 +223,7 @@ const UserList: React.FC = () => {
               <DownloadOutlined />
               导出用户信息
             </Button>
-          </Space>
+          </Space>,
         ]}
         request={async (params, sort, filter) => {
           const sortField = Object.keys(sort)?.[0];

@@ -61,8 +61,14 @@ const PostList: React.FC = () => {
     {
       title: '内容',
       dataIndex: 'content',
-      valueType: 'textarea',
-      ellipsis: true,
+      valueType: 'text',
+      render: (_, record) => {
+        return (
+          <Typography.Paragraph ellipsis={{ rows: 3, expandable: true }}>
+            {record.content}
+          </Typography.Paragraph>
+        );
+      },
     },
     {
       title: '封面',

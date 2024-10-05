@@ -17,6 +17,12 @@ declare namespace API {
     message?: string;
   };
 
+  type BaseResponseListUserVO_ = {
+    code?: number;
+    data?: UserVO[];
+    message?: string;
+  };
+
   type BaseResponseLoginUserVO_ = {
     code?: number;
     data?: LoginUserVO;
@@ -140,6 +146,7 @@ declare namespace API {
     createTime?: string;
     editTime?: string;
     id?: number;
+    tagList?: string[];
     updateTime?: string;
     userAvatar?: string;
     userEmail?: string;
@@ -148,6 +155,11 @@ declare namespace API {
     userPhone?: string;
     userProfile?: string;
     userRole?: string;
+  };
+
+  type matchUsersUsingGETParams = {
+    /** pageSize */
+    pageSize?: number;
   };
 
   type OrderItem = {
@@ -393,6 +405,7 @@ declare namespace API {
     id?: number;
     isDelete?: number;
     mpOpenId?: string;
+    tags?: string;
     unionId?: string;
     updateTime?: string;
     userAccount?: string;
@@ -407,6 +420,7 @@ declare namespace API {
   };
 
   type UserAddRequest = {
+    tagList?: string[];
     userAccount?: string;
     userAvatar?: string;
     userEmail?: string;
@@ -418,6 +432,7 @@ declare namespace API {
   };
 
   type UserEditRequest = {
+    tagList?: string[];
     userAvatar?: string;
     userEmail?: string;
     userGender?: number;
@@ -444,6 +459,7 @@ declare namespace API {
     pageSize?: number;
     sortField?: string;
     sortOrder?: string;
+    tagList?: string[];
     unionId?: string;
     userEmail?: string;
     userGender?: number;
@@ -461,6 +477,7 @@ declare namespace API {
 
   type UserUpdateRequest = {
     id?: number;
+    tagList?: string[];
     userAvatar?: string;
     userEmail?: string;
     userGender?: number;
@@ -476,6 +493,8 @@ declare namespace API {
     editTime?: string;
     id?: number;
     mpOpenId?: string;
+    similarity?: number;
+    tagList?: string[];
     unionId?: string;
     updateTime?: string;
     userAvatar?: string;

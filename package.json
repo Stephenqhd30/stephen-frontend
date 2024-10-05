@@ -52,6 +52,7 @@
     "@bytemd/plugin-highlight": "^1.21.0",
     "@bytemd/plugin-medium-zoom": "^1.21.0",
     "@bytemd/react": "^1.21.0",
+    "@reduxjs/toolkit": "^2.2.7",
     "@umijs/route-utils": "^2.2.2",
     "antd": "^5.21.2",
     "antd-style": "^3.7.0",
