@@ -5,7 +5,7 @@ import { listPostVoByPageUsingPost } from '@/services/stephen-backend/postContro
 import { PostCard } from '@/pages/Post/components';
 import { WELCOME_TITLE } from '@/constants';
 import { useModel } from '@umijs/max';
-import {RecommendUserCard} from '@/pages/Welcome/components';
+import { RecommendUserCard } from '@/pages/Welcome/components';
 
 
 // 响应式组件
@@ -23,8 +23,8 @@ const Welcome: React.FC = () => {
 
   return (
     <PageContainer title={WELCOME_TITLE} extra={isMobile ? '' : new Date().toLocaleDateString()}>
-      <Row gutter={8}>
-        <Col span={18}>
+      <Row gutter={16} wrap={true}>
+        <Col span={isMobile ? 24 : 18}>
           <ProCard bordered bodyStyle={{ padding: isMobile ? '0' : '16px' }}>
             <ProList<API.PostVO>
               onChange={() => {
@@ -57,7 +57,7 @@ const Welcome: React.FC = () => {
             />
           </ProCard>
         </Col>
-        <Col span={isMobile ? 0 : 6}>
+        <Col span={isMobile ? 24 : 6}>
           <ProCard title={"推荐用户"} bordered bodyStyle={{ padding: '4px' }}>
             <ProList<API.UserVO>
               dataSource={recommendUserList}

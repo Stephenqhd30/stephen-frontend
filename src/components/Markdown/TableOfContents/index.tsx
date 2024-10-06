@@ -33,14 +33,28 @@ const TableOfContents: React.FC<DirectoryProps> = ({ markdown }) => {
   }, [markdown]);
 
   return (
-    <ProCard title="目录" bordered={false}>
+    <ProCard
+      title="目录"
+      bordered={false} // 可以根据需要选择是否添加边框
+      bodyStyle={{ padding: '0px' }}
+      headStyle={{ padding: '0px' }}
+    >
       <ProList
         itemLayout="horizontal"
         dataSource={headings}
         split={false}
         renderItem={(heading) => (
-          <Item style={{ paddingLeft: `${(heading.level - 1) * 16}px` }}>
-            <Typography.Link href={`#${heading.id}`} style={{ fontSize: `${18 - heading.level}px` }}>
+          <Item style={{ paddingLeft: `${(heading.level - 1) * 12}px`}}>
+            <Typography.Link
+              href={`#${heading.id}`}
+              style={{
+                fontSize: `${16 - heading.level}px`, // 设置字体大小，标题级别越高，字体越小
+                color: heading.level === 1 ? '#333' : '#666', // 设置不同级别的颜色
+                transition: 'color 0.3s', // 添加过渡效果
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = '#1890ff')} // 悬停时改变颜色
+              onMouseLeave={(e) => (e.currentTarget.style.color = heading.level === 1 ? '#333' : '#666')} // 恢复颜色
+            >
               {heading.text}
             </Typography.Link>
           </Item>

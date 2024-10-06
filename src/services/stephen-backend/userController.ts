@@ -179,17 +179,17 @@ export async function userLogoutUsingPost(options?: { [key: string]: any }) {
   });
 }
 
-/** matchUsers GET /api/user/match */
-export async function matchUsersUsingGet(
-  // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
-  params: API.matchUsersUsingGETParams,
+/** matchUsers POST /api/user/match */
+export async function matchUsersUsingPost(
+  body: API.UserMatchRequest,
   options?: { [key: string]: any },
 ) {
   return request<API.BaseResponseListUserVO_>('/api/user/match', {
-    method: 'GET',
-    params: {
-      ...params,
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
     },
+    data: body,
     ...(options || {}),
   });
 }

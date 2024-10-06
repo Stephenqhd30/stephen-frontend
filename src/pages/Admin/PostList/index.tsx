@@ -1,6 +1,6 @@
-import { ActionType, ProColumns, ProFormTreeSelect, ProTable } from '@ant-design/pro-components';
+import { ActionType, ProColumns, ProTable } from '@ant-design/pro-components';
 import '@umijs/max';
-import { Button, message, Popconfirm, Space, Typography } from 'antd';
+import {Button, message, Popconfirm, Space, Tag, Typography} from 'antd';
 import React, { useRef, useState } from 'react';
 import { CreatePostModal, UpdatePostModal } from '@/pages/Admin/PostList/components';
 import {
@@ -8,7 +8,8 @@ import {
   listPostByPageUsingPost,
 } from '@/services/stephen-backend/postController';
 import { PlusOutlined } from '@ant-design/icons';
-import { listTagByTreeUsingGet } from '@/services/stephen-backend/tagController';
+import {TagTreeSelect} from '@/components';
+import {TAG_EMPTY} from '@/constants';
 
 /**
  * 删除节点
@@ -57,11 +58,13 @@ const PostList: React.FC = () => {
       title: '标题',
       dataIndex: 'title',
       valueType: 'text',
+      width: 200,
     },
     {
       title: '内容',
       dataIndex: 'content',
       valueType: 'text',
+      width: 500,
       render: (_, record) => {
         return (
           <Typography.Paragraph ellipsis={{ rows: 3, expandable: true }}>
@@ -94,42 +97,14 @@ const PostList: React.FC = () => {
     {
       title: '标签',
       dataIndex: 'tags',
-      valueType: 'select',
-      renderFormItem: () => {
-        return (
-          <ProFormTreeSelect
-            name={'tags'}
-            secondary
-            allowClear
-            request={async () => {
-              const res = await listTagByTreeUsingGet();
-              return (
-                res.data?.map((tag) => ({
-                  label: tag.tagName ?? '',
-                  value: tag.tagName ?? '',
-                  children:
-                    tag.children?.map((child) => ({
-                      label: child.tagName ?? '',
-                      value: child.tagName ?? '',
-                    })) || [],
-                })) || []
-              );
-            }}
-            fieldProps={{
-              filterTreeNode: true,
-              showSearch: true,
-              autoClearSearchValue: true,
-              multiple: true,
-              treeNodeFilterProp: 'label',
-              fieldNames: {
-                label: 'label',
-                value: 'value',
-                children: 'children',
-              },
-            }}
-          />
-        );
+      render: (_, record) => {
+        if (record.tags) {
+          const tagList = JSON.parse(record.tags as string);
+          return tagList.map((tag) => <Tag key={tag} color={'blue'}>{tag}</Tag>);
+        }
+        return <Tag>{TAG_EMPTY}</Tag>;
       },
+      renderFormItem: () => <TagTreeSelect name={'tags'}/>,
     },
     {
       title: '创建用户id',

@@ -157,11 +157,6 @@ declare namespace API {
     userRole?: string;
   };
 
-  type matchUsersUsingGETParams = {
-    /** pageSize */
-    pageSize?: number;
-  };
-
   type OrderItem = {
     asc?: boolean;
     column?: string;
@@ -420,7 +415,7 @@ declare namespace API {
   };
 
   type UserAddRequest = {
-    tagList?: string[];
+    tags?: string[];
     userAccount?: string;
     userAvatar?: string;
     userEmail?: string;
@@ -432,7 +427,7 @@ declare namespace API {
   };
 
   type UserEditRequest = {
-    tagList?: string[];
+    tags?: string[];
     userAvatar?: string;
     userEmail?: string;
     userGender?: number;
@@ -452,6 +447,14 @@ declare namespace API {
     userPassword?: string;
   };
 
+  type UserMatchRequest = {
+    current?: number;
+    number?: number;
+    pageSize?: number;
+    sortField?: string;
+    sortOrder?: string;
+  };
+
   type UserQueryRequest = {
     current?: number;
     id?: number;
@@ -459,7 +462,7 @@ declare namespace API {
     pageSize?: number;
     sortField?: string;
     sortOrder?: string;
-    tagList?: string[];
+    tags?: string[];
     unionId?: string;
     userEmail?: string;
     userGender?: number;
@@ -477,7 +480,7 @@ declare namespace API {
 
   type UserUpdateRequest = {
     id?: number;
-    tagList?: string[];
+    tags?: string[];
     userAvatar?: string;
     userEmail?: string;
     userGender?: number;
@@ -494,7 +497,7 @@ declare namespace API {
     id?: number;
     mpOpenId?: string;
     similarity?: number;
-    tagList?: string[];
+    tags?: string[];
     unionId?: string;
     updateTime?: string;
     userAvatar?: string;

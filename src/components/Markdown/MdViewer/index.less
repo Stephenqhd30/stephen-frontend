@@ -1,10 +1,31 @@
 .md-viewer {
-	max-width: 100%; // 限制md-viewer的最大宽度
-	overflow: hidden; // 防止内容溢出
+  max-width: 100%; /* 限制编辑器的最大宽度 */
+  overflow: hidden; /* 防止内容溢出 */
+  margin: 0 auto; /* 居中 */
 }
 
 .md-viewer img {
-	max-width: 100%; // 确保图片不会超出父组件的宽度
-	height: auto; // 保持图片的纵横比
+  max-width: 100%; /* 确保图片不会超出父组件的宽度 */
+  height: auto; /* 保持图片的纵横比 */
 }
 
+.md-viewer div {
+  font-size: 16px; /* 段落字体大小 */
+}
+
+.md-viewer p, li {
+  font-size: 14px; /* 段落字体大小 */
+}
+
+/* 具体标题和段落的大小 */
+.md-viewer h1 {
+  font-size: 1.5em; /* H1标题大小 */
+}
+
+.md-viewer h2 {
+  font-size: 1.4em; /* H2标题大小 */
+}
+
+.md-viewer h3 {
+  font-size: 1.3em; /* H3标题大小 */
+}

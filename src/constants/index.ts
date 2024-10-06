@@ -8,3 +8,4 @@ export const BASE_URL = 'http://localhost:8080';
 export const BACKGROUND_IMAGE = "https://butterfly-1318299170.cos.ap-shanghai.myqcloud.com/Images/Blog/Background/6.webp"
 export const ACCOUNT_TITLE = "我的城堡说欢迎光临";
 export const WELCOME_TITLE = "今晚的月亮或者楼外的蒹葭";
+export const TAG_EMPTY = "未设置标签";
