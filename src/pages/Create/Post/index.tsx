@@ -1,7 +1,7 @@
 import React from 'react';
 import { PageContainer, ProCard } from '@ant-design/pro-components';
 import { Grid, Steps } from 'antd';
-import CreatePostForm from '@/components/RePost/CreatePostForm';
+import {CreatePostForm} from '@/pages/Create/Post/components';
 
 const { useBreakpoint } = Grid;
 

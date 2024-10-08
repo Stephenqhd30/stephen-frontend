@@ -1,9 +1,11 @@
 import { ProFormTreeSelect } from '@ant-design/pro-components';
-import React from 'react';
-import {useModel} from '@umijs/max';
+import React, {useEffect, useState} from 'react';
+import { useModel } from '@umijs/max';
 
 interface Props {
   name: string;
+  initialValue?: string[];
+  label?: string;
 }
 
 /**
@@ -12,20 +14,25 @@ interface Props {
  * @constructor
  */
 const TagTreeSelect: React.FC<Props> = (props) => {
-  const { name } = props;
-  const { tagTreeList } = useModel('tagTree')
+  const { name, label = "", initialValue =[] } = props;
+  const { tagTreeList, loadData } = useModel('tagTree');
+  const [value, setValue] = useState<string[]>(initialValue);
+  useEffect(() => {
+    loadData();
+  }, []);
   return (
     <ProFormTreeSelect
       name={name}
+      label={label}
       allowClear
       request={async () => {
         return (
           tagTreeList?.map((tag) => ({
-            label: tag.tagName ?? '',
+            title: tag.tagName ?? '',
             value: tag.tagName ?? '',
             children:
               tag.children?.map((child) => ({
-                label: child.tagName ?? '',
+                title: child.tagName ?? '',
                 value: child.tagName ?? '',
               })) || [],
           })) || []
@@ -36,12 +43,16 @@ const TagTreeSelect: React.FC<Props> = (props) => {
         showSearch: true,
         autoClearSearchValue: true,
         multiple: true,
-        treeNodeFilterProp: 'label',
+        treeNodeFilterProp: 'title',
         fieldNames: {
-          label: 'label',
+          label: 'title',
           value: 'value',
           children: 'children',
         },
+        onChange: (newValue) => {
+          setValue(newValue);
+        },
+        value: value
       }}
     />
   );

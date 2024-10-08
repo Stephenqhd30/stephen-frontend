@@ -1,12 +1,39 @@
 import '@umijs/max';
-import { Modal } from 'antd';
-import React from 'react';
-import { CreatePostForm } from '@/components/RePost';
+import {Grid, message, Modal, UploadProps} from 'antd';
+import React, {useState} from 'react';
+import {ProForm, ProFormText, ProFormUploadDragger} from '@ant-design/pro-components';
+import {MdEditor, TagTreeSelect} from '@/components';
+import {addPostUsingPost} from '@/services/stephen-backend/postController';
+import {history} from '@@/core/history';
+import {uploadFileUsingPost} from '@/services/stephen-backend/fileController';
 
 interface CreateProps {
   onCancel: () => void;
   visible: boolean;
+  onSubmit: () => Promise<void>;
 }
+
+const { useBreakpoint } = Grid;
+
+/**
+ * 创建帖子
+ * @param values
+ */
+const handleCreatePost = async (values: API.PostAddRequest) => {
+  try {
+    const res = await addPostUsingPost(values);
+    if (res.code === 0 && res.data) {
+      message.success('创建成功3s之后跳转到创建的帖子页');
+      setTimeout(() => {
+        history.push(`/post/${res.data}`);
+      }, 3000);
+    }
+    return true;
+  } catch (error: any) {
+    message.error(`创建失败${error.message}`);
+    return false;
+  }
+};
 
 /**
  * 常见弹窗
@@ -14,10 +41,83 @@ interface CreateProps {
  * @constructor
  */
 const CreatePostModal: React.FC<CreateProps> = (props) => {
-  const { visible, onCancel } = props;
+  const { visible, onCancel, onSubmit } = props;
+  const scene = useBreakpoint();
+  const isMobile = !scene.md;
+  // 帖子封面
+  const [cover, setCover] = useState('');
+  // 帖子内容
+  const [content, setContent] = useState<string>('');
+  const [loading, setLoading] = useState<boolean>(false);
+
+  /**
+   * 上传文章封面
+   */
+  const uploadProps: UploadProps = {
+    name: 'file',
+    multiple: false,
+    maxCount: 1,
+    customRequest: async (options: any) => {
+      const { onSuccess, onError, file } = options;
+      try {
+        const res = await uploadFileUsingPost(
+          {
+            biz: 'post_cover',
+          },
+          {
+            file: file,
+          },
+          file,
+        );
+        if (res.code === 0 && res.data) {
+          onSuccess(res.data);
+          setCover(res.data);
+        }
+      } catch (error: any) {
+        onError(error);
+        message.error('文件上传失败', error.message);
+      }
+    },
+    onRemove() {
+      setCover('');
+    },
+  };
   return (
-    <Modal destroyOnClose title={'新建帖子'} width={800} onCancel={() => onCancel?.()} open={visible} footer>
-      <CreatePostForm />
+    <Modal destroyOnClose title={'新建帖子'} width={1200} onCancel={() => onCancel?.()} open={visible} footer>
+      <ProForm<API.PostAddRequest>
+        loading={loading}
+        onFinish={async (values) => {
+          setLoading(true);
+          const success = await handleCreatePost({
+            ...values,
+            cover
+          });
+          if (success) {
+            onSubmit?.()
+          }
+          setLoading(false);
+        }}
+        layout={isMobile ? 'vertical' : 'horizontal'}
+      >
+        <ProFormText name="title" label="标题" />
+        <ProFormText name="content" label="内容">
+          <MdEditor
+            value={content}
+            onChange={(value) => setContent(value)}
+            placeholder={'请填写内容'}
+          />
+        </ProFormText>
+        <ProFormUploadDragger
+          title={'上传帖子封面'}
+          max={1}
+          fieldProps={{
+            ...uploadProps,
+          }}
+          name="cover"
+          label={'封面'}
+        />
+        <TagTreeSelect name={'tags'} label={'标签'} />
+      </ProForm>
     </Modal>
   );
 };

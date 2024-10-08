@@ -1,6 +1,6 @@
 import { ActionType, ProColumns, ProTable } from '@ant-design/pro-components';
 import '@umijs/max';
-import {Button, message, Popconfirm, Space, Tag, Typography} from 'antd';
+import { Button, message, Popconfirm, Space, Tag, Typography } from 'antd';
 import React, { useRef, useState } from 'react';
 import { CreatePostModal, UpdatePostModal } from '@/pages/Admin/PostList/components';
 import {
@@ -216,6 +216,10 @@ const PostList: React.FC = () => {
             setCreateModalVisible(false);
           }}
           visible={createModalVisible}
+          onSubmit={async () => {
+            setCreateModalVisible(false);
+            actionRef.current?.reload();
+          }}
         />
       )}
       {/*更新表单的Modal框*/}
@@ -226,7 +230,6 @@ const PostList: React.FC = () => {
           }}
           visible={updateModalVisible}
           oldData={currentRow}
-          columns={columns}
           onSubmit={async () => {
             setUpdateModalVisible(false);
             actionRef.current?.reload();

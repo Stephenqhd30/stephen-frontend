@@ -269,8 +269,7 @@ const UserList: React.FC = () => {
             actionRef.current?.reload();
           }}
           visible={createModalVisible}
-          columns={columns}
-        />
+         />
       )}
       {/*更新表单的Modal框*/}
       {updateModalVisible && (
@@ -284,7 +283,6 @@ const UserList: React.FC = () => {
             actionRef.current?.reload();
           }}
           visible={updateModalVisible}
-          columns={columns}
           oldData={currentRow}
         />
       )}

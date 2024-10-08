@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { message } from 'antd';
 import { matchUsersUsingPost } from '@/services/stephen-backend/userController';
 
@@ -10,7 +10,7 @@ export default () => {
    * 加载推荐用户列表数据
    */
   const loadData = async () => {
-    if (recommendUserList.length  === 0) {
+    if (recommendUserList.length === 0) {
       try {
         const res = await matchUsersUsingPost({
           number: 10,
@@ -23,10 +23,6 @@ export default () => {
       }
     }
   };
-
-  useEffect(() => {
-    loadData();
-  }, [recommendUserList]);
 
   return { recommendUserList, loadData };
 };

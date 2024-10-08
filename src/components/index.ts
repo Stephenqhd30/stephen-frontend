@@ -9,7 +9,6 @@ import Footer from './Footer';
 import { AvatarDropdown, AvatarName } from './RightContent/AvatarDropdown';
 import { MdEditor, MdViewer, TableOfContents } from '@/components/Markdown';
 import { UserAvatarCard } from '@/components/ReUser';
-import { CreatePostForm } from '@/components/RePost';
 import { TagTreeSelect } from '@/components/ReTag';
 
 export {
@@ -20,6 +19,5 @@ export {
   MdEditor,
   TableOfContents,
   UserAvatarCard,
-  CreatePostForm,
   TagTreeSelect,
 };

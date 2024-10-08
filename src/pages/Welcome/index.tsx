@@ -1,5 +1,5 @@
 import { Col, Grid, Row } from 'antd';
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { ActionType, PageContainer, ProCard, ProList } from '@ant-design/pro-components';
 import { listPostVoByPageUsingPost } from '@/services/stephen-backend/postController';
 import { PostCard } from '@/pages/Post/components';
@@ -16,9 +16,11 @@ const Welcome: React.FC = () => {
   // 响应式
   const screens = useBreakpoint();
   const isMobile = !screens.md;
-  const { recommendUserList } = useModel('recommend');
+  const { recommendUserList, loadData } = useModel('recommend');
 
-
+  useEffect(() => {
+    loadData();
+  }, []);
 
 
   return (

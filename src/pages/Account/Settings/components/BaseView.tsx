@@ -75,7 +75,12 @@ const BaseView: React.FC<BaseViewProps> = (props) => {
   };
 
   return (
-    <ProCard title="更新个人基本信息" extra={new Date().toLocaleDateString()} headerBordered>
+    <ProCard
+      title="更新个人基本信息"
+      extra={new Date().toLocaleDateString()}
+      headerBordered
+      bodyStyle={{ padding: '0' }}
+    >
       <ProCard>
         <ProForm
           layout="vertical"
