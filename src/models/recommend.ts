@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { message } from 'antd';
-import { matchUsersUsingPost } from '@/services/stephen-backend/userController';
+import {listMatchUserVoUsingPost} from '@/services/stephen-backend/userController';
 
 export default () => {
   // 推荐用户列表
@@ -12,7 +12,7 @@ export default () => {
   const loadData = async () => {
     if (recommendUserList.length === 0) {
       try {
-        const res = await matchUsersUsingPost({
+        const res = await listMatchUserVoUsingPost({
           number: 10,
         });
         if (res.code === 0 && res.data) {

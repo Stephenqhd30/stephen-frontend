@@ -111,6 +111,36 @@ export async function importUserDataByExcelUsingPost(
   });
 }
 
+/** listMatchUserVO POST /api/user/list/match/user/vo */
+export async function listMatchUserVoUsingPost(
+  body: API.UserMatchRequest,
+  options?: { [key: string]: any },
+) {
+  return request<API.BaseResponseListUserVO_>('/api/user/list/match/user/vo', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    data: body,
+    ...(options || {}),
+  });
+}
+
+/** listMatchUserVOByPage POST /api/user/list/match/user/vo/page */
+export async function listMatchUserVoByPageUsingPost(
+  body: API.UserQueryRequest,
+  options?: { [key: string]: any },
+) {
+  return request<API.BaseResponsePageUserVO_>('/api/user/list/match/user/vo/page', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    data: body,
+    ...(options || {}),
+  });
+}
+
 /** listUserByPage POST /api/user/list/page */
 export async function listUserByPageUsingPost(
   body: API.UserQueryRequest,
@@ -175,21 +205,6 @@ export async function userLoginByWxOpenUsingGet(
 export async function userLogoutUsingPost(options?: { [key: string]: any }) {
   return request<API.BaseResponseBoolean_>('/api/user/logout', {
     method: 'POST',
-    ...(options || {}),
-  });
-}
-
-/** matchUsers POST /api/user/match */
-export async function matchUsersUsingPost(
-  body: API.UserMatchRequest,
-  options?: { [key: string]: any },
-) {
-  return request<API.BaseResponseListUserVO_>('/api/user/match', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    data: body,
     ...(options || {}),
   });
 }

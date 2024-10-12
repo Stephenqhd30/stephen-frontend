@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { ProCard, ProList } from '@ant-design/pro-components';
 import { Typography } from 'antd';
 import Item from 'antd/es/list/Item';
+import './index.less'
 
 interface Heading {
   text: string;
@@ -38,6 +39,7 @@ const TableOfContents: React.FC<DirectoryProps> = ({ markdown }) => {
       bordered={false} // 可以根据需要选择是否添加边框
       bodyStyle={{ padding: '0px' }}
       headStyle={{ padding: '0px' }}
+      className={'directory'}
     >
       <ProList
         itemLayout="horizontal"
