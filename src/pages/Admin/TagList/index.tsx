@@ -8,8 +8,8 @@ import {
   deleteTagUsingPost,
   listTagByPageUsingPost,
 } from '@/services/stephen-backend/tagController';
-import { TagStatusEnum, tagStatusEnum } from '@/enums/TagStatusEnum';
 import { CreateTagModal, UpdateTagModal } from '@/pages/Admin/TagList/components';
+import {tagStatus, TagStatusEnum} from '@/enums/TagStatusEnum';
 
 /**
  * 删除节点
@@ -73,15 +73,15 @@ const TagList: React.FC = () => {
     {
       title: '是否为父标签',
       dataIndex: 'isParent',
-      valueEnum: tagStatusEnum,
+      valueEnum: tagStatus,
       renderFormItem: () => {
         return (
           <Select>
             <Select.Option value={TagStatusEnum.IS_PARENT}>
-              {tagStatusEnum[TagStatusEnum.IS_PARENT].text}
+              {tagStatus[TagStatusEnum.IS_PARENT].text}
             </Select.Option>
             <Select.Option value={TagStatusEnum.NOT_IS_PARENT}>
-              {tagStatusEnum[TagStatusEnum.NOT_IS_PARENT].text}
+              {tagStatus[TagStatusEnum.NOT_IS_PARENT].text}
             </Select.Option>
           </Select>
         );

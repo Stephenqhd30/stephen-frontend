@@ -8,7 +8,7 @@ import {
   downloadUsingGet,
   listUserByPageUsingPost,
 } from '@/services/stephen-backend/userController';
-import { UserRole, userRoleEnum } from '@/enums/UserRoleEnum';
+import { UserRoleEnum, userRole } from '@/enums/UserRoleEnum';
 import {
   CreateUserModal,
   UpdateUserModal,
@@ -124,9 +124,9 @@ const UserList: React.FC = () => {
     {
       title: '权限',
       dataIndex: 'userRole',
-      valueEnum: userRoleEnum,
+      valueEnum: userRole,
       render: (_, record) => {
-        const role = userRoleEnum[record.userRole as UserRole];
+        const role = userRole[record.userRole as UserRoleEnum];
         return <Tag color={role.color}>{role.text}</Tag>;
       },
     },

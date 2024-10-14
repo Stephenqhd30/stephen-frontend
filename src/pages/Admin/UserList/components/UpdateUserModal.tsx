@@ -10,7 +10,7 @@ import { message, Modal, Select, UploadProps } from 'antd';
 import React, { useState } from 'react';
 import { updateUserUsingPost } from '@/services/stephen-backend/userController';
 import { uploadFileUsingPost } from '@/services/stephen-backend/fileController';
-import { UserRole, userRoleEnum } from '@/enums/UserRoleEnum';
+import { UserRoleEnum, userRole } from '@/enums/UserRoleEnum';
 import { TagTreeSelect } from '@/components';
 
 interface UpdateProps {
@@ -122,13 +122,13 @@ const UpdateUserModal: React.FC<UpdateProps> = (props) => {
           }}
           name="pic"
         />
-        <ProFormSelect name={'userRole'} label={'权限'} valueEnum={userRoleEnum}>
+        <ProFormSelect name={'userRole'} label={'权限'} valueEnum={userRole}>
           <Select>
-            <Select.Option value={UserRole.ADMIN}>
-              {userRoleEnum[UserRole.ADMIN].text}
+            <Select.Option value={UserRoleEnum.ADMIN}>
+              {userRole[UserRoleEnum.ADMIN].text}
             </Select.Option>
-            <Select.Option value={UserRole.USER}>{userRoleEnum[UserRole.USER].text}</Select.Option>
-            <Select.Option value={UserRole.BAN}>{userRoleEnum[UserRole.BAN].text}</Select.Option>
+            <Select.Option value={UserRoleEnum.USER}>{userRole[UserRoleEnum.USER].text}</Select.Option>
+            <Select.Option value={UserRoleEnum.BAN}>{userRole[UserRoleEnum.BAN].text}</Select.Option>
           </Select>
         </ProFormSelect>
         <TagTreeSelect

@@ -9,7 +9,7 @@ export enum TagStatusEnum {
 /**
  * 标签状态枚举
  */
-export const tagStatusEnum = {
+export const tagStatus = {
   [TagStatusEnum.NOT_IS_PARENT]: {
     text: '不是父标签',
     value: TagStatusEnum.NOT_IS_PARENT
