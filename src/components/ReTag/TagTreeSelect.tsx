@@ -1,5 +1,5 @@
 import { ProFormTreeSelect } from '@ant-design/pro-components';
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { useModel } from '@umijs/max';
 
 interface Props {
@@ -52,7 +52,7 @@ const TagTreeSelect: React.FC<Props> = (props) => {
         onChange: (newValue) => {
           setValue(newValue);
         },
-        value: value
+        value,
       }}
     />
   );

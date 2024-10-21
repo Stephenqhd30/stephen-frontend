@@ -101,7 +101,8 @@ const UpdateUserModal: React.FC<UpdateProps> = (props) => {
           const success = await handleUpdate({
             ...values,
             id: oldData?.id,
-            userAvatar
+            userAvatar,
+            tags: JSON.parse(oldData.tags || '[]'),
           });
           if (success) {
             onSubmit?.(values);
