@@ -28,16 +28,18 @@ const UploadUserModal: React.FC<CreateProps> = (props) => {
     // 避免重复提交
     if (submitting) return;
     setSubmitting(true);
+    const hide = message.loading("正在导入用户信息，请稍候...")
     try {
       const res = await importUserDataByExcelUsingPost({
         file: values.file[0].originFileObj,
       });
-      if (res.code === 0 && res.data) {
+      if (res.code === 0 && res?.data?.errorRecords?.length === 0) {
+        hide();
         message.success('用户信息导入成功');
         return true;
       }else  {
-        message.error('用户信息导入失败请重试');
-
+        hide();
+        message.error(`用户信息导入失败${res?.data?.errorRecords?.errorMessage}请重试`);
       }
     } catch (error: any) {
       message.error(`用户信息导入失败${error.message}` + '请重试');

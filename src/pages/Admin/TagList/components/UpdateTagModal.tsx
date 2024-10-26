@@ -25,8 +25,13 @@ const handleUpdate = async (fields: API.TagUpdateRequest) => {
       hide();
       message.success('更新成功');
       return true;
+    } else {
+      hide();
+      message.error(`更新失败${res.message}, 请重试!`);
+      return false;
     }
   } catch (error: any) {
+    hide();
     message.error(`更新失败${error.message}, 请重试!`);
     return false;
   }

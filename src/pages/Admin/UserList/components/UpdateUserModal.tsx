@@ -10,7 +10,7 @@ import { message, Modal, Select, UploadProps } from 'antd';
 import React, { useState } from 'react';
 import { updateUserUsingPost } from '@/services/stephen-backend/userController';
 import { uploadFileUsingPost } from '@/services/stephen-backend/fileController';
-import { UserRoleEnum, userRole } from '@/enums/UserRoleEnum';
+import { userRole, UserRoleEnum } from '@/enums/UserRoleEnum';
 import { TagTreeSelect } from '@/components';
 
 interface UpdateProps {
@@ -33,8 +33,11 @@ const handleUpdate = async (fields: API.UserUpdateRequest) => {
       hide();
       message.success('更新成功');
       return true;
+    } else {
+      hide();
+      message.error(`更新失败${res.message}`);
+      return false;
     }
-    return false;
   } catch (error: any) {
     hide();
     message.error(`更新失败${error.message}, 请重试!`);
@@ -70,8 +73,13 @@ const UpdateUserModal: React.FC<UpdateProps> = (props) => {
           },
           file,
         );
-        onSuccess(res.data);
-        setUserAvatar(res.data);
+        if (res.data && res.code === 0) {
+          onSuccess(res.data);
+          setUserAvatar(res.data);
+        } else {
+          onError(res.message);
+          message.error(`文件上传失败${res.message}`);
+        }
       } catch (error: any) {
         onError(error);
         message.error('文件上传失败', error.message);
