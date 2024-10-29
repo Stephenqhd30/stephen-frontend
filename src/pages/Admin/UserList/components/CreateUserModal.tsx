@@ -1,4 +1,5 @@
 import {
+  ModalForm,
   ProForm,
   ProFormSelect,
   ProFormText,
@@ -6,14 +7,15 @@ import {
   ProFormUploadDragger,
 } from '@ant-design/pro-components';
 import '@umijs/max';
-import { message, Modal, Select, UploadProps } from 'antd';
+import { message, Select, UploadProps } from 'antd';
 import React, { useState } from 'react';
 import { addUserUsingPost } from '@/services/stephen-backend/userController';
 import { uploadFileUsingPost } from '@/services/stephen-backend/fileController';
-import {UserRoleEnum, userRole} from '@/enums/UserRoleEnum';
-import {TagTreeSelect} from '@/components';
+import { userRole, UserRoleEnum } from '@/enums/UserRoleEnum';
+import { TagTreeSelect } from '@/components';
+import { FileUploadBiz } from '@/enums/FileUploadBizEnum';
 
-interface CreateProps {
+interface Props {
   onCancel: () => void;
   onSubmit: (values: API.UserAddRequest) => Promise<void>;
   visible: boolean;
@@ -27,16 +29,21 @@ interface CreateProps {
 const handleAdd = async (fields: API.UserAddRequest) => {
   const hide = message.loading('正在添加');
   try {
-    await addUserUsingPost({
+    const res = await addUserUsingPost({
       ...fields,
     });
-    hide();
-    message.success('添加成功');
-    return true;
+    if (res.code === 0 && res.data) {
+      message.success('添加成功');
+      return true;
+    } else {
+      message.error(`添加失败${res.message}, 请重试!`);
+      return false;
+    }
   } catch (error: any) {
-    hide();
     message.error(`添加失败${error.message}, 请重试!`);
     return false;
+  } finally {
+    hide();
   }
 };
 
@@ -45,10 +52,11 @@ const handleAdd = async (fields: API.UserAddRequest) => {
  * @param props
  * @constructor
  */
-const CreateUserModal: React.FC<CreateProps> = (props) => {
+const CreateUserModal: React.FC<Props> = (props) => {
   const { visible, onSubmit, onCancel } = props;
   // 用户头像
-  const [userAvatar, setUserAvatar] = useState<string>('');
+  const [userAvatar, setUserAvatar] = useState<any>();
+  const [form] = ProForm.useForm<API.UserAddRequest>();
   /**
    * 用户更新头像
    */
@@ -61,70 +69,83 @@ const CreateUserModal: React.FC<CreateProps> = (props) => {
       try {
         const res = await uploadFileUsingPost(
           {
-            biz: 'user_avatar',
+            biz: FileUploadBiz.USER_AVATAR,
           },
           {
             file: file,
           },
           file,
         );
-        onSuccess(res.data);
-        setUserAvatar(res.data as string);
+        if (res.code === 0 && res.data) {
+          onSuccess(res.data);
+          setUserAvatar(res.data);
+        } else {
+          onError(new Error(res.message));
+          message.error(`文件上传失败${res.message}`);
+        }
       } catch (error: any) {
         onError(error);
         message.error('文件上传失败', error.message);
       }
     },
     onRemove() {
-      setUserAvatar('');
+      setUserAvatar(undefined);
     },
   };
 
   return (
-    <Modal
-      destroyOnClose
+    <ModalForm
       title={'新建用户'}
-      onCancel={() => onCancel?.()}
       open={visible}
-      footer={null}
+      form={form}
+      onFinish={async (values: API.UserAddRequest) => {
+        const success = await handleAdd({
+          ...values,
+          userAvatar: userAvatar,
+        });
+        if (success) {
+          onSubmit?.(values);
+        }
+      }}
+      autoFocusFirstInput
+      modalProps={{
+        destroyOnClose: true,
+        onCancel: () => {
+          onCancel?.();
+        },
+      }}
+      submitter={{
+        searchConfig: {
+          submitText: '新建用户',
+          resetText: '取消',
+        },
+      }}
     >
-      <ProForm<API.UserAddRequest>
-        onFinish={async (values: API.UserAddRequest) => {
-          const success = await handleAdd({
-            ...values,
-            userAvatar: userAvatar,
-          });
-          if (success) {
-            onSubmit?.(values);
-          }
+      <ProFormText name={'userAccount'} label={'账号'} />
+      <ProFormText name={'userName'} label={'用户名'} />
+      <ProFormTextArea name={'userProfile'} label={'简介'} />
+      <ProFormText name={'userPhone'} label={'电话'} />
+      <ProFormText name={'userEmail'} label={'邮箱'} />
+      <ProFormUploadDragger
+        title={'上传头像'}
+        label={'头像'}
+        max={1}
+        fieldProps={{
+          ...uploadProps,
         }}
-      >
-        <ProFormText name={'userAccount'} label={'账号'} />
-        <ProFormText name={'userName'} label={'用户名'} />
-        <ProFormTextArea name={'userProfile'} label={'简介'} />
-        <ProFormText name={'userPhone'} label={'电话'} />
-        <ProFormText name={'userEmail'} label={'邮箱'} />
-        <ProFormUploadDragger
-          title={'上传头像'}
-          label={'头像'}
-          max={1}
-          fieldProps={{
-            ...uploadProps,
-          }}
-          name="pic"
-        />
-        <ProFormSelect name={'userRole'} label={'权限'} valueEnum={userRole}>
-          <Select>
-            <Select.Option value={UserRoleEnum.ADMIN}>
-              {userRole[UserRoleEnum.ADMIN].text}
-            </Select.Option>
-            <Select.Option value={UserRoleEnum.USER}>{userRole[UserRoleEnum.USER].text}</Select.Option>
-            <Select.Option value={UserRoleEnum.BAN}>{userRole[UserRoleEnum.BAN].text}</Select.Option>
-          </Select>
-        </ProFormSelect>
-        <TagTreeSelect name={'tags'} label={"标签"}/>
-      </ProForm>
-    </Modal>
+        name="pic"
+      />
+      <ProFormSelect name={'userRole'} label={'权限'} valueEnum={userRole}>
+        <Select>
+          <Select.Option value={UserRoleEnum.ADMIN}>
+            {userRole[UserRoleEnum.ADMIN].text}
+          </Select.Option>
+          <Select.Option value={UserRoleEnum.USER}>{userRole[UserRoleEnum.USER].text}</Select.Option>
+          <Select.Option value={UserRoleEnum.BAN}>{userRole[UserRoleEnum.BAN].text}</Select.Option>
+        </Select>
+      </ProFormSelect>
+      <TagTreeSelect name={'tags'} label={"标签"}/>
+    </ModalForm>
   );
 };
 export default CreateUserModal;

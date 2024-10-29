@@ -1,4 +1,5 @@
 import {
+  ModalForm,
   ProForm,
   ProFormSelect,
   ProFormText,
@@ -6,14 +7,14 @@ import {
   ProFormUploadDragger,
 } from '@ant-design/pro-components';
 import '@umijs/max';
-import { message, Modal, Select, UploadProps } from 'antd';
+import { message, Select, UploadProps } from 'antd';
 import React, { useState } from 'react';
-import { updateUserUsingPost } from '@/services/stephen-backend/userController';
 import { uploadFileUsingPost } from '@/services/stephen-backend/fileController';
+import { updateUserUsingPost } from '@/services/stephen-backend/userController';
 import { userRole, UserRoleEnum } from '@/enums/UserRoleEnum';
 import { TagTreeSelect } from '@/components';
 
-interface UpdateProps {
+interface Props {
   oldData?: API.User;
   onCancel: () => void;
   onSubmit: (values: API.UserUpdateRequest) => Promise<void>;
@@ -33,11 +34,8 @@ const handleUpdate = async (fields: API.UserUpdateRequest) => {
       hide();
       message.success('更新成功');
       return true;
-    } else {
-      hide();
-      message.error(`更新失败${res.message}`);
-      return false;
     }
+    return false;
   } catch (error: any) {
     hide();
     message.error(`更新失败${error.message}, 请重试!`);
@@ -50,10 +48,11 @@ const handleUpdate = async (fields: API.UserUpdateRequest) => {
  * @param props
  * @constructor
  */
-const UpdateUserModal: React.FC<UpdateProps> = (props) => {
+const UpdateUserModal: React.FC<Props> = (props) => {
   const { oldData, visible, onSubmit, onCancel } = props;
   // 用户头像
   const [userAvatar, setUserAvatar] = useState<string>();
+  const [form] = ProForm.useForm<API.UserUpdateRequest>();
   /**
    * 用户更新头像
    */
@@ -73,13 +72,8 @@ const UpdateUserModal: React.FC<UpdateProps> = (props) => {
           },
           file,
         );
-        if (res.data && res.code === 0) {
-          onSuccess(res.data);
-          setUserAvatar(res.data);
-        } else {
-          onError(res.message);
-          message.error(`文件上传失败${res.message}`);
-        }
+        onSuccess(res.data);
+        setUserAvatar(res.data);
       } catch (error: any) {
         onError(error);
         message.error('文件上传失败', error.message);
@@ -95,58 +89,64 @@ const UpdateUserModal: React.FC<UpdateProps> = (props) => {
   }
 
   return (
-    <Modal
-      destroyOnClose
-      title={'更新用户'}
-      onCancel={() => onCancel?.()}
+    <ModalForm
+      title={'更新用户信息'}
       open={visible}
-      footer={null}
+      form={form}
+      initialValues={oldData}
+      onFinish={async (values: API.UserUpdateRequest) => {
+        const success = await handleUpdate({
+          ...values,
+          id: oldData?.id,
+          userAvatar,
+        });
+        if (success) {
+          onSubmit?.(values);
+        }
+      }}
+      autoFocusFirstInput
+      modalProps={{
+        destroyOnClose: true,
+        onCancel: () => {
+          onCancel?.();
+        },
+      }}
+      submitter={{
+        searchConfig: {
+          submitText: '更新用户信息',
+          resetText: '取消',
+        },
+      }}
     >
-      <ProForm<API.UserUpdateRequest>
-        initialValues={oldData}
-        // @ts-ignore
-        onFinish={async (values: API.UserUpdateRequest) => {
-          const success = await handleUpdate({
-            ...values,
-            id: oldData?.id,
-            userAvatar,
-            tags: JSON.parse(oldData.tags || '[]'),
-          });
-          if (success) {
-            onSubmit?.(values);
-          }
+      <ProFormText name={'userAccount'} label={'账号'} />
+      <ProFormText name={'userName'} label={'用户名'} />
+      <ProFormTextArea name={'userProfile'} label={'简介'} />
+      <ProFormText name={'userPhone'} label={'电话'} />
+      <ProFormText name={'userEmail'} label={'邮箱'} />
+      <ProFormUploadDragger
+        title={'上传头像'}
+        label={'头像'}
+        max={1}
+        fieldProps={{
+          ...uploadProps,
         }}
-      >
-        <ProFormText name={'userAccount'} label={'账号'} />
-        <ProFormText name={'userName'} label={'用户名'} />
-        <ProFormTextArea name={'userProfile'} label={'简介'} />
-        <ProFormText name={'userPhone'} label={'电话'} />
-        <ProFormText name={'userEmail'} label={'邮箱'} />
-        <ProFormUploadDragger
-          title={'上传头像'}
-          label={'头像'}
-          max={1}
-          fieldProps={{
-            ...uploadProps,
-          }}
-          name="pic"
-        />
-        <ProFormSelect name={'userRole'} label={'权限'} valueEnum={userRole}>
-          <Select>
-            <Select.Option value={UserRoleEnum.ADMIN}>
-              {userRole[UserRoleEnum.ADMIN].text}
-            </Select.Option>
-            <Select.Option value={UserRoleEnum.USER}>{userRole[UserRoleEnum.USER].text}</Select.Option>
-            <Select.Option value={UserRoleEnum.BAN}>{userRole[UserRoleEnum.BAN].text}</Select.Option>
-          </Select>
-        </ProFormSelect>
-        <TagTreeSelect
-          name={'tags'}
-          label={'标签'}
-          initialValue={oldData.tags ? JSON.parse(oldData.tags) : []}
-        />
-      </ProForm>
-    </Modal>
+        name="pic"
+      />
+      <ProFormSelect name={'userRole'} label={'权限'} valueEnum={userRole}>
+        <Select>
+          <Select.Option value={UserRoleEnum.ADMIN}>
+            {userRole[UserRoleEnum.ADMIN].text}
+          </Select.Option>
+          <Select.Option value={UserRoleEnum.USER}>{userRole[UserRoleEnum.USER].text}</Select.Option>
+          <Select.Option value={UserRoleEnum.BAN}>{userRole[UserRoleEnum.BAN].text}</Select.Option>
+        </Select>
+      </ProFormSelect>
+      <TagTreeSelect
+        name={'tags'}
+        label={'标签'}
+        initialValue={oldData.tags ? JSON.parse(oldData.tags) : []}
+      />
+    </ModalForm>
   );
 };
 export default UpdateUserModal;
