@@ -2,7 +2,7 @@ import '@umijs/max';
 import { message } from 'antd';
 import React, { useState } from 'react';
 import { ModalForm, ProForm, ProFormUploadDragger } from '@ant-design/pro-components';
-import { importUserDataByExcelUsingPost } from '@/services/stephen-backend/userController';
+import { importUserDataByExcelUsingPost } from '@/services/stephen-backend/excelController';
 
 interface Props {
   onCancel: () => void;
@@ -17,8 +17,6 @@ interface Props {
  */
 const UploadUserModal: React.FC<Props> = (props) => {
   const { visible, onSubmit, onCancel } = props;
-  // 是否是提交状态
-  const [submitting, setSubmitting] = useState<boolean>(false);
   const [form] = ProForm.useForm();
   return (
     <ModalForm
@@ -32,9 +30,6 @@ const UploadUserModal: React.FC<Props> = (props) => {
         },
       }}
       onFinish={async (values: any) => {
-        // 避免重复提交
-        if (submitting) return;
-        setSubmitting(true);
         const hide = message.loading('正在上传用户中，请稍候...');
         try {
           const res = await importUserDataByExcelUsingPost({
@@ -43,17 +38,13 @@ const UploadUserModal: React.FC<Props> = (props) => {
           if (res.code === 0 && res?.data?.errorRecords.length === 0) {
             message.success('用户导入成功');
             onSubmit?.();
-            return true;
           } else {
             message.error(`用户导入失败${res?.data?.errorRecords?.errorMessage}` + '请重试');
-            return false;
           }
         } catch (error: any) {
           message.error(`用户导入失败${error.message}` + '请重试');
-          return false;
         } finally {
           hide();
-          setSubmitting(false);
         }
       }}
       submitter={{

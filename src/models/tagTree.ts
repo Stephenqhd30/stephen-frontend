@@ -10,6 +10,8 @@ export default () => {
       const res = await listTagByTreeUsingGet();
       if (res.code === 0 && res.data) {
         setTagTreeList(res.data);
+      } else {
+        setTagTreeList([]);
       }
     } catch (error: any) {
       message.error('获取树形组件失败');

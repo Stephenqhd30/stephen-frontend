@@ -13,6 +13,7 @@ import { uploadFileUsingPost } from '@/services/stephen-backend/fileController';
 import { updateUserUsingPost } from '@/services/stephen-backend/userController';
 import { userRole, UserRoleEnum } from '@/enums/UserRoleEnum';
 import { TagTreeSelect } from '@/components';
+import { FileUploadBiz } from '@/enums/FileUploadBizEnum';
 
 interface Props {
   oldData?: API.User;
@@ -31,15 +32,17 @@ const handleUpdate = async (fields: API.UserUpdateRequest) => {
   try {
     const res = await updateUserUsingPost(fields);
     if (res.code === 0 && res.data) {
-      hide();
       message.success('更新成功');
       return true;
+    } else {
+      message.error(`更新失败${res.message}, 请重试!`);
+      return false;
     }
-    return false;
   } catch (error: any) {
-    hide();
     message.error(`更新失败${error.message}, 请重试!`);
     return false;
+  } finally {
+    hide();
   }
 };
 
@@ -65,15 +68,20 @@ const UpdateUserModal: React.FC<Props> = (props) => {
       try {
         const res = await uploadFileUsingPost(
           {
-            biz: 'user_avatar',
+            biz: FileUploadBiz.USER_AVATAR,
           },
           {
             file: file,
           },
           file,
         );
-        onSuccess(res.data);
-        setUserAvatar(res.data);
+        if (res.code === 0 && res.data) {
+          onSuccess(res.data);
+          setUserAvatar(res.data);
+        } else {
+          onError(res);
+          message.error(`文件上传失败${res.message}`);
+        }
       } catch (error: any) {
         onError(error);
         message.error('文件上传失败', error.message);
@@ -89,7 +97,7 @@ const UpdateUserModal: React.FC<Props> = (props) => {
   }
 
   return (
-    <ModalForm
+    <ModalForm<API.UserUpdateRequest>
       title={'更新用户信息'}
       open={visible}
       form={form}
@@ -144,7 +152,7 @@ const UpdateUserModal: React.FC<Props> = (props) => {
       <TagTreeSelect
         name={'tags'}
         label={'标签'}
-        initialValue={oldData.tags ? JSON.parse(oldData.tags) : []}
+        initialValue={oldData?.tags ? JSON.parse(oldData?.tags) : []}
       />
     </ModalForm>
   );

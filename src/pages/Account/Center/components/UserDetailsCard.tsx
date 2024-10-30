@@ -5,7 +5,7 @@ import { Typography } from 'antd';
 import UserAvatarCard from '@/components/ReUser/UserAvatarCard';
 
 interface UserProps {
-  user: API.User;
+  user: API.UserVO;
 }
 
 const UserDetailsCard: React.FC<UserProps> = (props) => {
@@ -14,7 +14,7 @@ const UserDetailsCard: React.FC<UserProps> = (props) => {
   return (
     <>
       <ProCard>
-        <ProDescriptions<API.User>
+        <ProDescriptions<API.UserVO>
           column={1}
           title={
             <Typography.Title level={3}>
@@ -66,24 +66,6 @@ const UserDetailsCard: React.FC<UserProps> = (props) => {
               key: 'userPhone',
               dataIndex: 'userPhone',
               valueType: 'text',
-            },
-            {
-              title: '创建时间',
-              key: 'createTime',
-              dataIndex: 'createTime',
-              valueType: 'date',
-              fieldProps: {
-                format: 'YYYY.MM.DD',
-              },
-            },
-            {
-              title: '更新时间',
-              key: 'updateTime',
-              dataIndex: 'updateTime',
-              valueType: 'date',
-              fieldProps: {
-                format: 'YYYY.MM.DD',
-              },
             },
           ]}
         />

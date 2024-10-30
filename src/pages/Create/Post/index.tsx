@@ -14,7 +14,7 @@ const CreatePostPage: React.FC = () => {
   const isMobile = !scene.md;
 
   return (
-    <PageContainer>
+    <>
       <ProCard split={isMobile ? 'horizontal' : 'vertical'}>
         <ProCard colSpan={isMobile ? '100' : '20%'}>
           <Steps
@@ -34,7 +34,7 @@ const CreatePostPage: React.FC = () => {
           <CreatePostForm />
         </ProCard>
       </ProCard>
-    </PageContainer>
+    </>
   );
 };
 

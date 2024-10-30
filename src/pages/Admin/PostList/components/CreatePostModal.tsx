@@ -1,13 +1,14 @@
 import '@umijs/max';
-import {Grid, message, Modal, UploadProps} from 'antd';
-import React, {useState} from 'react';
-import {ProForm, ProFormText, ProFormUploadDragger} from '@ant-design/pro-components';
-import {MdEditor, TagTreeSelect} from '@/components';
-import {addPostUsingPost} from '@/services/stephen-backend/postController';
-import {history} from '@@/core/history';
-import {uploadFileUsingPost} from '@/services/stephen-backend/fileController';
+import { Grid, message, UploadProps } from 'antd';
+import React, { useState } from 'react';
+import { ModalForm, ProForm, ProFormText, ProFormUploadDragger } from '@ant-design/pro-components';
+import { MdEditor, TagTreeSelect } from '@/components';
+import { addPostUsingPost } from '@/services/stephen-backend/postController';
+import { history } from '@@/core/history';
+import { uploadFileUsingPost } from '@/services/stephen-backend/fileController';
+import { FileUploadBiz } from '@/enums/FileUploadBizEnum';
 
-interface CreateProps {
+interface Props {
   onCancel: () => void;
   visible: boolean;
   onSubmit: () => Promise<void>;
@@ -19,7 +20,8 @@ const { useBreakpoint } = Grid;
  * 创建帖子
  * @param values
  */
-const handleCreatePost = async (values: API.PostAddRequest) => {
+const handleAdd = async (values: API.PostAddRequest) => {
+  const hide = message.loading('正在创建...');
   try {
     const res = await addPostUsingPost(values);
     if (res.code === 0 && res.data) {
@@ -27,11 +29,16 @@ const handleCreatePost = async (values: API.PostAddRequest) => {
       setTimeout(() => {
         history.push(`/post/${res.data}`);
       }, 3000);
+      return true;
+    } else {
+      message.error(`创建失败${res.message}`);
+      return false;
     }
-    return true;
   } catch (error: any) {
     message.error(`创建失败${error.message}`);
     return false;
+  } finally {
+    hide();
   }
 };
 
@@ -40,15 +47,15 @@ const handleCreatePost = async (values: API.PostAddRequest) => {
  * @param props
  * @constructor
  */
-const CreatePostModal: React.FC<CreateProps> = (props) => {
+const CreatePostModal: React.FC<Props> = (props) => {
   const { visible, onCancel, onSubmit } = props;
   const scene = useBreakpoint();
   const isMobile = !scene.md;
   // 帖子封面
-  const [cover, setCover] = useState('');
+  const [cover, setCover] = useState<any>();
   // 帖子内容
   const [content, setContent] = useState<string>('');
-  const [loading, setLoading] = useState<boolean>(false);
+  const [form] = ProForm.useForm<API.PostAddRequest>();
 
   /**
    * 上传文章封面
@@ -62,7 +69,7 @@ const CreatePostModal: React.FC<CreateProps> = (props) => {
       try {
         const res = await uploadFileUsingPost(
           {
-            biz: 'post_cover',
+            biz: FileUploadBiz.POST_COVER,
           },
           {
             file: file,
@@ -79,46 +86,57 @@ const CreatePostModal: React.FC<CreateProps> = (props) => {
       }
     },
     onRemove() {
-      setCover('');
+      setCover(undefined);
     },
   };
   return (
-    <Modal destroyOnClose title={'新建帖子'} width={1200} onCancel={() => onCancel?.()} open={visible} footer>
-      <ProForm<API.PostAddRequest>
-        loading={loading}
-        onFinish={async (values) => {
-          setLoading(true);
-          const success = await handleCreatePost({
-            ...values,
-            cover
-          });
-          if (success) {
-            onSubmit?.()
-          }
-          setLoading(false);
-        }}
-        layout={isMobile ? 'vertical' : 'horizontal'}
-      >
-        <ProFormText name="title" label="标题" />
-        <ProFormText name="content" label="内容">
-          <MdEditor
-            value={content}
-            onChange={(value) => setContent(value)}
-            placeholder={'请填写内容'}
-          />
-        </ProFormText>
-        <ProFormUploadDragger
-          title={'上传帖子封面'}
-          max={1}
-          fieldProps={{
-            ...uploadProps,
-          }}
-          name="cover"
-          label={'封面'}
+    <ModalForm
+      open={visible}
+      form={form}
+      title={'新建帖子'}
+      onFinish={async (values) => {
+        const success = await handleAdd({
+          ...values,
+          cover,
+        });
+        if (success) {
+          onSubmit?.();
+        }
+      }}
+      layout={isMobile ? 'vertical' : 'horizontal'}
+      autoFocusFirstInput
+      modalProps={{
+        destroyOnClose: true,
+        onCancel: () => {
+          onCancel?.();
+        },
+      }}
+      submitter={{
+        searchConfig: {
+          submitText: '新建用户',
+          resetText: '取消',
+        },
+      }}
+    >
+      <ProFormText name="title" label="标题" />
+      <ProFormText name="content" label="内容">
+        <MdEditor
+          value={content}
+          onChange={(value) => setContent(value)}
+          placeholder={'请填写内容'}
         />
-        <TagTreeSelect name={'tags'} label={'标签'} />
-      </ProForm>
-    </Modal>
+      </ProFormText>
+      <ProFormUploadDragger
+        title={'上传帖子封面'}
+        max={1}
+        fieldProps={{
+          ...uploadProps,
+        }}
+        name="cover"
+        label={'封面'}
+      />
+      <TagTreeSelect name={'tags'} label={'标签'} />
+    </ModalForm>
   );
 };
 export default CreatePostModal;

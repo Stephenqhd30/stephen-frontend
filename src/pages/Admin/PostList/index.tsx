@@ -1,13 +1,10 @@
-import { ActionType, ProColumns, ProTable } from '@ant-design/pro-components';
+import {ActionType, ProColumns, ProTable} from '@ant-design/pro-components';
 import '@umijs/max';
-import { Button, message, Popconfirm, Space, Tag, Typography } from 'antd';
-import React, { useRef, useState } from 'react';
-import { CreatePostModal, UpdatePostModal } from '@/pages/Admin/PostList/components';
-import {
-  deletePostUsingPost,
-  listPostByPageUsingPost,
-} from '@/services/stephen-backend/postController';
-import { PlusOutlined } from '@ant-design/icons';
+import {Button, message, Popconfirm, Space, Tag, Typography} from 'antd';
+import React, {useRef, useState} from 'react';
+import {CreatePostModal, UpdatePostModal} from '@/pages/Admin/PostList/components';
+import {deletePostUsingPost, listPostByPageUsingPost} from '@/services/stephen-backend/postController';
+import {PlusOutlined} from '@ant-design/icons';
 import {TagTreeSelect} from '@/components';
 import {TAG_EMPTY} from '@/constants';
 
@@ -181,12 +178,14 @@ const PostList: React.FC = () => {
         toolBarRender={() => [
           <Space key={'space'} wrap>
             <Button
+              type={'primary'}
+              icon={<PlusOutlined />}
               key="create"
               onClick={() => {
                 setCreateModalVisible(true);
               }}
             >
-              <PlusOutlined /> 新建
+               新建
             </Button>
           </Space>,
         ]}

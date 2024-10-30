@@ -5,10 +5,9 @@ import { Button, message, Popconfirm, Space, Tag, Typography } from 'antd';
 import React, { useRef, useState } from 'react';
 import {
   deleteUserUsingPost,
-  downloadUsingGet,
   listUserByPageUsingPost,
 } from '@/services/stephen-backend/userController';
-import { UserRoleEnum, userRole } from '@/enums/UserRoleEnum';
+import { userRole, UserRoleEnum } from '@/enums/UserRoleEnum';
 import {
   CreateUserModal,
   UpdateUserModal,
@@ -16,6 +15,7 @@ import {
 } from '@/pages/Admin/UserList/components';
 import { TagTreeSelect } from '@/components';
 import { TAG_EMPTY } from '@/constants';
+import { downloadUsingGet } from '@/services/stephen-backend/excelController';
 
 /**
  * 删除节点
@@ -213,19 +213,21 @@ const UserList: React.FC = () => {
           <Space key={'space'} wrap>
             <Button
               key="create"
+              icon={<PlusOutlined />}
+              type={'primary'}
               onClick={() => {
                 setCreateModalVisible(true);
               }}
             >
-              <PlusOutlined /> 新建
+              新建
             </Button>
             <Button
               key={'upload'}
               onClick={() => {
                 setUploadModalVisible(true);
               }}
+              icon={<UploadOutlined />}
             >
-              <UploadOutlined />
               批量导入用户信息
             </Button>
             <Button
@@ -233,8 +235,8 @@ const UserList: React.FC = () => {
               onClick={async () => {
                 await downloadUserInfo();
               }}
+              icon={<DownloadOutlined />}
             >
-              <DownloadOutlined />
               导出用户信息
             </Button>
           </Space>,
@@ -269,7 +271,7 @@ const UserList: React.FC = () => {
             actionRef.current?.reload();
           }}
           visible={createModalVisible}
-         />
+        />
       )}
       {/*更新表单的Modal框*/}
       {updateModalVisible && (

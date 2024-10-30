@@ -1,12 +1,19 @@
-import {ProForm, ProFormText, ProFormTextArea, ProFormUploadDragger} from '@ant-design/pro-components';
+import {
+  ModalForm,
+  ProForm,
+  ProFormText,
+  ProFormTextArea,
+  ProFormUploadDragger,
+} from '@ant-design/pro-components';
 import '@umijs/max';
-import { Grid, message, Modal, UploadProps } from 'antd';
+import { Grid, message, UploadProps } from 'antd';
 import React, { useState } from 'react';
 import { updatePostUsingPost } from '@/services/stephen-backend/postController';
 import { MdEditor, TagTreeSelect } from '@/components';
 import { uploadFileUsingPost } from '@/services/stephen-backend/fileController';
+import { FileUploadBiz } from '@/enums/FileUploadBizEnum';
 
-interface UpdateProps {
+interface Props {
   oldData?: API.Post;
   onCancel: () => void;
   onSubmit: (values: API.PostUpdateRequest) => Promise<void>;
@@ -25,30 +32,29 @@ const handleUpdate = async (fields: API.PostUpdateRequest) => {
   try {
     const res = await updatePostUsingPost(fields);
     if (res.code === 0 && res.data) {
-      hide();
       message.success('更新成功');
       return true;
     }else {
-      hide();
       message.error(`更新失败${res.message}, 请重试!`);
       return false;
     }
   } catch (error: any) {
-    hide();
     message.error(`更新失败${error.message}, 请重试!`);
     return false;
+  } finally {
+    hide();
   }
 };
-const UpdatePostModal: React.FC<UpdateProps> = (props) => {
+const UpdatePostModal: React.FC<Props> = (props) => {
   const { oldData, visible, onSubmit, onCancel } = props;
   const scene = useBreakpoint();
   const isMobile = !scene.md;
   // 帖子封面
-  const [cover, setCover] = useState<string>();
+  const [cover, setCover] = useState<any>();
   // 帖子内容
   const [content, setContent] = useState<string>(oldData?.content ?? '');
-  const [loading, setLoading] = useState<boolean>(false);
 
+  const [form] = ProForm.useForm<API.PostUpdateRequest>();
   /**
    * 上传文章封面
    */
@@ -61,7 +67,7 @@ const UpdatePostModal: React.FC<UpdateProps> = (props) => {
       try {
         const res = await uploadFileUsingPost(
           {
-            biz: 'post_cover',
+            biz: FileUploadBiz.POST_COVER,
           },
           {
             file: file,
@@ -73,8 +79,8 @@ const UpdatePostModal: React.FC<UpdateProps> = (props) => {
           setCover(res.data);
         }
       } catch (error: any) {
-        onError(error);
         message.error('文件上传失败', error.message);
+        onError(error);
       }
     },
     onRemove() {
@@ -86,48 +92,60 @@ const UpdatePostModal: React.FC<UpdateProps> = (props) => {
   }
 
   return (
-    <Modal destroyOnClose title={'更新帖子'} width={"1200"} onCancel={() => onCancel?.()} open={visible} footer>
-      <ProForm<API.PostUpdateRequest>
-        loading={loading}
-        onFinish={async (values) => {
-          setLoading(true);
-          const success = await handleUpdate({
-            ...values,
-            id: oldData.id,
-            cover,
-            content,
-          });
-          if (success) {
-            onSubmit?.(values);
-          }
-          setLoading(false);
+    <ModalForm<API.PostUpdateRequest>
+      title={'更新帖子信息'}
+      open={visible}
+      form={form}
+      initialValues={oldData}
+      onFinish={async (values) => {
+        const success = await handleUpdate({
+          ...values,
+          id: oldData.id,
+          cover,
+          content,
+        });
+        if (success) {
+          onSubmit?.(values);
+        }
+      }}
+      layout={isMobile ? 'vertical' : 'horizontal'}
+      autoFocusFirstInput
+      modalProps={{
+        destroyOnClose: true,
+        onCancel: () => {
+          onCancel?.();
+        },
+      }}
+      submitter={{
+        searchConfig: {
+          submitText: '更新帖子信息',
+          resetText: '取消',
+        },
+      }}
+    >
+      <ProFormTextArea initialValue={oldData?.title} name="title" label="标题" />
+      <ProFormText initialValue={oldData?.content} name="content" label="内容">
+        <MdEditor
+          value={content}
+          onChange={(value) => setContent(value)}
+          placeholder={'请填写内容'}
+        />
+      </ProFormText>
+      <ProFormUploadDragger
+        title={'上传帖子封面'}
+        max={1}
+        fieldProps={{
+          ...uploadProps,
         }}
-        layout={isMobile ? 'vertical' : 'horizontal'}
-      >
-        <ProFormTextArea initialValue={oldData?.title} name="title" label="标题" />
-        <ProFormText initialValue={oldData?.content} name="content" label="内容">
-          <MdEditor
-            value={content}
-            onChange={(value) => setContent(value)}
-            placeholder={'请填写内容'}
-          />
-        </ProFormText>
-        <ProFormUploadDragger
-          title={'上传帖子封面'}
-          max={1}
-          fieldProps={{
-            ...uploadProps,
-          }}
-          name="cover"
-          label={'封面'}
-        />
-        <TagTreeSelect
-          name={'tags'}
-          label={'标签'}
-          initialValue={oldData.tags ? JSON.parse(oldData.tags) : []}
-        />
-      </ProForm>
-    </Modal>
+        name="pic"
+        label={'封面'}
+      />
+      <TagTreeSelect
+        name={'tags'}
+        label={'标签'}
+        initialValue={oldData?.tags ? JSON.parse(oldData?.tags) : []}
+      />
+    </ModalForm>
   );
 };
 export default UpdatePostModal;

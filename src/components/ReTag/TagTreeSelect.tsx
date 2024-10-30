@@ -14,9 +14,9 @@ interface Props {
  * @constructor
  */
 const TagTreeSelect: React.FC<Props> = (props) => {
-  const { name, label = "", initialValue =[] } = props;
+  const { name, label = "", initialValue = [] } = props;
   const { tagTreeList, loadData } = useModel('tagTree');
-  const [value, setValue] = useState<string[]>(initialValue);
+  const [value, setValue] = useState<string[]>(initialValue ?? []);
   useEffect(() => {
     loadData();
   }, []);
@@ -38,21 +38,24 @@ const TagTreeSelect: React.FC<Props> = (props) => {
           })) || []
         );
       }}
+
       fieldProps={{
         filterTreeNode: true,
         showSearch: true,
         autoClearSearchValue: true,
         multiple: true,
         treeNodeFilterProp: 'title',
+        treeCheckable: false,
         fieldNames: {
           label: 'title',
           value: 'value',
           children: 'children',
         },
+        value: value,
         onChange: (newValue) => {
           setValue(newValue);
         },
-        value,
+
       }}
     />
   );
