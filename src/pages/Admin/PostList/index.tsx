@@ -50,12 +50,12 @@ const PostList: React.FC = () => {
       dataIndex: 'id',
       valueType: 'text',
       hideInForm: true,
+      hideInTable: true,
     },
     {
       title: '标题',
       dataIndex: 'title',
       valueType: 'text',
-      width: 200,
     },
     {
       title: '内容',
@@ -116,6 +116,7 @@ const PostList: React.FC = () => {
       valueType: 'dateTime',
       hideInSearch: true,
       hideInForm: true,
+      hideInTable: true,
     },
     {
       title: '更新时间',
@@ -124,6 +125,7 @@ const PostList: React.FC = () => {
       valueType: 'dateTime',
       hideInSearch: true,
       hideInForm: true,
+      hideInTable: true,
     },
     {
       title: '操作',

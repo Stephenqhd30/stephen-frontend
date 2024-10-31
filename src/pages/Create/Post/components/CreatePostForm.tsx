@@ -5,6 +5,7 @@ import { Grid, message, UploadProps } from 'antd';
 import { uploadFileUsingPost } from '@/services/stephen-backend/fileController';
 import { addPostUsingPost } from '@/services/stephen-backend/postController';
 import { history } from '@@/core/history';
+import { FileUploadBiz } from '@/enums/FileUploadBizEnum';
 
 const { useBreakpoint } = Grid;
 
@@ -20,8 +21,11 @@ const handleCreatePost = async (values: API.PostAddRequest) => {
       setTimeout(() => {
         history.push(`/post/${res.data}`);
       }, 3000);
+      return true;
+    } else {
+      message.error(`创建失败${res.message}`);
+      return false;
     }
-    return true;
   } catch (error: any) {
     message.error(`创建失败${error.message}`);
     return false;
@@ -39,7 +43,6 @@ const CreatePostForm: React.FC = () => {
   const [cover, setCover] = useState();
   // 帖子内容
   const [content, setContent] = useState<string>('');
-  const [loading, setLoading] = useState<boolean>(false);
 
   /**
    * 上传文章封面
@@ -53,7 +56,7 @@ const CreatePostForm: React.FC = () => {
       try {
         const res = await uploadFileUsingPost(
           {
-            biz: 'post_cover',
+            biz: FileUploadBiz.POST_COVER,
           },
           {
             file: file,
@@ -63,6 +66,10 @@ const CreatePostForm: React.FC = () => {
         if (res.code === 0 && res.data) {
           setCover(res.data as any);
           onSuccess?.(res.data);
+        } else {
+          onError?.(res.message);
+          message.error(`文件上传失败${res.message}`);
+          setCover(undefined);
         }
       } catch (error: any) {
         onError(error);
@@ -75,14 +82,11 @@ const CreatePostForm: React.FC = () => {
   };
   return (
     <ProForm<API.PostVO>
-      loading={loading}
       onFinish={async (values) => {
-        setLoading(true);
         await handleCreatePost({
           ...values,
           cover,
         });
-        setLoading(false);
       }}
       layout={isMobile ? 'vertical' : 'horizontal'}
     >

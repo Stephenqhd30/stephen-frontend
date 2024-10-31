@@ -88,7 +88,7 @@ const UpdatePostModal: React.FC<Props> = (props) => {
     },
   };
   if (!oldData) {
-    return <></>;
+    return null;
   }
 
   return (
@@ -97,7 +97,7 @@ const UpdatePostModal: React.FC<Props> = (props) => {
       open={visible}
       form={form}
       initialValues={oldData}
-      onFinish={async (values) => {
+      onFinish={async (values: API.PostUpdateRequest) => {
         const success = await handleUpdate({
           ...values,
           id: oldData.id,
@@ -143,7 +143,6 @@ const UpdatePostModal: React.FC<Props> = (props) => {
       <TagTreeSelect
         name={'tags'}
         label={'标签'}
-        initialValue={oldData?.tags ? JSON.parse(oldData?.tags) : []}
       />
     </ModalForm>
   );

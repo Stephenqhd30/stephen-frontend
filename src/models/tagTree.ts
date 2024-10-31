@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { listTagByTreeUsingGet } from '@/services/stephen-backend/tagController';
 import { message } from 'antd';
 
@@ -17,6 +17,12 @@ export default () => {
       message.error('获取树形组件失败');
     }
   };
+
+  useEffect(() => {
+    if (tagTreeList.length === 0) {
+      loadData();
+    }
+  }, [loadData, tagTreeList.length]);
 
   return {
     tagTreeList,

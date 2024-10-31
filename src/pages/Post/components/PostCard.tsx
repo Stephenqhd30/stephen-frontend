@@ -40,6 +40,8 @@ const PostCard: React.FC<Props> = (props) => {
         setHasFavour(!hasFavour);
         setFavourNum(res.data ? favourNum + 1 : favourNum - 1);
         message.success('收藏成功');
+      } else {
+        message.error(`收藏失败${res.message}`);
       }
     } catch (error: any) {
       message.error('收藏失败' + error.message);
@@ -58,6 +60,8 @@ const PostCard: React.FC<Props> = (props) => {
         setHasThumb(!hasThumb);
         setThumbNum(res.data ? thumbNum + 1 : thumbNum - 1);
         message.success('点赞成功');
+      } else {
+        message.error(`点赞失败${res.message}`);
       }
     } catch (error: any) {
       message.error('点赞失败' + error.message);
@@ -70,7 +74,7 @@ const PostCard: React.FC<Props> = (props) => {
       gutter={[{ xs: 8, sm: 16, md: 24 }, 16]}
       style={{ marginBlockStart: 16 }}
       wrap
-      bodyStyle={{ padding: isMobile ? '0' : '16px' }}
+      bodyStyle={{ padding: 0}}
     >
       <ProCard
         title={<UserAvatarCard user={post.userVO ?? {}} />}

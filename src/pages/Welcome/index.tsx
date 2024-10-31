@@ -55,7 +55,7 @@ const Welcome: React.FC = () => {
                   total: data?.total || 0,
                 };
               }}
-              renderItem={(item) => <PostCard key={item.id} post={item} isMobile={isMobile} />}
+              renderItem={(item) => <PostCard  key={item.id} post={item} isMobile={isMobile} />}
             />
           </ProCard>
         </Col>
