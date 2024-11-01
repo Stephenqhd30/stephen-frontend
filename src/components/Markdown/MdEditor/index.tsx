@@ -56,7 +56,7 @@ const plugins = [
 const MdEditor: React.FC<Props> = (props) => {
   const { value = '', onChange, placeholder } = props;
 
-  const uploadImages = {async (files) => {
+  const uploadImages = async (files) => {
     try {
       const res = await uploadFileUsingPost(
         {
@@ -82,7 +82,7 @@ const MdEditor: React.FC<Props> = (props) => {
       message.error(`图片上传失败${error.message}`);
       return [];
     }
-  }}
+  }
 
   return (
     <div className="md-editor">

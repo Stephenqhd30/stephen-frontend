@@ -1,7 +1,7 @@
 import '@umijs/max';
 import { Grid, message, UploadProps } from 'antd';
 import React, { useState } from 'react';
-import { ModalForm, ProForm, ProFormText, ProFormUploadDragger } from '@ant-design/pro-components';
+import {ModalForm, ProForm, ProFormText, ProFormTextArea, ProFormUploadDragger} from '@ant-design/pro-components';
 import { MdEditor, TagTreeSelect } from '@/components';
 import { addPostUsingPost } from '@/services/stephen-backend/postController';
 import { history } from '@@/core/history';
@@ -77,6 +77,7 @@ const CreatePostModal: React.FC<Props> = (props) => {
           file,
         );
         if (res.code === 0 && res.data) {
+          form.resetFields(); // 清理表单状态
           onSuccess(res.data);
           setCover(res.data);
         }
@@ -98,6 +99,7 @@ const CreatePostModal: React.FC<Props> = (props) => {
         const success = await handleAdd({
           ...values,
           cover,
+          content,
         });
         if (success) {
           onSubmit?.();
@@ -113,19 +115,19 @@ const CreatePostModal: React.FC<Props> = (props) => {
       }}
       submitter={{
         searchConfig: {
-          submitText: '新建用户',
+          submitText: '新建帖子',
           resetText: '取消',
         },
       }}
     >
       <ProFormText name="title" label="标题" />
-      <ProFormText name="content" label="内容">
+      <ProFormTextArea name="content" label="描述" >
         <MdEditor
           value={content}
           onChange={(value) => setContent(value)}
           placeholder={'请填写内容'}
         />
-      </ProFormText>
+      </ProFormTextArea>
       <ProFormUploadDragger
         title={'上传帖子封面'}
         max={1}

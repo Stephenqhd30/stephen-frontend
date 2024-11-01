@@ -1,68 +1,60 @@
 import React, { useEffect, useState } from 'react';
-import { ProCard, ProList } from '@ant-design/pro-components';
-import { Typography } from 'antd';
-import Item from 'antd/es/list/Item';
-import './index.less'
+import { getProcessor } from 'bytemd';
+import { List } from 'antd';
+import './index.less';
 
-interface Heading {
+interface Props {
+  content: string;
+}
+
+interface TocItem {
+  tagName: string;
   text: string;
-  level: number;
-  id: string;
 }
 
-interface DirectoryProps {
-  markdown: string;
-}
-
-const TableOfContents: React.FC<DirectoryProps> = ({ markdown }) => {
-  const [headings, setHeadings] = useState<Heading[]>([]);
+const TableOfContents: React.FC<Props> = (props) => {
+  const { content } = props;
+  const [toc, setToc] = useState<TocItem[]>([]);
+  // 格式化标题
+  const stringifyHeading = (node: any) => {
+    return node.children.map((child: any) => child.value).join('');
+  };
 
   useEffect(() => {
-    // 提取标题
-    const headingRegex = /^(#{1,6})\s+(.*)$/gm;
-    const newHeadings: Heading[] = [];
-    let match;
+    const processor = getProcessor({
+      plugins: [
+        {
+          rehype: (p) =>
+            p.use(() => (tree) => {
+              const items: TocItem[] = [];
+              tree.children
+                .filter((node: any) => node.type === 'element' && /^h[1-3]$/.test(node.tagName))
+                .forEach((node: any) => {
+                  items.push({ tagName: node.tagName, text: stringifyHeading(node) });
+                });
+              setToc(items);
+            }),
+        },
+      ],
+    });
 
-    while ((match = headingRegex.exec(markdown)) !== null) {
-      const level = match[1].length; // # 的数量决定了级别
-      const text = match[2].trim();
-      const id = text.toLowerCase().replace(/\s+/g, '-'); // 转换为 ID
-      newHeadings.push({ text, level, id });
-    }
-
-    setHeadings(newHeadings);
-  }, [markdown]);
+    processor.processSync(content);
+  }, [content]);
 
   return (
-    <ProCard
-      title="目录"
-      bordered={false} // 可以根据需要选择是否添加边框
-      bodyStyle={{ padding: '0px' }}
-      headStyle={{ padding: '0px' }}
-      className={'directory'}
-    >
-      <ProList
-        itemLayout="horizontal"
-        dataSource={headings}
-        split={false}
-        renderItem={(heading) => (
-          <Item style={{ paddingLeft: `${(heading.level - 1) * 12}px`}}>
-            <Typography.Link
-              href={`#${heading.id}`}
-              style={{
-                fontSize: `${16 - heading.level}px`, // 设置字体大小，标题级别越高，字体越小
-                color: heading.level === 1 ? '#333' : '#666', // 设置不同级别的颜色
-                transition: 'color 0.3s', // 添加过渡效果
-              }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = '#1890ff')} // 悬停时改变颜色
-              onMouseLeave={(e) => (e.currentTarget.style.color = heading.level === 1 ? '#333' : '#666')} // 恢复颜色
-            >
-              {heading.text}
-            </Typography.Link>
-          </Item>
-        )}
-      />
-    </ProCard>
+    <List
+      header={<div>目录</div>}
+      bordered
+      className={"table-of-contents"}
+      dataSource={toc}
+      renderItem={(item) => (
+        <List.Item>
+          <a href={`#${item.text}`} style={{ display: 'block' }}>
+            {item.text}
+          </a>
+        </List.Item>
+      )}
+    />
   );
 };
 

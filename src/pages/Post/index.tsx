@@ -3,7 +3,7 @@ import { useParams } from '@@/exports';
 import { getPostVoByIdUsingGet } from '@/services/stephen-backend/postController';
 import { PageContainer, ProCard } from '@ant-design/pro-components';
 import { Col, Grid, message, Row } from 'antd';
-import { TableOfContents, UserAvatarCard } from '@/components';
+import { TableOfContents } from '@/components';
 import { PostDetailsCard } from '@/pages/Post/components';
 
 const { useBreakpoint } = Grid;
@@ -49,7 +49,7 @@ const PostPage: React.FC = () => {
         </Col>
         <Col span={isMobile ? 24 : 6}>
           <ProCard bodyStyle={{ padding: isMobile ? '0' : '16px' }} loading={loading}>
-            <TableOfContents markdown={post.content as string} />
+            <TableOfContents content={post.content as string} />
           </ProCard>
         </Col>
       </Row>

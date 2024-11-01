@@ -18,7 +18,6 @@ import { useEffect } from 'react';
 
 interface Props {
   value?: string;
-  theme?: string;
 }
 
 
@@ -45,7 +44,8 @@ const plugins = [
  * @constructor
  */
 const MdViewer = (props: Props) => {
-  const { value = "", theme = "channing-cyan" } = props;
+  const { value = ""} = props;
+  const theme = "nico";
 
   useEffect(() => {
     setTheme(theme);

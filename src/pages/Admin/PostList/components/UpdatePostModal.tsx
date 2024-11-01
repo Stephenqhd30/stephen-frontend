@@ -123,14 +123,14 @@ const UpdatePostModal: React.FC<Props> = (props) => {
         },
       }}
     >
-      <ProFormTextArea initialValue={oldData?.title} name="title" label="标题" />
-      <ProFormText initialValue={oldData?.content} name="content" label="内容">
+      <ProFormText initialValue={oldData?.title} name="title" label="标题" />
+      <ProFormTextArea initialValue={oldData?.content} name="content" label="内容">
         <MdEditor
           value={content}
           onChange={(value) => setContent(value)}
           placeholder={'请填写内容'}
         />
-      </ProFormText>
+      </ProFormTextArea>
       <ProFormUploadDragger
         title={'上传帖子封面'}
         max={1}
@@ -143,6 +143,7 @@ const UpdatePostModal: React.FC<Props> = (props) => {
       <TagTreeSelect
         name={'tags'}
         label={'标签'}
+        initialValue={oldData?.tags ? JSON.parse(oldData?.tags) : []}
       />
     </ModalForm>
   );
