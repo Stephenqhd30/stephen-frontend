@@ -48,8 +48,16 @@ const PostPage: React.FC = () => {
           <PostDetailsCard post={post} isMobile={isMobile} />
         </Col>
         <Col span={isMobile ? 24 : 6}>
-          <ProCard bodyStyle={{ padding: isMobile ? '0' : '16px' }} loading={loading}>
-            <TableOfContents content={post.content as string} />
+          <ProCard
+            title={'目录'}
+            bordered={false}
+            collapsible
+            defaultCollapsed={false}
+            loading={loading}
+            headerBordered
+            style={{ width: 300 }}
+          >
+            <TableOfContents markdownContent={post.content as string} />
           </ProCard>
         </Col>
       </Row>

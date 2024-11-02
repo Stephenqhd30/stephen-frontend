@@ -1,7 +1,7 @@
 import React from 'react';
 import { ProCard } from '@ant-design/pro-components';
+import {Avatar, Col, Row, Space, Tag} from 'antd';
 import { UserAvatarCard } from '@/components';
-import {Col, Row} from 'antd';
 
 interface Props {
   user: API.UserVO;
@@ -10,17 +10,35 @@ interface Props {
 const RecommendUserCard: React.FC<Props> = (props) => {
   const { user } = props;
 
+  // 将相似度转换为百分比形式，确保处理非数字情况
+  const similarity = user.similarity as number;
+  const similarityPercentage = similarity >= 0 ? (similarity * 100).toFixed(2) : 'N/A';
 
-  // 将相似度转换为百分比形式
-  const similarityPercentage = (user.similarity as number * 100).toFixed(2);
   return (
-    <ProCard gutter={8}>
-      <Row justify="center" align="middle">
-        <Col span={16}>
-          <UserAvatarCard user={user} />
+    <ProCard gutter={8} bodyStyle={{ paddingBottom: 4 }}>
+      <Row justify="space-between" align="middle">
+        <Col span={18}>
+          <Row align="middle">
+            <Col>
+              <UserAvatarCard user={user} />
+            </Col>
+            <Col>
+              <Space wrap>
+                {user.tags &&
+                  user.tags.map((tag: string, index: number) => (
+                    <Tag key={index} color="#add8e6">
+                      {tag}
+                    </Tag>
+                  ))}
+              </Space>
+            </Col>
+          </Row>
         </Col>
-        <Col span={8}>
-          <div style={{textAlign: 'center'}}>
+        <Col
+          span={6}
+        >
+          <span style={{ marginBottom: 4 }}>相似度</span>
+          <div style={{ fontWeight: 'bold' }}>
             <span>{similarityPercentage}%</span>
           </div>
         </Col>

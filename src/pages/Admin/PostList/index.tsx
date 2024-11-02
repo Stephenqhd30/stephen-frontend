@@ -17,14 +17,19 @@ const handleDelete = async (row: API.DeleteRequest) => {
   const hide = message.loading('正在删除');
   if (!row) return true;
   try {
-    await deletePostUsingPost({
+    const res = await deletePostUsingPost({
       id: row.id,
     });
-    hide();
-    message.success('删除成功');
+    if (res.code === 0 && res.data) {
+      message.success('删除成功');
+    } else {
+      message.error(`删除失败${res.message}, 请重试!`);
+    }
+
   } catch (error: any) {
-    hide();
     message.error(`删除失败${error.message}, 请重试!`);
+  } finally {
+    hide();
   }
 };
 
@@ -64,7 +69,7 @@ const PostList: React.FC = () => {
       width: 500,
       render: (_, record) => {
         return (
-          <Typography.Paragraph ellipsis={{ rows: 3, expandable: true }}>
+          <Typography.Paragraph ellipsis={{ rows: 5, expanded: false, expandable: false }}>
             {record.content}
           </Typography.Paragraph>
         );

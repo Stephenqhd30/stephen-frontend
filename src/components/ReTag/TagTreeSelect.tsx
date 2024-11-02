@@ -1,5 +1,5 @@
 import { ProFormTreeSelect } from '@ant-design/pro-components';
-import React, {useEffect, useState} from 'react';
+import React, { useState } from 'react';
 import { useModel } from '@umijs/max';
 
 interface Props {

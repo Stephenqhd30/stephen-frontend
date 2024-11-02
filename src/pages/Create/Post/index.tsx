@@ -84,7 +84,6 @@ const CreatePostPage: React.FC = () => {
   return (
     <ProCard title={"创建帖子"} extra={new Date().toLocaleDateString()} >
       <ProForm<API.PostVO>
-
         onFinish={async (values) => {
           await handleCreatePost({
             ...values,

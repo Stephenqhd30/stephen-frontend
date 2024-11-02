@@ -103,6 +103,7 @@ const UpdatePostModal: React.FC<Props> = (props) => {
           id: oldData.id,
           cover,
           content,
+          tags: Array.isArray(values.tags) ? values.tags : JSON.parse(values.tags as any),
         });
         if (success) {
           onSubmit?.(values);

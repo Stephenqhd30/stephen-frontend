@@ -10,6 +10,7 @@ import { AvatarDropdown, AvatarName } from './RightContent/AvatarDropdown';
 import { MdEditor, MdViewer, TableOfContents } from '@/components/Markdown';
 import { UserAvatarCard } from '@/components/ReUser';
 import { TagTreeSelect } from '@/components/ReTag';
+import { PostCard } from '@/components/RePost';
 
 export {
   Footer,
@@ -20,4 +21,5 @@ export {
   TableOfContents,
   UserAvatarCard,
   TagTreeSelect,
+  PostCard,
 };

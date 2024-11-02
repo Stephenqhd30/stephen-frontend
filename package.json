@@ -64,6 +64,7 @@
     "dayjs": "^1.11.13",
     "highlight.js": "^11.10.0",
     "lodash": "^4.17.21",
+    "markdown-navbar": "^1.4.3",
     "moment": "^2.30.1",
     "omit.js": "^2.0.2",
     "pro-utils": "^1.0.6",

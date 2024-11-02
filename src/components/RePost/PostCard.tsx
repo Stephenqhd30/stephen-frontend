@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ProCard } from '@ant-design/pro-components';
 import UserAvatarCard from '@/components/ReUser/UserAvatarCard';
-import { Button, Image, message, Space, Typography } from 'antd';
+import {Button, Divider, Image, message, Space, Typography} from 'antd';
 import { LikeOutlined, LikeTwoTone, StarOutlined, StarTwoTone } from '@ant-design/icons';
 import { doPostFavourUsingPost } from '@/services/stephen-backend/postFavourController';
 import { doThumbUsingPost } from '@/services/stephen-backend/postThumbController';
@@ -72,9 +72,9 @@ const PostCard: React.FC<Props> = (props) => {
     <ProCard
       headerBordered={true}
       gutter={[{ xs: 8, sm: 16, md: 24 }, 16]}
-      style={{ marginBlockStart: 16 }}
-      wrap
       bodyStyle={{ padding: 0}}
+      layout={'center'}
+      actions={[<Divider key={post.id} type={'vertical'} />]}
     >
       <ProCard
         title={<UserAvatarCard user={post.userVO ?? {}} />}
@@ -90,14 +90,13 @@ const PostCard: React.FC<Props> = (props) => {
             ellipsis={{
               rows: 3,
               expandable: false,
-              symbol: '阅读更多',
             }}
           >
             {post.content}
           </Typography.Paragraph>
         </div>
 
-        <Space>
+        <Space size={'middle'}>
           <Button type={'text'} onClick={handleThumb}>
             {hasThumb ? (
               <Space>

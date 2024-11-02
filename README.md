@@ -1,13 +1,14 @@
 # StephenQiu前端万用模板
 
 > 作者：[StephenQiu]()
->          仅分享于 [StephenQiu](https://stephenqhd30.github.io/)
+>
+> 仅分享于 [StephenQiu](https://stephenqhd30.github.io/)
 
 
 基于 React + Ant Design 的项目初始模板，整合了常用框架和主流业务的示例代码。
 
-
 ## 模板特点
+
 ### 主流框架 & 特性
 
 - Ant Design Pro 架构
@@ -52,6 +53,14 @@
   - 国际化
   - 权限
   - 数据流
+- ByteMd markdown编辑器
+  - Viewer
+    - 支持多主题渲染
+  - Editor
+    - 支持多主题渲染
+    - 自定义插件
+- Markdown Navbar
+  - markdown 目录组件
 
 ### 业务特性
 
@@ -68,6 +77,7 @@
 - 用户登录、用户注册
 - 管理员修改用户、新建用户、查询用户、删除用户
 - 动态路由展示（权限管理）
+- 博客功能
 
 ## 快速上手
 
