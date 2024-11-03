@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { message } from 'antd';
-import {listMatchUserVoUsingPost} from '@/services/stephen-backend/userController';
+import { listMatchUserVoUsingPost } from '@/services/stephen-backend/userController';
 
 export default () => {
   // 推荐用户列表
@@ -23,6 +23,15 @@ export default () => {
       }
     }
   };
+
+  /**
+   * 记载推荐用户列表
+   */
+  useEffect(() => {
+    if (recommendUserList.length === 0) {
+      loadData();
+    }
+  }, []);
 
   return { recommendUserList, loadData };
 };

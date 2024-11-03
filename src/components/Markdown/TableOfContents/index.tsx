@@ -1,7 +1,6 @@
 import React from 'react';
 import MarkNav from 'markdown-navbar';
 import 'markdown-navbar/dist/navbar.css';
-import './index.less';
 
 interface Props {
   markdownContent: string;

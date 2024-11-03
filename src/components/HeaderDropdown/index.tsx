@@ -19,6 +19,12 @@ export type HeaderDropdownProps = {
   placement?: 'bottomLeft' | 'bottomRight' | 'topLeft' | 'topCenter' | 'topRight' | 'bottomCenter';
 } & Omit<DropDownProps, 'overlay'>;
 
+/**
+ * HeaderDropdown
+ * @param cls
+ * @param restProps
+ * @constructor
+ */
 const HeaderDropdown: React.FC<HeaderDropdownProps> = ({ overlayClassName: cls, ...restProps }) => {
   const { styles } = useStyles();
   return <Dropdown overlayClassName={classNames(styles.dropdown, cls)} {...restProps} />;

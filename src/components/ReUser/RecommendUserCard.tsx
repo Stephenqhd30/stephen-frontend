@@ -1,6 +1,6 @@
 import React from 'react';
 import { ProCard } from '@ant-design/pro-components';
-import {Avatar, Col, Row, Space, Tag} from 'antd';
+import { Col, Row, Tag } from 'antd';
 import { UserAvatarCard } from '@/components';
 
 interface Props {
@@ -18,25 +18,21 @@ const RecommendUserCard: React.FC<Props> = (props) => {
     <ProCard gutter={8} bodyStyle={{ paddingBottom: 4 }}>
       <Row justify="space-between" align="middle">
         <Col span={18}>
-          <Row align="middle">
+          <Row>
             <Col>
               <UserAvatarCard user={user} />
             </Col>
             <Col>
-              <Space wrap>
-                {user.tags &&
-                  user.tags.map((tag: string, index: number) => (
-                    <Tag key={index} color="#add8e6">
-                      {tag}
-                    </Tag>
-                  ))}
-              </Space>
+              {user.tags &&
+                user.tags.map((tag) => (
+                  <Tag color="volcano" key={tag}>
+                    {tag}
+                  </Tag>
+                ))}
             </Col>
           </Row>
         </Col>
-        <Col
-          span={6}
-        >
+        <Col span={6}>
           <span style={{ marginBottom: 4 }}>相似度</span>
           <div style={{ fontWeight: 'bold' }}>
             <span>{similarityPercentage}%</span>
