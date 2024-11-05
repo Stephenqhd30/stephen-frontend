@@ -104,21 +104,6 @@ export async function listMyPostVoByPageUsingPost(
   });
 }
 
-/** searchPostVOByPage POST /api/post/search/page/vo */
-export async function searchPostVoByPageUsingPost(
-  body: API.PostQueryRequest,
-  options?: { [key: string]: any },
-) {
-  return request<API.BaseResponsePagePostVO_>('/api/post/search/page/vo', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    data: body,
-    ...(options || {}),
-  });
-}
-
 /** updatePost POST /api/post/update */
 export async function updatePostUsingPost(
   body: API.PostUpdateRequest,
