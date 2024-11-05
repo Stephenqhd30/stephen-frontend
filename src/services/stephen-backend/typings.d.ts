@@ -459,7 +459,10 @@ declare namespace API {
     current?: number;
     id?: number;
     mpOpenId?: string;
+    notId?: number;
+    orTags?: string[];
     pageSize?: number;
+    searchText?: string;
     sortField?: string;
     sortOrder?: string;
     tags?: string[];
