@@ -107,6 +107,7 @@ const UpdateUserModal: React.FC<Props> = (props) => {
           ...values,
           id: oldData?.id,
           userAvatar,
+          tags: Array.isArray(values.tags) ? values.tags : JSON.parse(values.tags as any),
         });
         if (success) {
           onSubmit?.(values);

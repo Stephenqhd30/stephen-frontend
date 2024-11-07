@@ -5,7 +5,6 @@ import { Col, Grid, Image, Row, Typography } from 'antd';
 
 import { history } from '@umijs/max';
 import { ActionTabbar } from '@/components';
-import dayjs from 'dayjs';
 
 interface Props {
   post: API.PostVO;
@@ -33,13 +32,12 @@ const PostCard: React.FC<Props> = ({post}) => {
           <ProCard
             colSpan={isMobile ? '100%' : '70'}
             title={<UserAvatarCard user={post.userVO ?? {}} />}
-            extra={
-              <Typography.Text type={'secondary'}>
-                {dayjs(post.createTime).format('YYYY-MM-DD HH:mm:ss')}
-              </Typography.Text>
-            }
           >
-            <ProCard layout={'default'} headStyle={{ padding: 4 }} bodyStyle={{ padding: 4 }}>
+            <ProCard
+              layout={'default'}
+              headStyle={{ padding: 4 }}
+              bodyStyle={{ padding: 4 }}
+            >
               <div
                 onClick={() => {
                   history.push(`/post/${post.id}`);

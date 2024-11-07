@@ -1,14 +1,13 @@
 import { Footer } from '@/components';
 import { LoginFormPage } from '@ant-design/pro-components';
-import { Helmet, history, useModel } from '@umijs/max';
-import { Divider, message, Space, Tabs, theme, Typography } from 'antd';
+import { history, useModel } from '@umijs/max';
+import { Divider, Image, message, Space, Tabs, theme, Typography } from 'antd';
 import React, { CSSProperties, useEffect, useState } from 'react';
 import { createStyles } from 'antd-style';
 import { BACKGROUND_IMAGE, STEPHEN_SUBTITLE, STEPHEN_TITLE } from '@/constants';
-import AccountLoginPage from '@/pages/User/Login/components/AccountLoginPage';
 import { userLoginUsingPost } from '@/services/stephen-backend/userController';
 import { AlipayOutlined, TaobaoOutlined, WeiboOutlined } from '@ant-design/icons';
-import PhoneLoginPage from '@/pages/User/Login/components/PhoneLoginPage';
+import { AccountLoginPage, PhoneLoginPage } from '@/pages/User/Login/components';
 
 const useStyles = createStyles(({ token }) => {
   return {
@@ -51,20 +50,27 @@ const Login: React.FC = () => {
   const {styles} = useStyles();
   // 用户登录
   const handleLoginSubmit = async (values: API.UserLoginRequest) => {
+    const hide = message.loading('正在登录中..');
     try {
       // 登录
       const res = await userLoginUsingPost({
         ...values,
       });
-      // 保存已登录的用户信息
-      setInitialState({
-        ...initialState,
-        currentUser: res?.data,
-      });
-      setRedirected(true); // 设置重定向状态为 true
-      message.success('登录成功！');
+      if (res.code === 0 && res.data) {
+        // 保存已登录的用户信息
+        setInitialState({
+          ...initialState,
+          currentUser: res?.data,
+        });
+        setRedirected(true); // 设置重定向状态为 true
+        message.success('登录成功！');
+      } else {
+        message.error(`登录失败${res.message}, 请重试！`);
+      }
     } catch (error: any) {
       message.error(`登录失败${error.message}, 请重试！`);
+    } finally {
+      hide();
     }
   };
 
@@ -78,9 +84,6 @@ const Login: React.FC = () => {
 
   return (
     <div className={styles.container}>
-      <Helmet>
-        <title>{STEPHEN_TITLE}</title>
-      </Helmet>
       <div
         style={{
           flex: '1 auto',
@@ -93,8 +96,8 @@ const Login: React.FC = () => {
           containerStyle={{
             backdropFilter: 'blur(4px)',
           }}
-          logo={<img alt="logo" src="/logo.png" />}
-          title={STEPHEN_TITLE}
+          logo={<Image preview={false} width={48} alt="logo" src="/logo.png" />}
+          title={<Typography.Title level={3}>{STEPHEN_TITLE}</Typography.Title>}
           subTitle={STEPHEN_SUBTITLE}
           initialValues={{
             autoLogin: true,

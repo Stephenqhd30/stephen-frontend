@@ -22,7 +22,7 @@ export default () => {
     if (tagTreeList.length === 0) {
       loadData();
     }
-  }, [loadData, tagTreeList.length]);
+  }, []);
 
   return {
     tagTreeList,

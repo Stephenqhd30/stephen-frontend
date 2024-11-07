@@ -1,6 +1,6 @@
 import React from 'react';
 import { ProCard } from '@ant-design/pro-components';
-import { Col, Row, Tag } from 'antd';
+import { Col, Empty, Row, Tag } from 'antd';
 import { UserAvatarCard } from '@/components';
 
 interface Props {
@@ -15,7 +15,11 @@ const RecommendUserCard: React.FC<Props> = (props) => {
   const similarityPercentage = similarity >= 0 ? (similarity * 100).toFixed(2) : 'N/A';
 
   return (
-    <ProCard gutter={8} bodyStyle={{ paddingBottom: 4 }}>
+    <ProCard
+      gutter={8}
+      bodyStyle={{ paddingBottom: 4 }}
+      onEmptied={() => <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />}
+    >
       <Row justify="space-between" align="middle">
         <Col span={18}>
           <Row>
