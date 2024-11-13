@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import { ProCard, ProForm, ProFormText, ProFormUploadDragger } from '@ant-design/pro-components';
-import { Grid, message, UploadProps } from 'antd';
+import { message, UploadProps } from 'antd';
 import { MdEditor, TagTreeSelect } from '@/components';
 import { addPostUsingPost } from '@/services/stephen-backend/postController';
 import { history } from '@umijs/max';
 import { uploadFileUsingPost } from '@/services/stephen-backend/fileController';
 import { FileUploadBiz } from '@/enums/FileUploadBizEnum';
 
-const { useBreakpoint } = Grid;
 
 /**
  * 创建帖子
@@ -38,9 +37,7 @@ const handleCreatePost = async (values: API.PostAddRequest) => {
  * @constructor
  */
 const CreatePostPage: React.FC = () => {
-  const scene = useBreakpoint();
-  const isMobile = !scene.md;
-// 帖子封面
+  // 帖子封面
   const [cover, setCover] = useState();
   // 帖子内容
   const [content, setContent] = useState<string>('');
@@ -82,7 +79,7 @@ const CreatePostPage: React.FC = () => {
     },
   };
   return (
-    <ProCard title={"创建帖子"} extra={new Date().toLocaleDateString()} >
+    <ProCard title={'创建帖子'} extra={new Date().toLocaleDateString()}>
       <ProForm<API.PostVO>
         onFinish={async (values) => {
           await handleCreatePost({
@@ -91,7 +88,6 @@ const CreatePostPage: React.FC = () => {
             content,
           });
         }}
-        layout={isMobile ? 'vertical' : 'horizontal'}
         submitter={{
           searchConfig: {
             submitText: '新建帖子',

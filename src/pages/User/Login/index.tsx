@@ -42,6 +42,10 @@ const iconStyles: CSSProperties = {
 };
 
 
+/**
+ * 登录页面
+ * @constructor
+ */
 const Login: React.FC = () => {
   const [type, setType] = useState<string>('account');
   const { token } = theme.useToken();
@@ -96,7 +100,7 @@ const Login: React.FC = () => {
           containerStyle={{
             backdropFilter: 'blur(4px)',
           }}
-          logo={<Image preview={false} width={48} alt="logo" src="/logo.png" />}
+          logo={<Image preview={false} width={48} alt="logo" src="/logo.svg" />}
           title={<Typography.Title level={3}>{STEPHEN_TITLE}</Typography.Title>}
           subTitle={STEPHEN_SUBTITLE}
           initialValues={{
