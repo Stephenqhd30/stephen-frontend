@@ -34,7 +34,6 @@ const PostCard: React.FC<Props> = ({post}) => {
             title={<UserAvatarCard user={post.userVO ?? {}} />}
           >
             <ProCard
-              layout={'default'}
               headStyle={{ padding: 4 }}
               bodyStyle={{ padding: 4 }}
             >

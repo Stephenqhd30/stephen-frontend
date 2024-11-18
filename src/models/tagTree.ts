@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { listTagByTreeUsingGet } from '@/services/stephen-backend/tagController';
 import { message } from 'antd';
 
-export default () => {
+const TagTree = () => {
   const [tagTreeList, setTagTreeList] = useState<API.TagDTO[]>([]);
 
   const loadData = async () => {
@@ -19,9 +19,7 @@ export default () => {
   };
 
   useEffect(() => {
-    if (tagTreeList.length === 0) {
-      loadData();
-    }
+    loadData();
   }, []);
 
   return {
@@ -29,3 +27,5 @@ export default () => {
     loadData,
   };
 };
+
+export default TagTree;

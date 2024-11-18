@@ -1,3 +1,3 @@
-import PostCardList from '@/pages/Welcome/components/Post/PostCardList';
+import RecommendUserList from '@/pages/Welcome/components/user/RecommendUserList';
 
-export { PostCardList };
+export { RecommendUserList };

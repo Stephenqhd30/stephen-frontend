@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { message } from 'antd';
 import { listMatchUserVoUsingPost } from '@/services/stephen-backend/userController';
 
-export default () => {
+const Recommend = () => {
   // 推荐用户列表
   const [recommendUserList, setRecommendUserList] = useState<API.UserVO[]>([]);
 
@@ -28,10 +28,10 @@ export default () => {
    * 记载推荐用户列表
    */
   useEffect(() => {
-    if (recommendUserList.length === 0) {
-      loadData();
-    }
+    loadData();
   }, []);
 
   return { recommendUserList, loadData };
 };
+
+export default Recommend;

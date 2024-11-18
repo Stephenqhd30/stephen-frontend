@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from '@@/exports';
-import { getPostVoByIdUsingGet } from '@/services/stephen-backend/postController';
 import { PageContainer, ProCard } from '@ant-design/pro-components';
-import { Col, Grid, message, Row } from 'antd';
-import { TableOfContents } from '@/components';
-import { PostDetailsCard } from '@/pages/Post/components';
+import { Col, Empty, Grid, message, Row, Typography } from 'antd';
+import { MdViewer, TableOfContents } from '@/components';
+import UserAvatarCard from '../../components/ReUser/UserAvatarCard';
+import dayjs from 'dayjs';
+import { getPostVoByIdUsingGet } from '@/services/stephen-backend/postController';
 
 const { useBreakpoint } = Grid;
 
@@ -12,14 +13,17 @@ const { useBreakpoint } = Grid;
  * 帖子详情页
  * @constructor
  */
-const PostPage: React.FC = () => {
+const PostDetailsPage: React.FC = () => {
   const { id } = useParams();
   // 帖子信息
   const [post, setPost] = useState<API.PostVO>({});
   // 加载中
   const [loading, setLoading] = useState<boolean>(false);
+  const [scrollElement] = useState(document.documentElement);
+
   const scene = useBreakpoint();
   const isMobile = !scene.md;
+  const editorId = `md-editor-${post?.id}`;
 
   const loadData = async () => {
     setLoading(true);
@@ -43,21 +47,31 @@ const PostPage: React.FC = () => {
   }, []);
   return (
     <PageContainer header={{ title: '' }}>
-      <Row gutter={16} align={'top'}>
+      <Row gutter={[16, 16]} align={'top'}>
         <Col span={isMobile ? 24 : 18}>
-          <PostDetailsCard post={post} isMobile={isMobile} />
+          <ProCard
+            wrap
+            title={<UserAvatarCard user={post.userVO ?? {}} />}
+            gutter={16}
+            extra={isMobile ? '' : dayjs(post.createTime).format('YYYY-MM-DD HH:mm:ss')}
+          >
+            <Typography.Title level={3}>{post.title}</Typography.Title>
+            <MdViewer key={post?.id} value={post.content} id={editorId as string} />
+          </ProCard>
         </Col>
         <Col span={isMobile ? 24 : 6}>
           <ProCard
             title={'目录'}
             bordered={false}
-            collapsible
-            defaultCollapsed={false}
             loading={loading}
             headerBordered
-            style={{ width: 300 }}
+            onEmptied={() => <Empty />}
           >
-            <TableOfContents markdownContent={post.content as string} />
+            <TableOfContents
+              key={post.id}
+              editorId={editorId as string}
+              scrollElement={scrollElement}
+            />
           </ProCard>
         </Col>
       </Row>
@@ -65,4 +79,4 @@ const PostPage: React.FC = () => {
   );
 };
 
-export default PostPage;
+export default PostDetailsPage;

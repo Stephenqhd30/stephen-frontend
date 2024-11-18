@@ -16,7 +16,7 @@ const RecommendUserCard: React.FC<Props> = (props) => {
 
   return (
     <ProCard
-      gutter={8}
+      gutter={[16, 16]}
       bodyStyle={{ paddingBottom: 4 }}
       onEmptied={() => <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />}
     >
