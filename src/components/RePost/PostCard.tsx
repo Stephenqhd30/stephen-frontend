@@ -59,7 +59,7 @@ const PostCard: React.FC<Props> = ({post}) => {
           </ProCard>
         </Col>
         <Col span={isMobile ? 24 : 8}>
-          <ProCard colSpan={isMobile ? '100%' : '30'} layout={'center'}>
+          <ProCard colSpan={isMobile ? '100%' : '30'} layout={ isMobile ? 'default' : 'center'}>
             <Image
               src={post?.cover}
               style={{ width: isMobile ? '100%' : 'auto', maxHeight: '120px' }}

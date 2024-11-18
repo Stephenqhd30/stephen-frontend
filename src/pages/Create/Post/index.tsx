@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ProCard, ProForm, ProFormText, ProFormUploadDragger } from '@ant-design/pro-components';
 import { message, UploadProps } from 'antd';
-import { MdEditor, TagTreeSelect } from '@/components';
+import { MyMdEditor, TagTreeSelect } from '@/components';
 import { addPostUsingPost } from '@/services/stephen-backend/postController';
 import { history } from '@umijs/max';
 import { uploadFileUsingPost } from '@/services/stephen-backend/fileController';
@@ -97,7 +97,7 @@ const CreatePostPage: React.FC = () => {
       >
         <ProFormText name="title" label="标题" />
         <ProFormText name="content" label="内容">
-          <MdEditor
+          <MyMdEditor
             value={content}
             onChange={(value) => setContent(value)}
             placeholder={'请填写内容'}
