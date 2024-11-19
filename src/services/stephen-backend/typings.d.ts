@@ -146,7 +146,7 @@ declare namespace API {
     createTime?: string;
     editTime?: string;
     id?: number;
-    tagList?: string[];
+    tags?: string[];
     updateTime?: string;
     userAvatar?: string;
     userEmail?: string;

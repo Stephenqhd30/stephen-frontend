@@ -3,7 +3,7 @@ import { PageContainer, ProCard } from '@ant-design/pro-components';
 import { ACCOUNT_TITLE } from '@/constants';
 import {Col, Grid, Row} from 'antd';
 import { useModel } from '@@/exports';
-import { MyFavourPostList, MyPostList, UserCard } from '@/pages/Account/Center/components';
+import { MyFavourPostList, MyPostList, UserCard, MyThumbPostList } from '@/pages/Account/Center/components';
 
 const { useBreakpoint } = Grid;
 
@@ -41,6 +41,11 @@ const AccountCenter: React.FC = () => {
                   label: `我的收藏`,
                   key: 'my-favour',
                   children: <MyFavourPostList />,
+                },
+                {
+                  label: `我的点赞`,
+                  key: 'my-thumb',
+                  children: <MyThumbPostList />,
                 },
               ],
               onChange: (key) => {

@@ -1,13 +1,13 @@
 import React, { useRef } from 'react';
 import { PostCard } from '@/components';
 import { ActionType, ProList } from '@ant-design/pro-components';
-import { listMyFavourPostByPageUsingPost } from '@/services/stephen-backend/postFavourController';
+import { listMyThumbPostByPageUsingPost } from '@/services/stephen-backend/postThumbController';
 
 /**
  * 我的帖子
  * @constructor
  */
-const MyFavourPostList: React.FC = () => {
+const MyThumbPostList: React.FC = () => {
   const actionRef = useRef<ActionType>();
   return (
     <ProList<API.PostVO>
@@ -25,7 +25,7 @@ const MyFavourPostList: React.FC = () => {
       request={async (params, sort, filter) => {
         const sortField = 'createTime';
         const sortOrder = sort?.[sortField] ?? 'desc';
-        const { data, code } = await listMyFavourPostByPageUsingPost({
+        const { data, code } = await listMyThumbPostByPageUsingPost({
           ...params,
           ...filter,
           sortField,
@@ -43,4 +43,4 @@ const MyFavourPostList: React.FC = () => {
   );
 };
 
-export default MyFavourPostList;
+export default MyThumbPostList;
