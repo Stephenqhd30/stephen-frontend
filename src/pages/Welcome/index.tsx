@@ -4,7 +4,7 @@ import { ActionType, PageContainer, ProCard, ProList } from '@ant-design/pro-com
 import { WELCOME_TITLE } from '@/constants';
 import { listPostVoByPageUsingPost } from '@/services/stephen-backend/postController';
 import { PostCard } from '@/components';
-import { RecommendUserList } from '@/pages/Welcome/components';
+import { RecommendUserCard } from '@/pages/Welcome/components';
 
 
 // 响应式组件
@@ -20,10 +20,17 @@ const Welcome: React.FC = () => {
   const isMobile = !screens.md;
   const actionRef = useRef<ActionType>();
   return (
-    <PageContainer title={WELCOME_TITLE} extra={isMobile ? '' : new Date().toLocaleDateString()}>
+    <PageContainer
+      title={WELCOME_TITLE}
+      token={{
+        paddingBlockPageContainerContent: 24,
+        paddingInlinePageContainerContent: 8,
+      }}
+      extra={isMobile ? '' : new Date().toLocaleDateString()}
+    >
       <Row gutter={16} wrap={true}>
         <Col span={isMobile ? 24 : 18}>
-          <ProCard bordered bodyStyle={{ padding: isMobile ? '0' : '16px' }}>
+          <ProCard bordered bodyStyle={{padding: isMobile? 4 : 16}}>
             <ProList<API.PostVO>
               onChange={() => {
                 actionRef.current?.reload();
@@ -57,8 +64,8 @@ const Welcome: React.FC = () => {
           </ProCard>
         </Col>
         <Col span={isMobile ? 0 : 6}>
-          <ProCard title={'推荐用户'} headerBordered bordered bodyStyle={{ padding: '4px' }}>
-            <RecommendUserList />
+          <ProCard bordered bodyStyle={{padding: 0, width: 320}}>
+            <RecommendUserCard />
           </ProCard>
         </Col>
       </Row>

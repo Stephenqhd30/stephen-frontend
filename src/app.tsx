@@ -5,6 +5,8 @@ import Settings from '../config/defaultSettings';
 import { getLoginUserUsingGet } from '@/services/stephen-backend/userController';
 import UnAccessiblePage from '@/pages/Exception/403';
 import { requestConfig } from '@/requestConfig';
+import { GitlabFilled } from '@ant-design/icons';
+import { STEPHEN_GITLAB } from '@/constants';
 
 const loginPath = '/user/login';
 
@@ -60,6 +62,9 @@ export const layout: RunTimeLayoutConfig = ({ initialState }) => {
           </div>
         </Link>
       );
+    },
+    actionsRender: () => {
+      return [<GitlabFilled target={'_blank'} src={STEPHEN_GITLAB} key="GitlabFille" />];
     },
     footerRender: () => <Footer />,
     onPageChange: () => {

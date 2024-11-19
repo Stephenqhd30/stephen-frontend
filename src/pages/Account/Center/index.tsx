@@ -1,30 +1,29 @@
-import React, {useState} from 'react';
-import {PageContainer, ProCard} from '@ant-design/pro-components';
-import {ACCOUNT_TITLE} from '@/constants';
+import React, { useState } from 'react';
+import { PageContainer, ProCard } from '@ant-design/pro-components';
+import { ACCOUNT_TITLE } from '@/constants';
 import {Col, Grid, Row} from 'antd';
-import {useModel} from '@@/exports';
-import UserCard from '@/pages/Account/Center/components/UserCard';
-import UserDetailsCard from '@/pages/Account/Center/components/UserDetailsCard';
+import { useModel } from '@@/exports';
+import { MyFavourPostList, MyPostList, UserCard } from '@/pages/Account/Center/components';
 
-const {useBreakpoint} = Grid;
+const { useBreakpoint } = Grid;
+
 
 /**
  * 个人中心
  * @constructor
  */
-const UserCenter: React.FC = () => {
+const AccountCenter: React.FC = () => {
   const { initialState } = useModel('@@initialState');
   const currentUser = initialState?.currentUser;
   const scene = useBreakpoint();
   const isMobile = !scene.md;
-  const [tab, setTab] = useState('tab2');
+  const [tab, setTab] = useState('my-post');
+
   return (
-    <PageContainer title={ACCOUNT_TITLE} extra={new Date().toLocaleDateString()}>
+    <PageContainer title={ACCOUNT_TITLE} breadcrumb={undefined}>
       <Row gutter={[16, 16]}>
         <Col span={isMobile ? 24 : 6}>
-          <ProCard bordered={false}>
-            <UserCard user={currentUser || {}} />
-          </ProCard>
+          <UserCard user={currentUser ?? {}} />
         </Col>
         <Col span={isMobile ? 24 : 18}>
           <ProCard
@@ -34,33 +33,26 @@ const UserCenter: React.FC = () => {
               activeKey: tab,
               items: [
                 {
-                  label: `个人信息`,
-                  key: 'user-detail',
-                  children: <UserDetailsCard user={currentUser || {}} />
-                },
-                {
                   label: `我的帖子`,
                   key: 'my-post',
-                  children: `内容二`
+                  children: <MyPostList />,
                 },
                 {
-                  label: `产品三`,
-                  key: 'tab3',
-                  children: `内容三`
-                }
+                  label: `我的收藏`,
+                  key: 'my-favour',
+                  children: <MyFavourPostList />,
+                },
               ],
               onChange: (key) => {
                 setTab(key);
-              }
+              },
             }}
             bordered
-          >
-
-          </ProCard>
+          />
         </Col>
       </Row>
     </PageContainer>
   );
 };
 
-export default UserCenter;
+export default AccountCenter;

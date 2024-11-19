@@ -11,9 +11,10 @@ import { AntDesignOutlined } from '@ant-design/icons';
 import {updateMyUserUsingPost} from '@/services/stephen-backend/userController';
 import { uploadFileUsingPost } from '@/services/stephen-backend/fileController';
 import {FileUploadBiz} from '@/enums/FileUploadBizEnum';
+import {TagTreeSelect} from '@/components';
 
 interface BaseViewProps {
-  user: API.User;
+  user: API.UserVO;
 }
 
 const { useBreakpoint } = Grid;
@@ -131,6 +132,11 @@ const BaseView: React.FC<BaseViewProps> = (props) => {
             ...updateProps,
           }}
           name="pic"
+        />
+        <TagTreeSelect
+          name={'tags'}
+          label={'标签'}
+          initialValue={user?.tags}
         />
       </ProForm>
     </ProCard>
