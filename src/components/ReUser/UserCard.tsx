@@ -3,9 +3,10 @@ import { Avatar, Button, Tag, Typography } from 'antd';
 import React from 'react';
 import { ProCard, StatisticCard } from '@ant-design/pro-components';
 import { EditOutlined } from '@ant-design/icons';
-import { history } from '@umijs/max';
+import { history, useModel } from '@umijs/max';
 
 interface Props {
+  title?: string;
   user: API.LoginUserVO;
 }
 
@@ -15,19 +16,23 @@ interface Props {
  * @constructor
  */
 const UserCard: React.FC<Props> = (props) => {
-  const { user } = props;
+  const { title = '个人信息', user } = props;
+  const { initialState } = useModel('@@initialState');
+  const { currentUser } = initialState || {};
 
   return (
     <ProCard
-      title={' 个人信息'}
+      title={title}
       extra={
-        <Button
-          type={'text'}
-          onClick={() => {
-            history.push('/account/settings');
-          }}
-          icon={<EditOutlined />}
-        />
+        currentUser?.id === user?.id && (
+          <Button
+            type={'text'}
+            onClick={() => {
+              history.push('/account/settings');
+            }}
+            icon={<EditOutlined />}
+          />
+        )
       }
       headerBordered
     >

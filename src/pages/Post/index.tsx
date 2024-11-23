@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from '@@/exports';
 import { PageContainer, ProCard } from '@ant-design/pro-components';
-import { Col, Empty, Grid, message, Row, Typography } from 'antd';
-import { MdViewer, PostAvatarCard, TableOfContents } from '@/components';
+import { Col, Grid, message, Row, Typography } from 'antd';
+import {MdViewer, PostTitleCard, TableOfContents, UserCard} from '@/components';
 import { getPostVoByIdUsingGet } from '@/services/stephen-backend/postController';
-import { RecommendUserCard } from '@/pages/Welcome/components';
 
 const { useBreakpoint } = Grid;
 
@@ -33,9 +32,12 @@ const PostDetailsPage: React.FC = () => {
       });
       if (res.code === 0 && res.data) {
         setPost(res.data);
+      } else {
+        setPost({});
       }
     } catch (error: any) {
       message.error(error.message || '加载失败');
+      setPost({});
     } finally {
       setLoading(false);
     }
@@ -45,17 +47,10 @@ const PostDetailsPage: React.FC = () => {
     loadData();
   }, []);
   return (
-    <PageContainer
-      header={{ title: '' }}
-      token={{
-        paddingBlockPageContainerContent: 24,
-        paddingInlinePageContainerContent: isMobile? 4 : 60,
-      }}
-    >
+    <PageContainer header={{ title: '' }}>
       <Row gutter={[16, 16]} align={'top'}>
         <Col span={isMobile ? 24 : 18}>
-          <ProCard title={<PostAvatarCard post={post} />} gutter={[16, 16]}>
-            <Typography.Title level={5}>{post?.title}</Typography.Title>
+          <ProCard title={<PostTitleCard post={post} />} gutter={[16, 16]}>
             <Typography.Paragraph>
               <MdViewer key={post?.id} value={post.content} id={editorId as string} />
             </Typography.Paragraph>
@@ -65,21 +60,16 @@ const PostDetailsPage: React.FC = () => {
           <ProCard ghost={true}>
             <Row gutter={[16, 16]}>
               <Col span={24}>
-                <ProCard
-                  title={'目录'}
-                  bordered={false}
-                  loading={loading}
-                  headerBordered
-                >
+                <UserCard title={'作者'} user={post?.userVO ?? {}} />
+              </Col>
+              <Col span={24}>
+                <ProCard title={'目录'} bordered={false} loading={loading} headerBordered>
                   <TableOfContents
                     key={post.id}
                     editorId={editorId as string}
                     scrollElement={scrollElement}
                   />
                 </ProCard>
-              </Col>
-              <Col span={24}>
-                <RecommendUserCard />
               </Col>
             </Row>
           </ProCard>
