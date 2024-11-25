@@ -23,6 +23,14 @@ export const requestConfig: RequestConfig = {
   requestInterceptors: [
     (config: RequestOptions) => {
       // 拦截请求配置，进行个性化处理。
+      // 每次登录之前都需要携带token信息
+      const token = localStorage.getItem('token');
+      if (token) {
+        config.headers = {
+          ...config.headers,
+          Authorization: `Bearer ${token}`,
+        };
+      }
       return config;
     },
   ],
@@ -42,14 +50,13 @@ export const requestConfig: RequestConfig = {
       // 未登录，且不为获取用户登录信息接口
       if (
         code === 40100 &&
-        !requestPath.includes('user/get/login') &&
+        !requestPath.includes('/user/get/login') &&
         !location.pathname.includes('/user/login')
       ) {
         // 跳转至登录页面
         window.location.href = `/user/login?redirect=${window.location.href}`;
         throw new Error('用户还未登录,请先登录');
       }
-
       return response;
     },
   ],

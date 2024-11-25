@@ -24,6 +24,8 @@ export async function getInitialState(): Promise<InitialState> {
       const res = await getLoginUserUsingGet();
       if (res.code === 0) {
         initialState.currentUser = res.data as any;
+        // 保存token信息到本地
+        localStorage.setItem('token', res?.data?.token || '');
       }
     }
   } catch (error: any) {}
