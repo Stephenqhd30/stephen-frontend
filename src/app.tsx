@@ -3,7 +3,7 @@ import { history, Link, RunTimeLayoutConfig } from '@umijs/max';
 import React from 'react';
 import Settings from '../config/defaultSettings';
 import { getLoginUserUsingGet } from '@/services/stephen-backend/userController';
-import UnAccessiblePage from '@/pages/Exception/403';
+import { UnAccessiblePage } from '@/pages/Exception';
 import { requestConfig } from '@/requestConfig';
 import { GitlabFilled } from '@ant-design/icons';
 import { STEPHEN_GITLAB } from '@/constants';
@@ -25,7 +25,7 @@ export async function getInitialState(): Promise<InitialState> {
       if (res.code === 0) {
         initialState.currentUser = res.data as any;
         // 保存token信息到本地
-        localStorage.setItem('token', res?.data?.token || '');
+        localStorage.setItem('stephen-token', res?.data?.token || '');
       }
     }
   } catch (error: any) {}
