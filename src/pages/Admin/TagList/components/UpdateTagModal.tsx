@@ -1,5 +1,4 @@
 import { ProColumns, ProTable } from '@ant-design/pro-components';
-import '@umijs/max';
 import { message, Modal } from 'antd';
 import React from 'react';
 import { updateTagUsingPost } from '@/services/stephen-backend/tagController';
@@ -22,20 +21,25 @@ const handleUpdate = async (fields: API.TagUpdateRequest) => {
   try {
     const res = await updateTagUsingPost(fields);
     if (res.code === 0 && res.data) {
-      hide();
       message.success('更新成功');
       return true;
     } else {
-      hide();
       message.error(`更新失败${res.message}, 请重试!`);
       return false;
     }
   } catch (error: any) {
-    hide();
     message.error(`更新失败${error.message}, 请重试!`);
     return false;
+  } finally {
+    hide();
   }
 };
+
+/**
+ * 更新标签
+ * @param props
+ * @constructor
+ */
 const UpdateTagModal: React.FC<UpdateProps> = (props) => {
   const { oldData, visible, onSubmit, onCancel, columns } = props;
   if (!oldData) {

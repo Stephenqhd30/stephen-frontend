@@ -27,13 +27,8 @@ const Settings: React.FC = () => {
 
   return (
     <PageContainer
-      token={{
-        paddingBlockPageContainerContent: 24,
-        paddingInlinePageContainerContent: isMobile? 4 : 60,
-      }}
       title={ACCOUNT_TITLE}
       breadcrumb={undefined}
-      extra={new Date().toLocaleDateString()}
     >
       <ProCard
         tabs={{

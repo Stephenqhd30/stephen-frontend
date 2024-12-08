@@ -1,5 +1,5 @@
-import { AvatarDropdown, Footer } from '@/components';
-import { history, Link, RunTimeLayoutConfig } from '@umijs/max';
+import { AvatarDropdown, AvatarName, Footer } from '@/components';
+import { history, RunTimeLayoutConfig } from '@umijs/max';
 import React from 'react';
 import Settings from '../config/defaultSettings';
 import { getLoginUserUsingGet } from '@/services/stephen-backend/userController';
@@ -39,34 +39,16 @@ export const layout: RunTimeLayoutConfig = ({ initialState }) => {
   return {
     avatarProps: {
       src: initialState?.currentUser?.userAvatar,
-      title: initialState?.currentUser?.userName,
-      render: () => {
-        return <AvatarDropdown />;
+      title: <AvatarName />,
+      render: (_, avatarChildren) => {
+        return <AvatarDropdown>{avatarChildren}</AvatarDropdown>;
       },
     },
-    menuItemRender: (menuItemProps, defaultDom) => {
-      if (menuItemProps.isUrl || !menuItemProps.path) {
-        return defaultDom;
-      }
-      // 支持二级菜单显示icon
-      return (
-        <Link to={menuItemProps.path}>
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-            }}
-          >
-            {menuItemProps.pro_layout_parentKeys &&
-              menuItemProps.pro_layout_parentKeys.length > 0 &&
-              menuItemProps.icon}
-            <span>{defaultDom}</span>
-          </div>
-        </Link>
-      );
-    },
-    actionsRender: () => {
-      return [<GitlabFilled target={'_blank'} src={STEPHEN_GITLAB} key="GitlabFille" />];
+    actionsRender: (props) => {
+      if (props.isMobile) return [];
+      return [
+        <GitlabFilled target={'_blank'} src={STEPHEN_GITLAB} key="GitlabFille" />,
+      ];
     },
     footerRender: () => <Footer />,
     onPageChange: () => {
@@ -76,9 +58,32 @@ export const layout: RunTimeLayoutConfig = ({ initialState }) => {
         history.push(loginPath);
       }
     },
+    bgLayoutImgList: [
+      {
+        src: 'https://mdn.alipayobjects.com/yuyan_qk0oxh/afts/img/D2LWSqNny4sAAAAAAAAAAAAAFl94AQBr',
+        left: 85,
+        bottom: 100,
+        height: '303px',
+      },
+      {
+        src: 'https://mdn.alipayobjects.com/yuyan_qk0oxh/afts/img/C2TWRpJpiC0AAAAAAAAAAAAAFl94AQBr',
+        bottom: -68,
+        right: -45,
+        height: '303px',
+      },
+      {
+        src: 'https://mdn.alipayobjects.com/yuyan_qk0oxh/afts/img/F6vSTbj8KpYAAAAAAAAAAAAAFl94AQBr',
+        bottom: 0,
+        left: 0,
+        width: '331px',
+      },
+    ],
     menuHeaderRender: undefined,
     // 自定义 403 页面
     unAccessible: <UnAccessiblePage />,
+    childrenRender: (children) => {
+      return <>{children}</>;
+    },
     ...Settings,
   };
 };

@@ -8,10 +8,10 @@ import {
   ProFormUploadButton,
 } from '@ant-design/pro-components';
 import { AntDesignOutlined } from '@ant-design/icons';
-import {updateMyUserUsingPost} from '@/services/stephen-backend/userController';
+import { updateMyUserUsingPost } from '@/services/stephen-backend/userController';
 import { uploadFileUsingPost } from '@/services/stephen-backend/fileController';
-import {FileUploadBiz} from '@/enums/FileUploadBizEnum';
-import {TagTreeSelect} from '@/components';
+import { FileUploadBiz } from '@/enums/FileUploadBizEnum';
+import { TagTreeSelect } from '@/components';
 
 interface BaseViewProps {
   user: API.UserVO;
@@ -133,11 +133,7 @@ const BaseView: React.FC<BaseViewProps> = (props) => {
           }}
           name="pic"
         />
-        <TagTreeSelect
-          name={'tags'}
-          label={'标签'}
-          initialValue={user?.tags}
-        />
+        <TagTreeSelect initialValue={user?.tags} name={'tags'} label={"标签选择"} />
       </ProForm>
     </ProCard>
   );

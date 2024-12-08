@@ -37,7 +37,7 @@ const handleDelete = async (row: API.DeleteRequest) => {
 };
 
 /**
- * 用户管理列表
+ * 标签管理列表
  * @constructor
  */
 const TagList: React.FC = () => {
@@ -154,7 +154,7 @@ const TagList: React.FC = () => {
       <ProTable<API.TagVO, API.PageParams>
         headerTitle={'查询表格'}
         actionRef={actionRef}
-        rowKey={'key'}
+        rowKey={'id'}
         search={{
           labelWidth: 120,
         }}

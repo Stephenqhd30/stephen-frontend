@@ -1,6 +1,6 @@
 import { LogoutOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
 import { history, Link, useModel } from '@umijs/max';
-import {Avatar, Button, Grid, Space} from 'antd';
+import { Avatar, Button, Grid, Space } from 'antd';
 import { stringify } from 'querystring';
 import type { MenuInfo } from 'rc-menu/lib/interface';
 import React, { useCallback } from 'react';
@@ -10,6 +10,7 @@ import { userLogoutUsingPost } from '@/services/stephen-backend/userController';
 
 export type GlobalHeaderRightProps = {
   menu?: boolean;
+  children?: React.ReactNode;
 };
 
 export const AvatarName = () => {
@@ -17,9 +18,7 @@ export const AvatarName = () => {
   const { currentUser } = initialState || {};
   return <span className="anticon">{currentUser?.userName}</span>;
 };
-
 const { useBreakpoint } = Grid;
-
 /**
  * 头像下拉框
  * @constructor
