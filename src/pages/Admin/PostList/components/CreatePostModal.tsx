@@ -10,7 +10,6 @@ import {
 } from '@ant-design/pro-components';
 import { MyMdEditor, TagTreeSelect } from '@/components';
 import { addPostUsingPost } from '@/services/stephen-backend/postController';
-import { history } from '@@/core/history';
 import { uploadFileUsingPost } from '@/services/stephen-backend/fileController';
 import { FileUploadBiz } from '@/enums/FileUploadBizEnum';
 
@@ -30,10 +29,7 @@ const handleAdd = async (values: API.PostAddRequest) => {
   try {
     const res = await addPostUsingPost(values);
     if (res.code === 0 && res.data) {
-      message.success('创建成功3s之后跳转到创建的帖子页');
-      setTimeout(() => {
-        history.push(`/post/${res.data}`);
-      }, 3000);
+      message.success('请在个人中心查看我创建的帖子');
       return true;
     } else {
       message.error(`创建失败${res.message}`);
@@ -80,7 +76,8 @@ const CreatePostModal: React.FC<Props> = (props) => {
           file,
         );
         if (res.code === 0 && res.data) {
-          form.resetFields(); // 清理表单状态
+          // 清理表单状态
+          form.resetFields();
           onSuccess(res.data);
           setCover(res.data);
         }

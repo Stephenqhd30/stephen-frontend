@@ -1,5 +1,4 @@
 import {ActionType, ProColumns, ProTable} from '@ant-design/pro-components';
-import '@umijs/max';
 import {Button, message, Popconfirm, Space, Tag, Typography} from 'antd';
 import React, {useRef, useState} from 'react';
 import {CreatePostModal, UpdatePostModal} from '@/pages/Admin/PostList/components';
@@ -25,7 +24,6 @@ const handleDelete = async (row: API.DeleteRequest) => {
     } else {
       message.error(`删除失败${res.message}, 请重试!`);
     }
-
   } catch (error: any) {
     message.error(`删除失败${error.message}, 请重试!`);
   } finally {

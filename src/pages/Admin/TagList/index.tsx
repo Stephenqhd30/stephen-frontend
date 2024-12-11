@@ -1,6 +1,5 @@
 import { PlusOutlined } from '@ant-design/icons';
 import { ActionType, ProColumns, ProTable } from '@ant-design/pro-components';
-import '@umijs/max';
 import { Button, message, Popconfirm, Select, Space, Typography } from 'antd';
 import React, { useRef, useState } from 'react';
 
@@ -29,7 +28,6 @@ const handleDelete = async (row: API.DeleteRequest) => {
       message.error(`删除失败${res.message}, 请重试!`);
     }
   } catch (error: any) {
-    hide();
     message.error(`删除失败${error.message}, 请重试!`);
   } finally {
     hide();

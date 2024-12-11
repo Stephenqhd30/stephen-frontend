@@ -3,7 +3,6 @@ import { ProCard, ProForm, ProFormText, ProFormUploadDragger } from '@ant-design
 import { message, UploadProps } from 'antd';
 import { MyMdEditor, TagTreeSelect } from '@/components';
 import { addPostUsingPost } from '@/services/stephen-backend/postController';
-import { history } from '@umijs/max';
 import { uploadFileUsingPost } from '@/services/stephen-backend/fileController';
 import { FileUploadBiz } from '@/enums/FileUploadBizEnum';
 
@@ -16,10 +15,7 @@ const handleCreatePost = async (values: API.PostAddRequest) => {
   try {
     const res = await addPostUsingPost(values);
     if (res.code === 0 && res.data) {
-      message.success('创建成功3s之后跳转到创建的帖子页');
-      setTimeout(() => {
-        history.push(`/post/${res.data}`);
-      }, 3000);
+      message.success('请在个人中心查看我创建的帖子');
       return true;
     } else {
       message.error(`创建失败${res.message}`);
