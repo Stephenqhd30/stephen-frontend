@@ -14,7 +14,7 @@ import {
 } from '@/pages/Admin/UserList/components';
 import { TagTreeSelect } from '@/components';
 import { TAG_EMPTY } from '@/constants';
-import { downloadUsingGet } from '@/services/stephen-backend/excelController';
+import { downloadUserUsingGet } from '@/services/stephen-backend/excelController';
 
 /**
  * 删除节点
@@ -60,7 +60,7 @@ const UserList: React.FC = () => {
    */
   const downloadUserInfo = async () => {
     try {
-      const res = await downloadUsingGet({
+      const res = await downloadUserUsingGet({
         responseType: 'blob',
       });
       // 创建 Blob 对象

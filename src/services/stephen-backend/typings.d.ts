@@ -83,6 +83,12 @@ declare namespace API {
     message?: string;
   };
 
+  type BaseResponseSearchVOObject_ = {
+    code?: number;
+    data?: SearchVOObject_;
+    message?: string;
+  };
+
   type BaseResponseString_ = {
     code?: number;
     data?: string;
@@ -325,6 +331,19 @@ declare namespace API {
     updateTime?: string;
     userId?: number;
     userVO?: UserVO;
+  };
+
+  type SearchRequest = {
+    current?: number;
+    pageSize?: number;
+    searchText?: string;
+    sortField?: string;
+    sortOrder?: string;
+    type?: string;
+  };
+
+  type SearchVOObject_ = {
+    dataList?: Record<string, any>[];
   };
 
   type Tag = {
