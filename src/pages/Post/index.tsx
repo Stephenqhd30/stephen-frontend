@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from '@@/exports';
 import { PageContainer, ProCard } from '@ant-design/pro-components';
 import { Col, Grid, message, Row, Typography } from 'antd';
-import {MdViewer, PostTitleCard, TableOfContents, UserCard} from '@/components';
+import { MdViewer, PostTitleCard, TableOfContents, UserCard } from '@/components';
 import { getPostVoByIdUsingGet } from '@/services/stephen-backend/postController';
 
 const { useBreakpoint } = Grid;
@@ -47,10 +47,14 @@ const PostDetailsPage: React.FC = () => {
     loadData();
   }, []);
   return (
-    <PageContainer header={{ title: '' }}>
-      <Row gutter={[16, 16]} align={'top'}>
+    <PageContainer title={false}>
+      <Row gutter={isMobile ? 0 : 16} align={'top'}>
         <Col span={isMobile ? 24 : 18}>
-          <ProCard title={<PostTitleCard post={post} />} gutter={[16, 16]}>
+          <ProCard
+            bodyStyle={{ padding: 0 }}
+            title={<PostTitleCard post={post} />}
+            gutter={[16, 16]}
+          >
             <Typography.Paragraph>
               <MdViewer key={post?.id} value={post.content} id={editorId as string} />
             </Typography.Paragraph>

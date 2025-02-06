@@ -3,7 +3,7 @@ import { ProCard } from '@ant-design/pro-components';
 import { Col, Divider, Grid, Image, Row, Typography } from 'antd';
 
 import { history } from '@umijs/max';
-import { ActionTabbar, PostAvatarCard } from '@/components';
+import {ActionTabbar, PostAvatarCard} from '@/components';
 
 interface Props {
   post: API.PostVO;
@@ -21,11 +21,7 @@ const PostCard: React.FC<Props> = ({post}) => {
   const isMobile = !scene.md;
 
   return (
-    <ProCard
-      title={<PostAvatarCard key={post.id} post={post} />}
-      headStyle={{ padding: 4 }}
-      bodyStyle={{ padding: isMobile ? 4 : 16, paddingTop: 0 }}
-    >
+    <ProCard title={<PostAvatarCard key={post.id} post={post} />} bodyStyle={{ paddingTop: 0 }}>
       <Row>
         <Col span={isMobile ? 24 : post?.cover ? 18 : 24}>
           <ProCard bodyStyle={{ padding: 4 }}>

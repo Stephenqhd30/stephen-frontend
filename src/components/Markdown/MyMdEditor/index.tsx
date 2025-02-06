@@ -4,7 +4,7 @@ import 'md-editor-rt/lib/style.css';
 import { FileUploadBiz } from '@/enums/FileUploadBizEnum';
 import { message } from 'antd';
 import './index.less';
-import {uploadFileUsingPost} from '@/services/stephen-backend/fileController';
+import { uploadFileUsingPost } from '@/services/stephen-backend/fileController';
 
 interface Props {
   value?: string;
@@ -139,7 +139,6 @@ const MyMdEditor: React.FC<Props> = (props) => {
         placeholder={placeholder}
         value={value}
         onChange={onChange}
-        previewTheme="vuepress"
         onGetCatalog={setList}
         onUploadImg={uploadImages}
         toolbarsExclude={['github', 'htmlPreview', 'prettier']}

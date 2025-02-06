@@ -1,7 +1,6 @@
 import { Col, Grid, Row } from 'antd';
 import React, { useRef } from 'react';
 import { ActionType, PageContainer, ProCard, ProList } from '@ant-design/pro-components';
-import { WELCOME_TITLE } from '@/constants';
 import { listPostVoByPageUsingPost } from '@/services/stephen-backend/postController';
 import { PostCard } from '@/components';
 import { RecommendUserList } from '@/pages/Welcome/components';
@@ -20,17 +19,17 @@ const Welcome: React.FC = () => {
   const isMobile = !screens.md;
   const actionRef = useRef<ActionType>();
   return (
-    <PageContainer title={WELCOME_TITLE}>
+    <PageContainer title={false}>
       <Row gutter={16} wrap={true}>
         <Col span={isMobile ? 24 : 18}>
-          <ProCard bordered bodyStyle={{ padding: isMobile ? 4 : 16 }}>
+          <ProCard bordered bodyStyle={{ padding: 4 }}>
             <ProList<API.PostVO>
               onChange={() => {
                 actionRef.current?.reload();
               }}
               pagination={{
                 pageSize: 10,
-                showQuickJumper: true,
+                showTotal: undefined,
                 responsive: true,
               }}
               actionRef={actionRef}
