@@ -1,10 +1,10 @@
 import React from 'react';
+import { ProCard } from '@ant-design/pro-components';
+import { Markdown } from '@ant-design/pro-editor';
 import './index.less';
-import { MdPreview } from 'md-editor-rt';
 
 interface Props {
   value?: string;
-  id?: string;
 }
 
 /**
@@ -12,13 +12,11 @@ interface Props {
  * @param props
  * @constructor
  */
-const MdViewer:React.FC<Props> = (props) => {
-  const { value = "", id} = props;
-
+const MdViewer: React.FC<Props> = ({value = ''}) => {
   return (
-    <div className="md-viewer">
-      <MdPreview id={id} value={value} autoFoldThreshold={200} />
-    </div>
+    <ProCard>
+      <Markdown className={'md-viewer'}>{value}</Markdown>
+    </ProCard>
   );
 };
 

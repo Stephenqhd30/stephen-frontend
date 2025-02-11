@@ -1,4 +1,3 @@
-import '@umijs/max';
 import { message, UploadProps } from 'antd';
 import React, { useState } from 'react';
 import {
@@ -8,7 +7,7 @@ import {
   ProFormTextArea,
   ProFormUploadDragger,
 } from '@ant-design/pro-components';
-import { MyMdEditor, TagTreeSelect } from '@/components';
+import { MdEditor, TagTreeSelect } from '@/components';
 import { addPostUsingPost } from '@/services/stephen-backend/postController';
 import { uploadFileUsingPost } from '@/services/stephen-backend/fileController';
 import { FileUploadBiz } from '@/enums/FileUploadBizEnum';
@@ -120,12 +119,8 @@ const CreatePostModal: React.FC<Props> = (props) => {
       }}
     >
       <ProFormText name="title" label="标题" />
-      <ProFormTextArea name="content" label="描述" >
-        <MyMdEditor
-          value={content}
-          onChange={(value) => setContent(value)}
-          placeholder={'请填写内容'}
-        />
+      <ProFormTextArea name="content" label="描述">
+        <MdEditor value={content} onChange={(value) => setContent(value)} />
       </ProFormTextArea>
       <ProFormUploadDragger
         title={'上传帖子封面'}

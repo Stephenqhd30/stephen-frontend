@@ -17,12 +17,6 @@ declare namespace API {
     message?: string;
   };
 
-  type BaseResponseListUserVO_ = {
-    code?: number;
-    data?: UserVO[];
-    message?: string;
-  };
-
   type BaseResponseLoginUserVO_ = {
     code?: number;
     data?: LoginUserVO;
@@ -394,6 +388,7 @@ declare namespace API {
 
   type TagUpdateRequest = {
     id?: number;
+    idList?: number[];
     isParent?: number;
     parentId?: number;
     tagName?: string;
@@ -465,14 +460,6 @@ declare namespace API {
   type UserLoginRequest = {
     userAccount?: string;
     userPassword?: string;
-  };
-
-  type UserMatchRequest = {
-    current?: number;
-    number?: number;
-    pageSize?: number;
-    sortField?: string;
-    sortOrder?: string;
   };
 
   type UserQueryRequest = {

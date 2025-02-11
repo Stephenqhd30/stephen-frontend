@@ -5,8 +5,6 @@ import Settings from '../config/defaultSettings';
 import { getLoginUserUsingGet } from '@/services/stephen-backend/userController';
 import { UnAccessiblePage } from '@/pages/Exception';
 import { requestConfig } from '@/requestConfig';
-import { GitlabFilled } from '@ant-design/icons';
-import { STEPHEN_GITLAB } from '@/constants';
 
 const loginPath = '/user/login';
 

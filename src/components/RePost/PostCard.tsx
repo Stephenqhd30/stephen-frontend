@@ -1,9 +1,7 @@
 import React from 'react';
-import { ProCard } from '@ant-design/pro-components';
+import { ProCard, StatisticCard } from '@ant-design/pro-components';
 import { Col, Divider, Grid, Image, Row, Typography } from 'antd';
-
-import { history } from '@umijs/max';
-import {ActionTabbar, PostAvatarCard} from '@/components';
+import { ActionTabbar, PostAvatarCard } from '@/components';
 
 interface Props {
   post: API.PostVO;
@@ -21,26 +19,38 @@ const PostCard: React.FC<Props> = ({post}) => {
   const isMobile = !scene.md;
 
   return (
-    <ProCard title={<PostAvatarCard key={post.id} post={post} />} bodyStyle={{ paddingTop: 0 }}>
+    <ProCard
+      title={<PostAvatarCard key={post.id} post={post} />}
+      headStyle={{ padding: 4 }}
+      bodyStyle={{ paddingTop: 0 }}
+    >
       <Row>
         <Col span={isMobile ? 24 : post?.cover ? 18 : 24}>
           <ProCard bodyStyle={{ padding: 4 }}>
-            <div
+            <StatisticCard
               onClick={() => {
-                history.push(`/post/${post.id}`);
+                window.open(`/post/${post?.id}`, '_blank');
               }}
-            >
-              <Typography.Paragraph
-                ellipsis={{
-                  rows: 3,
-                  expandable: false,
-                  symbol: '...',
-                }}
-              >
-                {post.content}
-              </Typography.Paragraph>
-            </div>
-            <ActionTabbar post={post} />
+              bodyStyle={{
+                padding: 0,
+              }}
+              headStyle={{
+                padding: 0,
+              }}
+              statistic={{
+                title: <Typography.Title level={4}>{post?.title}</Typography.Title>,
+                valueRender: () => (
+                  <Typography.Paragraph
+                    ellipsis={{
+                      rows: 3,
+                      expandable: false,
+                    }}
+                  >
+                    {post.content}
+                  </Typography.Paragraph>
+                ),
+              }}
+            />
           </ProCard>
         </Col>
         <Col span={isMobile ? 24 : 6}>
@@ -58,8 +68,11 @@ const PostCard: React.FC<Props> = ({post}) => {
             </ProCard>
           )}
         </Col>
+        <Col span={24}>
+          <ActionTabbar post={post} />
+          <Divider key={post?.id} />
+        </Col>
       </Row>
-      <Divider key={post?.id} />
     </ProCard>
   );
 };

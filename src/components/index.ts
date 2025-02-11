@@ -5,8 +5,8 @@
  */
 import Footer from './Footer';
 import { AvatarDropdown, AvatarName } from './RightContent/AvatarDropdown';
-import { MyMdEditor, MdViewer, TableOfContents } from '@/components/Markdown';
-import { RecommendUser, UserCard } from '@/components/ReUser';
+import { MdEditor, MdViewer, TableOfContents } from '@/components/Markdown';
+import { UserCard } from '@/components/ReUser';
 import { TagTreeSelect } from '@/components/ReTag';
 import { ActionTabbar, PostCard, PostAvatarCard, PostTitleCard } from '@/components/RePost';
 
@@ -15,12 +15,11 @@ export {
   AvatarDropdown,
   AvatarName,
   MdViewer,
-  MyMdEditor,
+  MdEditor,
   TableOfContents,
   TagTreeSelect,
   PostCard,
   ActionTabbar,
-  RecommendUser,
   UserCard,
   PostAvatarCard,
   PostTitleCard

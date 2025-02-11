@@ -56,7 +56,7 @@ const PostDetailsPage: React.FC = () => {
             gutter={[16, 16]}
           >
             <Typography.Paragraph>
-              <MdViewer key={post?.id} value={post.content} id={editorId as string} />
+              <MdViewer key={post?.id} value={post.content} />
             </Typography.Paragraph>
           </ProCard>
         </Col>

@@ -1,9 +1,14 @@
 import { Col, Grid, Row } from 'antd';
 import React, { useRef } from 'react';
-import { ActionType, PageContainer, ProCard, ProList } from '@ant-design/pro-components';
+import {
+  ActionType,
+  PageContainer,
+  ProCard,
+  ProList,
+  StatisticCard,
+} from '@ant-design/pro-components';
 import { listPostVoByPageUsingPost } from '@/services/stephen-backend/postController';
 import { PostCard } from '@/components';
-import { RecommendUserList } from '@/pages/Welcome/components';
 
 
 // 响应式组件
@@ -20,7 +25,7 @@ const Welcome: React.FC = () => {
   const actionRef = useRef<ActionType>();
   return (
     <PageContainer title={false}>
-      <Row gutter={16} wrap={true}>
+      <Row wrap={true}>
         <Col span={isMobile ? 24 : 18}>
           <ProCard bordered bodyStyle={{ padding: 4 }}>
             <ProList<API.PostVO>
@@ -36,7 +41,7 @@ const Welcome: React.FC = () => {
               itemLayout="vertical"
               rowKey="id"
               request={async (params, sort, filter) => {
-                const sortField = 'createTime';
+                const sortField = 'updateTime';
                 const sortOrder = sort?.[sortField] ?? 'desc';
                 const { data, code } = await listPostVoByPageUsingPost({
                   ...params,
@@ -56,9 +61,7 @@ const Welcome: React.FC = () => {
           </ProCard>
         </Col>
         <Col span={isMobile ? 0 : 6}>
-          <ProCard bordered bodyStyle={{ padding: 0 }}>
-            <RecommendUserList />
-          </ProCard>
+          <StatisticCard></StatisticCard>
         </Col>
       </Row>
     </PageContainer>
