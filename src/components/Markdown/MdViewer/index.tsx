@@ -1,22 +1,36 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { ProCard } from '@ant-design/pro-components';
-import { Markdown } from '@ant-design/pro-editor';
 import './index.less';
+import { MarkdownEditor, MarkdownEditorInstance } from '@ant-design/md-editor';
 
 interface Props {
   value?: string;
+  onChange?: (value: string) => void;
+  isMobile?: boolean;
 }
+
 
 /**
  * Markdown 浏览器
  * @param props
  * @constructor
  */
-const MdViewer: React.FC<Props> = ({value = ''}) => {
+const MdViewer: React.FC<Props> = (props) => {
+  const { value = '', onChange, isMobile } = props;
+  const editorRef = useRef<MarkdownEditorInstance>();
   return (
-    <ProCard>
-      <Markdown className={'md-viewer'}>{value}</Markdown>
-    </ProCard>
+    <MarkdownEditor
+      editorRef={editorRef}
+      initValue={value}
+      onChange={onChange}
+      width={'100vw'}
+      toc={!isMobile}
+      readonly={true}
+      style={{
+        maxWidth: '100%',
+        overflow: 'hidden',
+      }}
+    />
   );
 };
 
