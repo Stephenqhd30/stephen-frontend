@@ -59,46 +59,6 @@ const UserCard: React.FC<Props> = (props) => {
               {user?.userName}
             </Typography.Text>
           }
-          statistic={{
-            valueRender: () => {
-              return (
-                <Typography.Text
-                  style={{
-                    fontWeight: 500,
-                    color: 'rgba(0, 0, 0, 0.45)',
-                  }}
-                  ellipsis={{
-                    tooltip: user?.userProfile,
-                    symbol: '...',
-                  }}
-                >
-                  {user?.userProfile}
-                </Typography.Text>
-              );
-            },
-          }}
-        />
-        <StatisticCard
-          bodyStyle={{ padding: 0 }}
-          headStyle={{ padding: 0 }}
-          statistic={{
-            valueRender: () => {
-              return user.tags?.map((tag) => {
-                return (
-                  <Tag
-                    style={{
-                      fontSize: 14,
-                    }}
-                    color={'magenta'}
-                    bordered={false}
-                    key={tag}
-                  >
-                    {tag}
-                  </Tag>
-                );
-              });
-            },
-          }}
         />
       </StatisticCard.Group>
     </ProCard>

@@ -29,12 +29,6 @@ declare namespace API {
     message?: string;
   };
 
-  type BaseResponseMapStringObject_ = {
-    code?: number;
-    data?: Record<string, any>;
-    message?: string;
-  };
-
   type BaseResponsePagePost_ = {
     code?: number;
     data?: PagePost_;
@@ -144,17 +138,12 @@ declare namespace API {
 
   type LoginUserVO = {
     createTime?: string;
-    editTime?: string;
     id?: number;
-    tags?: string[];
     token?: string;
     updateTime?: string;
     userAvatar?: string;
     userEmail?: string;
-    userGender?: number;
     userName?: string;
-    userPhone?: string;
-    userProfile?: string;
     userRole?: string;
   };
 
@@ -411,45 +400,32 @@ declare namespace API {
 
   type User = {
     createTime?: string;
-    editTime?: string;
     id?: number;
     isDelete?: number;
     mpOpenId?: string;
-    tags?: string;
     unionId?: string;
     updateTime?: string;
     userAccount?: string;
     userAvatar?: string;
     userEmail?: string;
-    userGender?: number;
     userName?: string;
     userPassword?: string;
-    userPhone?: string;
-    userProfile?: string;
     userRole?: string;
   };
 
   type UserAddRequest = {
-    tags?: string[];
     userAccount?: string;
     userAvatar?: string;
     userEmail?: string;
-    userGender?: number;
     userName?: string;
-    userPhone?: string;
-    userProfile?: string;
     userRole?: string;
   };
 
   type UserEditRequest = {
-    tags?: string[];
     userAvatar?: string;
     userEmail?: string;
-    userGender?: number;
     userName?: string;
     userPassword?: string;
-    userPhone?: string;
-    userProfile?: string;
   };
 
   type userLoginByWxOpenUsingGETParams = {
@@ -467,18 +443,13 @@ declare namespace API {
     id?: number;
     mpOpenId?: string;
     notId?: number;
-    orTags?: string[];
     pageSize?: number;
     searchText?: string;
     sortField?: string;
     sortOrder?: string;
-    tags?: string[];
     unionId?: string;
     userEmail?: string;
-    userGender?: number;
     userName?: string;
-    userPhone?: string;
-    userProfile?: string;
     userRole?: string;
   };
 
@@ -490,32 +461,22 @@ declare namespace API {
 
   type UserUpdateRequest = {
     id?: number;
-    tags?: string[];
     userAvatar?: string;
     userEmail?: string;
-    userGender?: number;
     userName?: string;
     userPassword?: string;
-    userPhone?: string;
-    userProfile?: string;
     userRole?: string;
   };
 
   type UserVO = {
     createTime?: string;
-    editTime?: string;
     id?: number;
     mpOpenId?: string;
-    similarity?: number;
-    tags?: string[];
     unionId?: string;
     updateTime?: string;
     userAvatar?: string;
     userEmail?: string;
-    userGender?: number;
     userName?: string;
-    userPhone?: string;
-    userProfile?: string;
     userRole?: string;
   };
 }

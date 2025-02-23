@@ -1,4 +1,4 @@
-import { DownloadOutlined, PlusOutlined, UploadOutlined } from '@ant-design/icons';
+import { PlusOutlined } from '@ant-design/icons';
 import { ActionType, ProColumns, ProTable } from '@ant-design/pro-components';
 import { Button, message, Popconfirm, Space, Tag, Typography } from 'antd';
 import React, { useRef, useState } from 'react';
@@ -7,14 +7,7 @@ import {
   listUserByPageUsingPost,
 } from '@/services/stephen-backend/userController';
 import { userRole, UserRoleEnum } from '@/enums/UserRoleEnum';
-import {
-  CreateUserModal,
-  UpdateUserModal,
-  UploadUserModal,
-} from '@/pages/Admin/UserList/components';
-import { TagTreeSelect } from '@/components';
-import { TAG_EMPTY } from '@/constants';
-import { downloadUserUsingGet } from '@/services/stephen-backend/excelController';
+import { CreateUserModal, UpdateUserModal } from '@/pages/Admin/UserList/components';
 
 /**
  * 删除节点
@@ -49,35 +42,9 @@ const UserList: React.FC = () => {
   const [createModalVisible, setCreateModalVisible] = useState<boolean>(false);
   // 更新窗口的Modal框
   const [updateModalVisible, setUpdateModalVisible] = useState<boolean>(false);
-  // 上传窗口的Modal框
-  const [uploadModalVisible, setUploadModalVisible] = useState<boolean>(false);
   const actionRef = useRef<ActionType>();
   // 当前用户的所点击的数据
   const [currentRow, setCurrentRow] = useState<API.User>();
-
-  /**
-   * 现在用户信息
-   */
-  const downloadUserInfo = async () => {
-    try {
-      const res = await downloadUserUsingGet({
-        responseType: 'blob',
-      });
-      // 创建 Blob 对象
-      // @ts-ignore
-      const url = window.URL.createObjectURL(new Blob([res]));
-      const link = document.createElement('a');
-      link.href = url;
-      link.setAttribute('download', '用户信息.xlsx');
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
-      // 释放对象 URL
-      window.URL.revokeObjectURL(url);
-    } catch (error: any) {
-      message.error('导出失败: ' + error.message);
-    }
-  };
 
   /**
    * 表格列数据
@@ -109,16 +76,6 @@ const UserList: React.FC = () => {
       hideInSearch: true,
     },
     {
-      title: '简介',
-      dataIndex: 'userProfile',
-      valueType: 'textarea',
-    },
-    {
-      title: '电话',
-      dataIndex: 'userPhone',
-      valueType: 'text',
-    },
-    {
       title: '邮箱',
       dataIndex: 'userEmail',
       valueType: 'text',
@@ -131,19 +88,6 @@ const UserList: React.FC = () => {
         const role = userRole[record.userRole as UserRoleEnum];
         return <Tag color={role.color}>{role.text}</Tag>;
       },
-    },
-    {
-      title: '用户标签',
-      dataIndex: 'tags',
-      valueType: 'text',
-      render: (_, record) => {
-        if (record.tags) {
-          const tagList = JSON.parse(record.tags as string);
-          return tagList.map((tag) => <Tag key={tag} color={'blue'}>{tag}</Tag>);
-        }
-        return <Tag>{TAG_EMPTY}</Tag>;
-      },
-      renderFormItem: () => <TagTreeSelect name={'tags'}/>,
     },
     {
       title: '创建时间',
@@ -223,24 +167,6 @@ const UserList: React.FC = () => {
             >
               新建
             </Button>
-            <Button
-              key={'upload'}
-              onClick={() => {
-                setUploadModalVisible(true);
-              }}
-              icon={<UploadOutlined />}
-            >
-              批量导入用户信息
-            </Button>
-            <Button
-              key={'export'}
-              onClick={async () => {
-                await downloadUserInfo();
-              }}
-              icon={<DownloadOutlined />}
-            >
-              导出用户信息
-            </Button>
           </Space>,
         ]}
         request={async (params, sort, filter) => {
@@ -288,19 +214,6 @@ const UserList: React.FC = () => {
           }}
           visible={updateModalVisible}
           oldData={currentRow}
-        />
-      )}
-      {/*上传用户信息的Modal框*/}
-      {uploadModalVisible && (
-        <UploadUserModal
-          onCancel={() => {
-            setUploadModalVisible(false);
-          }}
-          visible={uploadModalVisible}
-          onSubmit={async () => {
-            setUploadModalVisible(false);
-            actionRef.current?.reload();
-          }}
         />
       )}
     </>
