@@ -1,7 +1,84 @@
 declare namespace API {
+  type AffineTransform = {
+    determinant?: number;
+    identity?: boolean;
+    scaleX?: number;
+    scaleY?: number;
+    shearX?: number;
+    shearY?: number;
+    translateX?: number;
+    translateY?: number;
+    type?: number;
+  };
+
+  type Attribute = true;
+
+  type Auth = {
+    accessToken?: string;
+    createTime?: string;
+    id?: number;
+    isDelete?: number;
+    oauthId?: string;
+    oauthProvider?: string;
+    refreshToken?: string;
+    updateTime?: string;
+    userId?: number;
+  };
+
+  type AuthAddRequest = {
+    accessToken?: string;
+    oauthId?: string;
+    oauthProvider?: string;
+    refreshToken?: string;
+  };
+
+  type AuthQueryRequest = {
+    accessToken?: string;
+    current?: number;
+    id?: number;
+    notId?: number;
+    oauthId?: string;
+    oauthProvider?: string;
+    pageSize?: number;
+    refreshToken?: string;
+    sortField?: string;
+    sortOrder?: string;
+    userId?: number;
+  };
+
+  type AuthVO = {
+    accessToken?: string;
+    createTime?: string;
+    id?: number;
+    oauthId?: string;
+    oauthProvider?: string;
+    refreshToken?: string;
+    updateTime?: string;
+    userId?: number;
+    userVO?: UserVO;
+  };
+
+  type BaseResponseAuthVO_ = {
+    code?: number;
+    data?: AuthVO;
+    message?: string;
+  };
+
   type BaseResponseBoolean_ = {
     code?: number;
     data?: boolean;
+    message?: string;
+  };
+
+  type BaseResponseCaptcha_ = {
+    code?: number;
+    data?: Captcha;
+    message?: string;
+  };
+
+  type BaseResponseConversionVO_ = {
+    code?: number;
+    data?: ConversionVO;
     message?: string;
   };
 
@@ -26,6 +103,48 @@ declare namespace API {
   type BaseResponseLong_ = {
     code?: number;
     data?: number;
+    message?: string;
+  };
+
+  type BaseResponseMessageVO_ = {
+    code?: number;
+    data?: MessageVO;
+    message?: string;
+  };
+
+  type BaseResponsePageAuth_ = {
+    code?: number;
+    data?: PageAuth_;
+    message?: string;
+  };
+
+  type BaseResponsePageAuthVO_ = {
+    code?: number;
+    data?: PageAuthVO_;
+    message?: string;
+  };
+
+  type BaseResponsePageConversion_ = {
+    code?: number;
+    data?: PageConversion_;
+    message?: string;
+  };
+
+  type BaseResponsePageConversionVO_ = {
+    code?: number;
+    data?: PageConversionVO_;
+    message?: string;
+  };
+
+  type BaseResponsePageMessage_ = {
+    code?: number;
+    data?: PageMessage_;
+    message?: string;
+  };
+
+  type BaseResponsePageMessageVO_ = {
+    code?: number;
+    data?: PageMessageVO_;
     message?: string;
   };
 
@@ -101,6 +220,47 @@ declare namespace API {
     message?: string;
   };
 
+  type BufferedImage = {
+    accelerationPriority?: number;
+    alphaPremultiplied?: boolean;
+    alphaRaster?: WritableRaster;
+    colorModel?: ColorModel;
+    data?: Raster;
+    graphics?: Graphics;
+    height?: number;
+    minTileX?: number;
+    minTileY?: number;
+    minX?: number;
+    minY?: number;
+    numXTiles?: number;
+    numYTiles?: number;
+    propertyNames?: string[];
+    raster?: WritableRaster;
+    sampleModel?: SampleModel;
+    source?: ImageProducer;
+    sources?: RenderedImage[];
+    tileGridXOffset?: number;
+    tileGridYOffset?: number;
+    tileHeight?: number;
+    tileWidth?: number;
+    transparency?: number;
+    type?: number;
+    width?: number;
+    writableTileIndices?: Point[];
+  };
+
+  type Captcha = {
+    code?: string;
+    image?: string;
+    imageBuffer?: BufferedImage;
+    uuid?: string;
+  };
+
+  type checkCaptchaCodeUsingPOSTParams = {
+    /** code */
+    code: string;
+  };
+
   type checkUsingGETParams = {
     /** echostr */
     echostr?: string;
@@ -112,7 +272,149 @@ declare namespace API {
     timestamp?: string;
   };
 
+  type Color = {
+    alpha?: number;
+    blue?: number;
+    colorSpace?: ColorSpace;
+    green?: number;
+    red?: number;
+    rgb?: number;
+    transparency?: number;
+  };
+
+  type ColorModel = {
+    alphaPremultiplied?: boolean;
+    colorSpace?: ColorSpace;
+    componentSize?: number[];
+    numColorComponents?: number;
+    numComponents?: number;
+    pixelSize?: number;
+    transferType?: number;
+    transparency?: number;
+  };
+
+  type ColorSpace = {
+    cs_sRGB?: boolean;
+    numComponents?: number;
+    type?: number;
+  };
+
+  type Conversion = {
+    createTime?: string;
+    id?: number;
+    isDelete?: number;
+    title?: string;
+    updateTime?: string;
+    userId?: number;
+  };
+
+  type ConversionAddRequest = {
+    title?: string;
+  };
+
+  type ConversionEditRequest = {
+    id?: number;
+    title?: string;
+  };
+
+  type ConversionQueryRequest = {
+    current?: number;
+    id?: number;
+    notId?: number;
+    pageSize?: number;
+    searchText?: string;
+    sortField?: string;
+    sortOrder?: string;
+    title?: string;
+    userId?: number;
+  };
+
+  type ConversionUpdateRequest = {
+    id?: number;
+    title?: string;
+  };
+
+  type ConversionVO = {
+    createTime?: string;
+    id?: number;
+    title?: string;
+    updateTime?: string;
+    userId?: number;
+    userVO?: UserVO;
+  };
+
+  type DataBuffer = {
+    dataType?: number;
+    numBanks?: number;
+    offset?: number;
+    offsets?: number[];
+    size?: number;
+  };
+
   type DeleteRequest = {
+    id?: number;
+  };
+
+  type Dimension = {
+    height?: number;
+    width?: number;
+  };
+
+  type Font = {
+    attributes?: Record<string, any>;
+    availableAttributes?: Attribute[];
+    bold?: boolean;
+    family?: string;
+    fontName?: string;
+    italic?: boolean;
+    italicAngle?: number;
+    missingGlyphCode?: number;
+    name?: string;
+    numGlyphs?: number;
+    plain?: boolean;
+    psname?: string;
+    size?: number;
+    size2D?: number;
+    style?: number;
+    transform?: AffineTransform;
+    transformed?: boolean;
+  };
+
+  type FontMetrics = {
+    ascent?: number;
+    descent?: number;
+    font?: Font;
+    fontRenderContext?: FontRenderContext;
+    height?: number;
+    leading?: number;
+    maxAdvance?: number;
+    maxAscent?: number;
+    maxDecent?: number;
+    maxDescent?: number;
+    widths?: number[];
+  };
+
+  type FontRenderContext = {
+    antiAliased?: boolean;
+    antiAliasingHint?: Record<string, any>;
+    fractionalMetricsHint?: Record<string, any>;
+    transform?: AffineTransform;
+    transformType?: number;
+    transformed?: boolean;
+  };
+
+  type getAuthVOByIdUsingGETParams = {
+    /** id */
+    id?: number;
+  };
+
+  type getConversionVOByIdUsingGETParams = {
+    /** id */
+    id?: number;
+  };
+
+  type getMessageVOByIdUsingGETParams = {
+    /** id */
     id?: number;
   };
 
@@ -136,6 +438,17 @@ declare namespace API {
     id?: number;
   };
 
+  type Graphics = {
+    clip?: Shape;
+    clipBounds?: Rectangle;
+    clipRect?: Rectangle;
+    color?: Color;
+    font?: Font;
+    fontMetrics?: FontMetrics;
+  };
+
+  type ImageProducer = true;
+
   type LoginUserVO = {
     createTime?: string;
     id?: number;
@@ -147,9 +460,139 @@ declare namespace API {
     userRole?: string;
   };
 
+  type Message = {
+    content?: string;
+    conversionId?: number;
+    createTime?: string;
+    id?: number;
+    senderType?: number;
+    userId?: number;
+  };
+
+  type MessageAddRequest = {
+    content?: string;
+    conversionId?: number;
+    senderType?: number;
+  };
+
+  type MessageEditRequest = {
+    content?: string;
+    conversionId?: number;
+    id?: number;
+    senderType?: number;
+  };
+
+  type MessageQueryRequest = {
+    content?: string;
+    conversionId?: number;
+    current?: number;
+    id?: number;
+    notId?: number;
+    pageSize?: number;
+    searchText?: string;
+    senderType?: number;
+    sortField?: string;
+    sortOrder?: string;
+    userId?: number;
+  };
+
+  type MessageUpdateRequest = {
+    content?: string;
+    id?: number;
+    senderType?: number;
+  };
+
+  type MessageVO = {
+    content?: string;
+    conversionId?: number;
+    createTime?: string;
+    id?: number;
+    senderType?: number;
+    userId?: number;
+    userVO?: UserVO;
+  };
+
   type OrderItem = {
     asc?: boolean;
     column?: string;
+  };
+
+  type PageAuth_ = {
+    countId?: string;
+    current?: number;
+    maxLimit?: number;
+    optimizeCountSql?: boolean;
+    orders?: OrderItem[];
+    pages?: number;
+    records?: Auth[];
+    searchCount?: boolean;
+    size?: number;
+    total?: number;
+  };
+
+  type PageAuthVO_ = {
+    countId?: string;
+    current?: number;
+    maxLimit?: number;
+    optimizeCountSql?: boolean;
+    orders?: OrderItem[];
+    pages?: number;
+    records?: AuthVO[];
+    searchCount?: boolean;
+    size?: number;
+    total?: number;
+  };
+
+  type PageConversion_ = {
+    countId?: string;
+    current?: number;
+    maxLimit?: number;
+    optimizeCountSql?: boolean;
+    orders?: OrderItem[];
+    pages?: number;
+    records?: Conversion[];
+    searchCount?: boolean;
+    size?: number;
+    total?: number;
+  };
+
+  type PageConversionVO_ = {
+    countId?: string;
+    current?: number;
+    maxLimit?: number;
+    optimizeCountSql?: boolean;
+    orders?: OrderItem[];
+    pages?: number;
+    records?: ConversionVO[];
+    searchCount?: boolean;
+    size?: number;
+    total?: number;
+  };
+
+  type PageMessage_ = {
+    countId?: string;
+    current?: number;
+    maxLimit?: number;
+    optimizeCountSql?: boolean;
+    orders?: OrderItem[];
+    pages?: number;
+    records?: Message[];
+    searchCount?: boolean;
+    size?: number;
+    total?: number;
+  };
+
+  type PageMessageVO_ = {
+    countId?: string;
+    current?: number;
+    maxLimit?: number;
+    optimizeCountSql?: boolean;
+    orders?: OrderItem[];
+    pages?: number;
+    records?: MessageVO[];
+    searchCount?: boolean;
+    size?: number;
+    total?: number;
   };
 
   type PagePost_ = {
@@ -228,6 +671,11 @@ declare namespace API {
     searchCount?: boolean;
     size?: number;
     total?: number;
+  };
+
+  type Point = {
+    x?: number;
+    y?: number;
   };
 
   type Post = {
@@ -316,6 +764,85 @@ declare namespace API {
     userVO?: UserVO;
   };
 
+  type Raster = {
+    bounds?: Rectangle;
+    dataBuffer?: DataBuffer;
+    height?: number;
+    minX?: number;
+    minY?: number;
+    numBands?: number;
+    numDataElements?: number;
+    parent?: Raster;
+    sampleModel?: SampleModel;
+    sampleModelTranslateX?: number;
+    sampleModelTranslateY?: number;
+    transferType?: number;
+    width?: number;
+  };
+
+  type Rectangle = {
+    bounds2D?: Rectangle2D;
+    centerX?: number;
+    centerY?: number;
+    empty?: boolean;
+    height?: number;
+    location?: Point;
+    maxX?: number;
+    maxY?: number;
+    minX?: number;
+    minY?: number;
+    size?: Dimension;
+    width?: number;
+    x?: number;
+    y?: number;
+  };
+
+  type Rectangle2D = {
+    bounds?: Rectangle;
+    bounds2D?: Rectangle2D;
+    centerX?: number;
+    centerY?: number;
+    empty?: boolean;
+    height?: number;
+    maxX?: number;
+    maxY?: number;
+    minX?: number;
+    minY?: number;
+    width?: number;
+    x?: number;
+    y?: number;
+  };
+
+  type RenderedImage = {
+    colorModel?: ColorModel;
+    data?: Raster;
+    height?: number;
+    minTileX?: number;
+    minTileY?: number;
+    minX?: number;
+    minY?: number;
+    numXTiles?: number;
+    numYTiles?: number;
+    propertyNames?: string[];
+    sampleModel?: SampleModel;
+    sources?: RenderedImage[];
+    tileGridXOffset?: number;
+    tileGridYOffset?: number;
+    tileHeight?: number;
+    tileWidth?: number;
+    width?: number;
+  };
+
+  type SampleModel = {
+    dataType?: number;
+    height?: number;
+    numBands?: number;
+    numDataElements?: number;
+    sampleSize?: number[];
+    transferType?: number;
+    width?: number;
+  };
+
   type SearchRequest = {
     current?: number;
     pageSize?: number;
@@ -327,6 +854,11 @@ declare namespace API {
 
   type SearchVOObject_ = {
     dataList?: Record<string, any>[];
+  };
+
+  type Shape = {
+    bounds?: Rectangle;
+    bounds2D?: Rectangle2D;
   };
 
   type Tag = {
@@ -478,5 +1010,22 @@ declare namespace API {
     userEmail?: string;
     userName?: string;
     userRole?: string;
+  };
+
+  type WritableRaster = {
+    bounds?: Rectangle;
+    dataBuffer?: DataBuffer;
+    height?: number;
+    minX?: number;
+    minY?: number;
+    numBands?: number;
+    numDataElements?: number;
+    parent?: Raster;
+    sampleModel?: SampleModel;
+    sampleModelTranslateX?: number;
+    sampleModelTranslateY?: number;
+    transferType?: number;
+    width?: number;
+    writableParent?: WritableRaster;
   };
 }
