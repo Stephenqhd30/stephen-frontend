@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
-import {PageContainer, ProCard, ProForm, ProFormText, ProFormUploadDragger} from '@ant-design/pro-components';
+import {
+  PageContainer,
+  ProCard,
+  ProForm,
+  ProFormText,
+  ProFormUploadDragger,
+} from '@ant-design/pro-components';
 import { message, UploadProps } from 'antd';
-import { MdEditor, TagTreeSelect } from '@/components';
-import { addPostUsingPost } from '@/services/stephen-backend/postController';
-import { uploadFileUsingPost } from '@/services/stephen-backend/fileController';
+import { MdEditor } from '@/components';
 import { FileUploadBiz } from '@/enums/FileUploadBizEnum';
-
+import { addPost } from '@/services/stephen-backend/postController';
+import { uploadFile } from '@/services/stephen-backend/fileController';
 
 /**
  * 创建帖子
@@ -13,7 +18,7 @@ import { FileUploadBiz } from '@/enums/FileUploadBizEnum';
  */
 const handleCreatePost = async (values: API.PostAddRequest) => {
   try {
-    const res = await addPostUsingPost(values);
+    const res = await addPost(values);
     if (res.code === 0 && res.data) {
       message.success('请在个人中心查看我创建的帖子');
       return true;
@@ -26,7 +31,6 @@ const handleCreatePost = async (values: API.PostAddRequest) => {
     return false;
   }
 };
-
 
 /**
  * 创建帖子页面
@@ -48,11 +52,10 @@ const CreatePostPage: React.FC = () => {
     customRequest: async (options: any) => {
       const { onSuccess, onError, file } = options;
       try {
-        const res = await uploadFileUsingPost(
+        const res = await uploadFile(
+          { biz: FileUploadBiz.POST_COVER },
           {
             biz: FileUploadBiz.POST_COVER,
-          },
-          {
             file: file,
           },
           file,
@@ -94,10 +97,7 @@ const CreatePostPage: React.FC = () => {
         >
           <ProFormText name="title" label="标题" />
           <ProFormText name="content" label="内容">
-            <MdEditor
-              value={content}
-              onChange={(value) => setContent(value)}
-            />
+            <MdEditor value={content} onChange={(value) => setContent(value)} />
           </ProFormText>
           <ProFormUploadDragger
             title={'上传帖子封面'}
@@ -108,7 +108,6 @@ const CreatePostPage: React.FC = () => {
             name="cover"
             label={'封面'}
           />
-          <TagTreeSelect name={'tags'} label={'标签'} />
         </ProForm>
       </ProCard>
     </PageContainer>

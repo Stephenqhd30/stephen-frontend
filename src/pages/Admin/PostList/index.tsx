@@ -1,11 +1,10 @@
-import {ActionType, ProColumns, ProTable} from '@ant-design/pro-components';
-import {Button, message, Popconfirm, Space, Tag, Typography} from 'antd';
-import React, {useRef, useState} from 'react';
+import { ActionType, ProColumns, ProTable } from '@ant-design/pro-components';
+import { Button, message, Popconfirm, Space, Tag, Typography } from 'antd';
+import React, { useRef, useState } from 'react';
 import { CreatePostModal, UpdatePostModal, ViewPostModal } from '@/pages/Admin/PostList/components';
-import {deletePostUsingPost, listPostByPageUsingPost} from '@/services/stephen-backend/postController';
-import {PlusOutlined} from '@ant-design/icons';
-import {TagTreeSelect} from '@/components';
-import {TAG_EMPTY} from '@/constants';
+import { PlusOutlined } from '@ant-design/icons';
+import { TAG_EMPTY } from '@/constants';
+import { deletePost, listPostByPage } from '@/services/stephen-backend/postController';
 
 /**
  * 删除节点
@@ -16,7 +15,7 @@ const handleDelete = async (row: API.DeleteRequest) => {
   const hide = message.loading('正在删除');
   if (!row) return true;
   try {
-    const res = await deletePostUsingPost({
+    const res = await deletePost({
       id: row.id,
     });
     if (res.code === 0 && res.data) {
@@ -102,7 +101,6 @@ const PostList: React.FC = () => {
         }
         return <Tag>{TAG_EMPTY}</Tag>;
       },
-      renderFormItem: () => <TagTreeSelect name={'tags'} />,
     },
     {
       title: '创建用户id',
@@ -204,7 +202,7 @@ const PostList: React.FC = () => {
         request={async (params, sort, filter) => {
           const sortField = Object.keys(sort)?.[0];
           const sortOrder = sort?.[sortField] ?? undefined;
-          const { data, code } = await listPostByPageUsingPost({
+          const { data, code } = await listPostByPage({
             ...params,
             ...filter,
             sortField,

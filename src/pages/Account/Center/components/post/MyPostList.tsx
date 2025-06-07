@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
-import { listMyPostVoByPageUsingPost } from '@/services/stephen-backend/postController';
 import { PostCard } from '@/components';
 import { ActionType, ProList } from '@ant-design/pro-components';
+import {listMyPostVoByPage} from '@/services/stephen-backend/postController';
 
 /**
  * 我的帖子
@@ -25,7 +25,7 @@ const MyPostList: React.FC = () => {
       request={async (params, sort, filter) => {
         const sortField = 'createTime';
         const sortOrder = sort?.[sortField] ?? 'desc';
-        const { data, code } = await listMyPostVoByPageUsingPost({
+        const { data, code } = await listMyPostVoByPage({
           ...params,
           ...filter,
           sortField,

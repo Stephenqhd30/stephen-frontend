@@ -2,12 +2,9 @@ import { PlusOutlined } from '@ant-design/icons';
 import { ActionType, ProColumns, ProTable } from '@ant-design/pro-components';
 import { Button, message, Popconfirm, Space, Tag, Typography } from 'antd';
 import React, { useRef, useState } from 'react';
-import {
-  deleteUserUsingPost,
-  listUserByPageUsingPost,
-} from '@/services/stephen-backend/userController';
 import { userRole, UserRoleEnum } from '@/enums/UserRoleEnum';
 import { CreateUserModal, UpdateUserModal } from '@/pages/Admin/UserList/components';
+import {deleteUser, listUserByPage} from '@/services/stephen-backend/userController';
 
 /**
  * 删除节点
@@ -18,7 +15,7 @@ const handleDelete = async (row: API.DeleteRequest) => {
   const hide = message.loading('正在删除');
   if (!row) return true;
   try {
-    const res = await deleteUserUsingPost({
+    const res = await deleteUser({
       id: row.id,
     });
     if (res.code === 0 && res.data) {
@@ -172,7 +169,7 @@ const UserList: React.FC = () => {
         request={async (params, sort, filter) => {
           const sortField = Object.keys(sort)?.[0];
           const sortOrder = sort?.[sortField] ?? undefined;
-          const { data, code } = await listUserByPageUsingPost({
+          const { data, code } = await listUserByPage({
             ...params,
             ...filter,
             sortField,

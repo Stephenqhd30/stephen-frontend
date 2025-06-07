@@ -8,10 +8,10 @@ import {
 } from '@ant-design/pro-components';
 import { message, Select, UploadProps } from 'antd';
 import React, { useState } from 'react';
-import { uploadFileUsingPost } from '@/services/stephen-backend/fileController';
-import { updateUserUsingPost } from '@/services/stephen-backend/userController';
 import { userRole, UserRoleEnum } from '@/enums/UserRoleEnum';
 import { FileUploadBiz } from '@/enums/FileUploadBizEnum';
+import {updateUser} from '@/services/stephen-backend/userController';
+import {uploadFile} from '@/services/stephen-backend/fileController';
 
 interface Props {
   oldData?: API.User;
@@ -28,7 +28,7 @@ interface Props {
 const handleUpdate = async (fields: API.UserUpdateRequest) => {
   const hide = message.loading('正在更新');
   try {
-    const res = await updateUserUsingPost(fields);
+    const res = await updateUser(fields);
     if (res.code === 0 && res.data) {
       message.success('更新成功');
       return true;
@@ -64,7 +64,7 @@ const UpdateUserModal: React.FC<Props> = (props) => {
     customRequest: async (options: any) => {
       const { onSuccess, onError, file } = options;
       try {
-        const res = await uploadFileUsingPost(
+        const res = await uploadFile(
           {
             biz: FileUploadBiz.USER_AVATAR,
           },

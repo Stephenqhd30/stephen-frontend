@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { PostCard } from '@/components';
 import { ActionType, ProList } from '@ant-design/pro-components';
-import { listMyThumbPostByPageUsingPost } from '@/services/stephen-backend/postThumbController';
+import {listMyThumbPostByPage} from '@/services/stephen-backend/postThumbController';
 
 /**
  * 我的帖子
@@ -25,7 +25,7 @@ const MyThumbPostList: React.FC = () => {
       request={async (params, sort, filter) => {
         const sortField = 'createTime';
         const sortOrder = sort?.[sortField] ?? 'desc';
-        const { data, code } = await listMyThumbPostByPageUsingPost({
+        const { data, code } = await listMyThumbPostByPage({
           ...params,
           ...filter,
           sortField,

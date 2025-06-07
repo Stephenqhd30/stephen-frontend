@@ -7,10 +7,10 @@ import {
 } from '@ant-design/pro-components';
 import { message, UploadProps } from 'antd';
 import React, { useState } from 'react';
-import { updatePostUsingPost } from '@/services/stephen-backend/postController';
-import { MdEditor, TagTreeSelect } from '@/components';
-import { uploadFileUsingPost } from '@/services/stephen-backend/fileController';
+import { MdEditor } from '@/components';
 import { FileUploadBiz } from '@/enums/FileUploadBizEnum';
+import {updatePost} from '@/services/stephen-backend/postController';
+import {uploadFile} from '@/services/stephen-backend/fileController';
 
 interface Props {
   oldData?: API.Post;
@@ -28,7 +28,7 @@ interface Props {
 const handleUpdate = async (fields: API.PostUpdateRequest) => {
   const hide = message.loading('正在更新');
   try {
-    const res = await updatePostUsingPost(fields);
+    const res = await updatePost(fields);
     if (res.code === 0 && res.data) {
       message.success('更新成功');
       return true;
@@ -61,7 +61,7 @@ const UpdatePostModal: React.FC<Props> = (props) => {
     customRequest: async (options: any) => {
       const { onSuccess, onError, file } = options;
       try {
-        const res = await uploadFileUsingPost(
+        const res = await uploadFile(
           {
             biz: FileUploadBiz.POST_COVER,
           },
@@ -134,11 +134,6 @@ const UpdatePostModal: React.FC<Props> = (props) => {
         }}
         name="pic"
         label={'封面'}
-      />
-      <TagTreeSelect
-        name={'tags'}
-        label={'标签'}
-        initialValue={oldData?.tags ? JSON.parse(oldData?.tags) : []}
       />
     </ModalForm>
   );

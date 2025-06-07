@@ -2,9 +2,9 @@ import { AvatarDropdown, AvatarName, Footer } from '@/components';
 import { history, RunTimeLayoutConfig } from '@umijs/max';
 import React from 'react';
 import Settings from '../config/defaultSettings';
-import { getLoginUserUsingGet } from '@/services/stephen-backend/userController';
 import { UnAccessiblePage } from '@/pages/Exception';
 import { requestConfig } from '@/requestConfig';
+import { getLoginUser } from '@/services/stephen-backend/userController';
 
 const loginPath = '/user/login';
 
@@ -19,7 +19,7 @@ export async function getInitialState(): Promise<InitialState> {
   const { location } = history;
   try {
     if (location.pathname !== loginPath) {
-      const res = await getLoginUserUsingGet();
+      const res = await getLoginUser();
       if (res.code === 0) {
         initialState.currentUser = res.data as any;
         // 保存token信息到本地

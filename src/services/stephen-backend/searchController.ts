@@ -2,12 +2,9 @@
 /* eslint-disable */
 import { request } from '@umijs/max';
 
-/** doSearchAll POST /api/es/all */
-export async function doSearchAllUsingPost(
-  body: API.SearchRequest,
-  options?: { [key: string]: any },
-) {
-  return request<API.BaseResponseSearchVOObject_>('/api/es/all', {
+/** 此处后端没有提供注释 POST /es/all */
+export async function doSearchAll(body: API.SearchRequest, options?: { [key: string]: any }) {
+  return request<API.BaseResponseSearchVOObject>('/es/all', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -17,12 +14,12 @@ export async function doSearchAllUsingPost(
   });
 }
 
-/** searchPostVOByPage POST /api/es/search/post/page/vo */
-export async function searchPostVoByPageUsingPost(
+/** 此处后端没有提供注释 POST /es/search/post/page/vo */
+export async function searchPostVoByPage(
   body: API.PostQueryRequest,
   options?: { [key: string]: any },
 ) {
-  return request<API.BaseResponsePagePostVO_>('/api/es/search/post/page/vo', {
+  return request<API.BaseResponsePagePostVO>('/es/search/post/page/vo', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -32,12 +29,12 @@ export async function searchPostVoByPageUsingPost(
   });
 }
 
-/** searchUserVOByPage POST /api/es/search/user/page/vo */
-export async function searchUserVoByPageUsingPost(
+/** 此处后端没有提供注释 POST /es/search/user/page/vo */
+export async function searchUserVoByPage(
   body: API.UserQueryRequest,
   options?: { [key: string]: any },
 ) {
-  return request<API.BaseResponsePageUserVO_>('/api/es/search/user/page/vo', {
+  return request<API.BaseResponsePageUserVO>('/es/search/user/page/vo', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

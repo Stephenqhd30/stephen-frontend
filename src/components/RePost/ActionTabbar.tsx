@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { doPostFavourUsingPost } from '@/services/stephen-backend/postFavourController';
 import { Divider, message, Space, Statistic } from 'antd';
-import { doThumbUsingPost } from '@/services/stephen-backend/postThumbController';
 import { LikeOutlined, LikeTwoTone, StarOutlined, StarTwoTone } from '@ant-design/icons';
+import {doPostFavour} from '@/services/stephen-backend/postFavourController';
+import {doThumb} from '@/services/stephen-backend/postThumbController';
 
 interface Props {
   post: API.PostVO;
@@ -27,7 +27,7 @@ const ActionTabbar: React.FC<Props> = ({ post }) => {
    */
   const handleFavour = async () => {
     try {
-      const res = await doPostFavourUsingPost({
+      const res = await doPostFavour({
         postId: post.id,
       });
       if (res.code === 0 && res.data) {
@@ -47,7 +47,7 @@ const ActionTabbar: React.FC<Props> = ({ post }) => {
    */
   const handleThumb = async () => {
     try {
-      const res = await doThumbUsingPost({
+      const res = await doThumb({
         postId: post.id,
       });
       if (res.code === 0 && res.data) {

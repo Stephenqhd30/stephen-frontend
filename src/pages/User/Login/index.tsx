@@ -5,9 +5,9 @@ import { Divider, Image, message, Space, Tabs, theme, Typography } from 'antd';
 import React, { CSSProperties, useEffect, useState } from 'react';
 import { createStyles } from 'antd-style';
 import { BACKGROUND_IMAGE, STEPHEN_SUBTITLE, STEPHEN_TITLE } from '@/constants';
-import { userLoginUsingPost } from '@/services/stephen-backend/userController';
 import { AlipayOutlined, TaobaoOutlined, WeiboOutlined } from '@ant-design/icons';
 import { AccountLoginPage, PhoneLoginPage } from '@/pages/User/Login/components';
+import { userLogin } from '@/services/stephen-backend/userController';
 
 const useStyles = createStyles(({ token }) => {
   return {
@@ -41,7 +41,6 @@ const iconStyles: CSSProperties = {
   cursor: 'pointer',
 };
 
-
 /**
  * 登录页面
  * @constructor
@@ -49,17 +48,15 @@ const iconStyles: CSSProperties = {
 const Login: React.FC = () => {
   const [type, setType] = useState<string>('account');
   const { token } = theme.useToken();
-  const {initialState, setInitialState} = useModel('@@initialState');
+  const { initialState, setInitialState } = useModel('@@initialState');
   const [redirected, setRedirected] = useState(false); // 控制重定向状态
-  const {styles} = useStyles();
+  const { styles } = useStyles();
   // 用户登录
   const handleLoginSubmit = async (values: API.UserLoginRequest) => {
     const hide = message.loading('正在登录中..');
     try {
       // 登录
-      const res = await userLoginUsingPost({
-        ...values,
-      });
+      const res = await userLogin({ ...values });
       if (res.code === 0 && res.data) {
         // 保存已登录的用户信息
         setInitialState({

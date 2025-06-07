@@ -1,14 +1,14 @@
-import { uploadFileUsingPost } from '@/services/stephen-backend/fileController';
 import { FileUploadBiz } from '@/enums/FileUploadBizEnum';
 import React, { useRef } from 'react';
 import { Card } from 'antd';
 import { MarkdownEditor, MarkdownEditorInstance } from '@ant-design/md-editor';
+import { uploadFile } from '@/services/stephen-backend/fileController';
 
 const uploadImage = async (fileList: File[] | string[]): Promise<string[]> => {
   try {
     const uploadedUrls = await Promise.all(
       fileList.map(async (file) => {
-        const res = await uploadFileUsingPost(
+        const res = await uploadFile(
           {
             biz: FileUploadBiz.POST_IMAGE_COVER,
           },

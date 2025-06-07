@@ -7,8 +7,8 @@ import {
   ProList,
   StatisticCard,
 } from '@ant-design/pro-components';
-import { listPostVoByPageUsingPost } from '@/services/stephen-backend/postController';
 import { PostCard } from '@/components';
+import {listPostVoByPage} from '@/services/stephen-backend/postController';
 
 
 // 响应式组件
@@ -43,7 +43,7 @@ const Welcome: React.FC = () => {
               request={async (params, sort, filter) => {
                 const sortField = 'updateTime';
                 const sortOrder = sort?.[sortField] ?? 'desc';
-                const { data, code } = await listPostVoByPageUsingPost({
+                const { data, code } = await listPostVoByPage({
                   ...params,
                   ...filter,
                   sortField,

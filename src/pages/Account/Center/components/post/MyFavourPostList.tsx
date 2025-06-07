@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { PostCard } from '@/components';
 import { ActionType, ProList } from '@ant-design/pro-components';
-import { listMyFavourPostByPageUsingPost } from '@/services/stephen-backend/postFavourController';
+import { listMyFavourPostByPage } from '@/services/stephen-backend/postFavourController';
 
 /**
  * 我的帖子
@@ -25,7 +25,7 @@ const MyFavourPostList: React.FC = () => {
       request={async (params, sort, filter) => {
         const sortField = 'createTime';
         const sortOrder = sort?.[sortField] ?? 'desc';
-        const { data, code } = await listMyFavourPostByPageUsingPost({
+        const { data, code } = await listMyFavourPostByPage({
           ...params,
           ...filter,
           sortField,

@@ -2,12 +2,9 @@
 /* eslint-disable */
 import { request } from '@umijs/max';
 
-/** doThumb POST /api/post_thumb/ */
-export async function doThumbUsingPost(
-  body: API.PostThumbAddRequest,
-  options?: { [key: string]: any },
-) {
-  return request<API.BaseResponseInt_>('/api/post_thumb/', {
+/** 此处后端没有提供注释 POST /post_thumb/ */
+export async function doThumb(body: API.PostThumbAddRequest, options?: { [key: string]: any }) {
+  return request<API.BaseResponseInteger>('/post_thumb/', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -17,12 +14,12 @@ export async function doThumbUsingPost(
   });
 }
 
-/** listFavourPostByPage POST /api/post_thumb/list/page */
-export async function listFavourPostByPageUsingPost1(
+/** 此处后端没有提供注释 POST /post_thumb/list/page */
+export async function listFavourPostByPage(
   body: API.PostFavourQueryRequest,
   options?: { [key: string]: any },
 ) {
-  return request<API.BaseResponsePagePostVO_>('/api/post_thumb/list/page', {
+  return request<API.BaseResponsePagePostVO>('/post_thumb/list/page', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -32,12 +29,12 @@ export async function listFavourPostByPageUsingPost1(
   });
 }
 
-/** listMyThumbPostByPage POST /api/post_thumb/my/list/page */
-export async function listMyThumbPostByPageUsingPost(
+/** 此处后端没有提供注释 POST /post_thumb/my/list/page */
+export async function listMyThumbPostByPage(
   body: API.PostQueryRequest,
   options?: { [key: string]: any },
 ) {
-  return request<API.BaseResponsePagePostVO_>('/api/post_thumb/my/list/page', {
+  return request<API.BaseResponsePagePostVO>('/post_thumb/my/list/page', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

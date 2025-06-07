@@ -7,17 +7,16 @@ import {
   ProFormTextArea,
   ProFormUploadDragger,
 } from '@ant-design/pro-components';
-import { MdEditor, TagTreeSelect } from '@/components';
-import { addPostUsingPost } from '@/services/stephen-backend/postController';
-import { uploadFileUsingPost } from '@/services/stephen-backend/fileController';
+import { MdEditor } from '@/components';
 import { FileUploadBiz } from '@/enums/FileUploadBizEnum';
+import { uploadFile } from '@/services/stephen-backend/fileController';
+import { addPost } from '@/services/stephen-backend/postController';
 
 interface Props {
   onCancel: () => void;
   visible: boolean;
   onSubmit: () => Promise<void>;
 }
-
 
 /**
  * 创建帖子
@@ -26,7 +25,7 @@ interface Props {
 const handleAdd = async (values: API.PostAddRequest) => {
   const hide = message.loading('正在创建...');
   try {
-    const res = await addPostUsingPost(values);
+    const res = await addPost(values);
     if (res.code === 0 && res.data) {
       message.success('请在个人中心查看我创建的帖子');
       return true;
@@ -65,7 +64,7 @@ const CreatePostModal: React.FC<Props> = (props) => {
     customRequest: async (options: any) => {
       const { onSuccess, onError, file } = options;
       try {
-        const res = await uploadFileUsingPost(
+        const res = await uploadFile(
           {
             biz: FileUploadBiz.POST_COVER,
           },
@@ -131,7 +130,6 @@ const CreatePostModal: React.FC<Props> = (props) => {
         name="cover"
         label={'封面'}
       />
-      <TagTreeSelect name={'tags'} label={'标签'} />
     </ModalForm>
   );
 };

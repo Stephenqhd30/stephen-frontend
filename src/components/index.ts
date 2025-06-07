@@ -7,7 +7,6 @@ import Footer from './Footer';
 import { AvatarDropdown, AvatarName } from './RightContent/AvatarDropdown';
 import { MdEditor, MdViewer } from '@/components/Markdown';
 import { UserCard } from '@/components/ReUser';
-import { TagTreeSelect } from '@/components/ReTag';
 import { ActionTabbar, PostCard, PostAvatarCard, PostTitleCard } from '@/components/RePost';
 
 export {
@@ -16,7 +15,6 @@ export {
   AvatarName,
   MdViewer,
   MdEditor,
-  TagTreeSelect,
   PostCard,
   ActionTabbar,
   UserCard,

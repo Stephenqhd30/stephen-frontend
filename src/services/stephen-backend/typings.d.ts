@@ -1,710 +1,1139 @@
 declare namespace API {
-  type AffineTransform = {
-    determinant?: number;
-    identity?: boolean;
-    scaleX?: number;
-    scaleY?: number;
-    shearX?: number;
-    shearY?: number;
-    translateX?: number;
-    translateY?: number;
-    type?: number;
-  };
-
-  type Attribute = true;
-
-  type Auth = {
-    accessToken?: string;
-    createTime?: string;
-    id?: number;
-    isDelete?: number;
-    oauthId?: string;
-    oauthProvider?: string;
-    refreshToken?: string;
-    updateTime?: string;
-    userId?: number;
-  };
-
-  type AuthAddRequest = {
-    accessToken?: string;
-    oauthId?: string;
-    oauthProvider?: string;
-    refreshToken?: string;
-  };
-
-  type AuthQueryRequest = {
-    accessToken?: string;
-    current?: number;
-    id?: number;
-    notId?: number;
-    oauthId?: string;
-    oauthProvider?: string;
-    pageSize?: number;
-    refreshToken?: string;
-    sortField?: string;
-    sortOrder?: string;
-    userId?: number;
-  };
-
-  type AuthVO = {
-    accessToken?: string;
-    createTime?: string;
-    id?: number;
-    oauthId?: string;
-    oauthProvider?: string;
-    refreshToken?: string;
-    updateTime?: string;
-    userId?: number;
-    userVO?: UserVO;
-  };
-
-  type BaseResponseAuthVO_ = {
-    code?: number;
-    data?: AuthVO;
-    message?: string;
-  };
-
-  type BaseResponseBoolean_ = {
+  type BaseResponseBoolean = {
     code?: number;
     data?: boolean;
     message?: string;
   };
 
-  type BaseResponseCaptcha_ = {
+  type BaseResponseCaptcha = {
     code?: number;
     data?: Captcha;
     message?: string;
   };
 
-  type BaseResponseConversionVO_ = {
-    code?: number;
-    data?: ConversionVO;
-    message?: string;
-  };
-
-  type BaseResponseInt_ = {
+  type BaseResponseInteger = {
     code?: number;
     data?: number;
     message?: string;
   };
 
-  type BaseResponseListTagDTO_ = {
-    code?: number;
-    data?: TagDTO[];
-    message?: string;
-  };
-
-  type BaseResponseLoginUserVO_ = {
+  type BaseResponseLoginUserVO = {
     code?: number;
     data?: LoginUserVO;
     message?: string;
   };
 
-  type BaseResponseLong_ = {
+  type BaseResponseLong = {
     code?: number;
     data?: number;
     message?: string;
   };
 
-  type BaseResponseMessageVO_ = {
+  type BaseResponsePagePost = {
     code?: number;
-    data?: MessageVO;
+    data?: PagePost;
     message?: string;
   };
 
-  type BaseResponsePageAuth_ = {
+  type BaseResponsePagePostVO = {
     code?: number;
-    data?: PageAuth_;
+    data?: PagePostVO;
     message?: string;
   };
 
-  type BaseResponsePageAuthVO_ = {
+  type BaseResponsePageTag = {
     code?: number;
-    data?: PageAuthVO_;
+    data?: PageTag;
     message?: string;
   };
 
-  type BaseResponsePageConversion_ = {
+  type BaseResponsePageTagVO = {
     code?: number;
-    data?: PageConversion_;
+    data?: PageTagVO;
     message?: string;
   };
 
-  type BaseResponsePageConversionVO_ = {
+  type BaseResponsePageUser = {
     code?: number;
-    data?: PageConversionVO_;
+    data?: PageUser;
     message?: string;
   };
 
-  type BaseResponsePageMessage_ = {
+  type BaseResponsePageUserVO = {
     code?: number;
-    data?: PageMessage_;
+    data?: PageUserVO;
     message?: string;
   };
 
-  type BaseResponsePageMessageVO_ = {
-    code?: number;
-    data?: PageMessageVO_;
-    message?: string;
-  };
-
-  type BaseResponsePagePost_ = {
-    code?: number;
-    data?: PagePost_;
-    message?: string;
-  };
-
-  type BaseResponsePagePostVO_ = {
-    code?: number;
-    data?: PagePostVO_;
-    message?: string;
-  };
-
-  type BaseResponsePageTag_ = {
-    code?: number;
-    data?: PageTag_;
-    message?: string;
-  };
-
-  type BaseResponsePageTagVO_ = {
-    code?: number;
-    data?: PageTagVO_;
-    message?: string;
-  };
-
-  type BaseResponsePageUser_ = {
-    code?: number;
-    data?: PageUser_;
-    message?: string;
-  };
-
-  type BaseResponsePageUserVO_ = {
-    code?: number;
-    data?: PageUserVO_;
-    message?: string;
-  };
-
-  type BaseResponsePostVO_ = {
+  type BaseResponsePostVO = {
     code?: number;
     data?: PostVO;
     message?: string;
   };
 
-  type BaseResponseSearchVOObject_ = {
+  type BaseResponseSearchVOObject = {
     code?: number;
-    data?: SearchVOObject_;
+    data?: SearchVOObject;
     message?: string;
   };
 
-  type BaseResponseString_ = {
+  type BaseResponseString = {
     code?: number;
     data?: string;
     message?: string;
   };
 
-  type BaseResponseTagVO_ = {
+  type BaseResponseTagVO = {
     code?: number;
     data?: TagVO;
     message?: string;
   };
 
-  type BaseResponseUser_ = {
+  type BaseResponseUser = {
     code?: number;
     data?: User;
     message?: string;
   };
 
-  type BaseResponseUserVO_ = {
+  type BaseResponseUserVO = {
     code?: number;
     data?: UserVO;
     message?: string;
   };
 
-  type BufferedImage = {
-    accelerationPriority?: number;
-    alphaPremultiplied?: boolean;
-    alphaRaster?: WritableRaster;
-    colorModel?: ColorModel;
-    data?: Raster;
-    graphics?: Graphics;
-    height?: number;
-    minTileX?: number;
-    minTileY?: number;
-    minX?: number;
-    minY?: number;
-    numXTiles?: number;
-    numYTiles?: number;
-    propertyNames?: string[];
-    raster?: WritableRaster;
-    sampleModel?: SampleModel;
-    source?: ImageProducer;
-    sources?: RenderedImage[];
-    tileGridXOffset?: number;
-    tileGridYOffset?: number;
-    tileHeight?: number;
-    tileWidth?: number;
-    transparency?: number;
-    type?: number;
-    width?: number;
-    writableTileIndices?: Point[];
-  };
-
   type Captcha = {
     code?: string;
-    image?: string;
-    imageBuffer?: BufferedImage;
     uuid?: string;
+    image?: string;
+    imageBuffer?: {
+      accelerationPriority?: number;
+      colorModel?: {
+        transparency?: number;
+        numComponents?: number;
+        numColorComponents?: number;
+        colorSpace?: { type?: number; numComponents?: number; cs_sRGB?: boolean };
+        transferType?: number;
+        alphaPremultiplied?: boolean;
+        componentSize?: number[];
+        pixelSize?: number;
+      };
+      raster?: {
+        sampleModel?: {
+          width?: number;
+          height?: number;
+          numBands?: number;
+          dataType?: number;
+          transferType?: number;
+          sampleSize?: number[];
+          numDataElements?: number;
+        };
+        dataBuffer?: {
+          dataType?: number;
+          offset?: number;
+          size?: number;
+          offsets?: number[];
+          numBanks?: number;
+        };
+        minX?: number;
+        minY?: number;
+        width?: number;
+        height?: number;
+        sampleModelTranslateX?: number;
+        sampleModelTranslateY?: number;
+        numBands?: number;
+        numDataElements?: number;
+        parent?: {
+          sampleModel?: {
+            width?: number;
+            height?: number;
+            numBands?: number;
+            dataType?: number;
+            transferType?: number;
+            sampleSize?: number[];
+            numDataElements?: number;
+          };
+          dataBuffer?: {
+            dataType?: number;
+            offset?: number;
+            size?: number;
+            offsets?: number[];
+            numBanks?: number;
+          };
+          minX?: number;
+          minY?: number;
+          width?: number;
+          height?: number;
+          sampleModelTranslateX?: number;
+          sampleModelTranslateY?: number;
+          numBands?: number;
+          numDataElements?: number;
+          transferType?: number;
+          bounds?: {
+            x?: number;
+            y?: number;
+            width?: number;
+            height?: number;
+            bounds2D?: {
+              minX?: number;
+              minY?: number;
+              maxX?: number;
+              maxY?: number;
+              centerX?: number;
+              centerY?: number;
+              x?: number;
+              y?: number;
+              empty?: boolean;
+              width?: number;
+              height?: number;
+            };
+            empty?: boolean;
+            location?: { x?: number; y?: number };
+            size?: { width?: number; height?: number };
+            rect?: {
+              minX?: number;
+              minY?: number;
+              maxX?: number;
+              maxY?: number;
+              centerX?: number;
+              centerY?: number;
+              x?: number;
+              y?: number;
+              empty?: boolean;
+              width?: number;
+              height?: number;
+            };
+            minX?: number;
+            minY?: number;
+            maxX?: number;
+            maxY?: number;
+            centerX?: number;
+            centerY?: number;
+          };
+        };
+        rect?: {
+          sampleModel?: {
+            width?: number;
+            height?: number;
+            numBands?: number;
+            dataType?: number;
+            transferType?: number;
+            sampleSize?: number[];
+            numDataElements?: number;
+          };
+          dataBuffer?: {
+            dataType?: number;
+            offset?: number;
+            size?: number;
+            offsets?: number[];
+            numBanks?: number;
+          };
+          minX?: number;
+          minY?: number;
+          width?: number;
+          height?: number;
+          sampleModelTranslateX?: number;
+          sampleModelTranslateY?: number;
+          numBands?: number;
+          numDataElements?: number;
+          transferType?: number;
+          bounds?: {
+            x?: number;
+            y?: number;
+            width?: number;
+            height?: number;
+            bounds2D?: {
+              minX?: number;
+              minY?: number;
+              maxX?: number;
+              maxY?: number;
+              centerX?: number;
+              centerY?: number;
+              x?: number;
+              y?: number;
+              empty?: boolean;
+              width?: number;
+              height?: number;
+            };
+            empty?: boolean;
+            location?: { x?: number; y?: number };
+            size?: { width?: number; height?: number };
+            rect?: {
+              minX?: number;
+              minY?: number;
+              maxX?: number;
+              maxY?: number;
+              centerX?: number;
+              centerY?: number;
+              x?: number;
+              y?: number;
+              empty?: boolean;
+              width?: number;
+              height?: number;
+            };
+            minX?: number;
+            minY?: number;
+            maxX?: number;
+            maxY?: number;
+            centerX?: number;
+            centerY?: number;
+          };
+        };
+        transferType?: number;
+        bounds?: {
+          x?: number;
+          y?: number;
+          width?: number;
+          height?: number;
+          bounds2D?: {
+            minX?: number;
+            minY?: number;
+            maxX?: number;
+            maxY?: number;
+            centerX?: number;
+            centerY?: number;
+            x?: number;
+            y?: number;
+            empty?: boolean;
+            width?: number;
+            height?: number;
+          };
+          empty?: boolean;
+          location?: { x?: number; y?: number };
+          size?: { width?: number; height?: number };
+          rect?: {
+            minX?: number;
+            minY?: number;
+            maxX?: number;
+            maxY?: number;
+            centerX?: number;
+            centerY?: number;
+            x?: number;
+            y?: number;
+            empty?: boolean;
+            width?: number;
+            height?: number;
+          };
+          minX?: number;
+          minY?: number;
+          maxX?: number;
+          maxY?: number;
+          centerX?: number;
+          centerY?: number;
+        };
+      };
+      transparency?: number;
+      sampleModel?: {
+        width?: number;
+        height?: number;
+        numBands?: number;
+        dataType?: number;
+        transferType?: number;
+        sampleSize?: number[];
+        numDataElements?: number;
+      };
+      minX?: number;
+      minY?: number;
+      numXTiles?: number;
+      numYTiles?: number;
+      minTileX?: number;
+      minTileY?: number;
+      tileWidth?: number;
+      tileHeight?: number;
+      tileGridXOffset?: number;
+      tileGridYOffset?: number;
+      alphaPremultiplied?: boolean;
+      alphaRaster?: {
+        sampleModel?: {
+          width?: number;
+          height?: number;
+          numBands?: number;
+          dataType?: number;
+          transferType?: number;
+          sampleSize?: number[];
+          numDataElements?: number;
+        };
+        dataBuffer?: {
+          dataType?: number;
+          offset?: number;
+          size?: number;
+          offsets?: number[];
+          numBanks?: number;
+        };
+        minX?: number;
+        minY?: number;
+        width?: number;
+        height?: number;
+        sampleModelTranslateX?: number;
+        sampleModelTranslateY?: number;
+        numBands?: number;
+        numDataElements?: number;
+        parent?: {
+          sampleModel?: {
+            width?: number;
+            height?: number;
+            numBands?: number;
+            dataType?: number;
+            transferType?: number;
+            sampleSize?: number[];
+            numDataElements?: number;
+          };
+          dataBuffer?: {
+            dataType?: number;
+            offset?: number;
+            size?: number;
+            offsets?: number[];
+            numBanks?: number;
+          };
+          minX?: number;
+          minY?: number;
+          width?: number;
+          height?: number;
+          sampleModelTranslateX?: number;
+          sampleModelTranslateY?: number;
+          numBands?: number;
+          numDataElements?: number;
+          transferType?: number;
+          bounds?: {
+            x?: number;
+            y?: number;
+            width?: number;
+            height?: number;
+            bounds2D?: {
+              minX?: number;
+              minY?: number;
+              maxX?: number;
+              maxY?: number;
+              centerX?: number;
+              centerY?: number;
+              x?: number;
+              y?: number;
+              empty?: boolean;
+              width?: number;
+              height?: number;
+            };
+            empty?: boolean;
+            location?: { x?: number; y?: number };
+            size?: { width?: number; height?: number };
+            rect?: {
+              minX?: number;
+              minY?: number;
+              maxX?: number;
+              maxY?: number;
+              centerX?: number;
+              centerY?: number;
+              x?: number;
+              y?: number;
+              empty?: boolean;
+              width?: number;
+              height?: number;
+            };
+            minX?: number;
+            minY?: number;
+            maxX?: number;
+            maxY?: number;
+            centerX?: number;
+            centerY?: number;
+          };
+        };
+        rect?: {
+          sampleModel?: {
+            width?: number;
+            height?: number;
+            numBands?: number;
+            dataType?: number;
+            transferType?: number;
+            sampleSize?: number[];
+            numDataElements?: number;
+          };
+          dataBuffer?: {
+            dataType?: number;
+            offset?: number;
+            size?: number;
+            offsets?: number[];
+            numBanks?: number;
+          };
+          minX?: number;
+          minY?: number;
+          width?: number;
+          height?: number;
+          sampleModelTranslateX?: number;
+          sampleModelTranslateY?: number;
+          numBands?: number;
+          numDataElements?: number;
+          transferType?: number;
+          bounds?: {
+            x?: number;
+            y?: number;
+            width?: number;
+            height?: number;
+            bounds2D?: {
+              minX?: number;
+              minY?: number;
+              maxX?: number;
+              maxY?: number;
+              centerX?: number;
+              centerY?: number;
+              x?: number;
+              y?: number;
+              empty?: boolean;
+              width?: number;
+              height?: number;
+            };
+            empty?: boolean;
+            location?: { x?: number; y?: number };
+            size?: { width?: number; height?: number };
+            rect?: {
+              minX?: number;
+              minY?: number;
+              maxX?: number;
+              maxY?: number;
+              centerX?: number;
+              centerY?: number;
+              x?: number;
+              y?: number;
+              empty?: boolean;
+              width?: number;
+              height?: number;
+            };
+            minX?: number;
+            minY?: number;
+            maxX?: number;
+            maxY?: number;
+            centerX?: number;
+            centerY?: number;
+          };
+        };
+        transferType?: number;
+        bounds?: {
+          x?: number;
+          y?: number;
+          width?: number;
+          height?: number;
+          bounds2D?: {
+            minX?: number;
+            minY?: number;
+            maxX?: number;
+            maxY?: number;
+            centerX?: number;
+            centerY?: number;
+            x?: number;
+            y?: number;
+            empty?: boolean;
+            width?: number;
+            height?: number;
+          };
+          empty?: boolean;
+          location?: { x?: number; y?: number };
+          size?: { width?: number; height?: number };
+          rect?: {
+            minX?: number;
+            minY?: number;
+            maxX?: number;
+            maxY?: number;
+            centerX?: number;
+            centerY?: number;
+            x?: number;
+            y?: number;
+            empty?: boolean;
+            width?: number;
+            height?: number;
+          };
+          minX?: number;
+          minY?: number;
+          maxX?: number;
+          maxY?: number;
+          centerX?: number;
+          centerY?: number;
+        };
+      };
+      graphics?: {
+        font?: {
+          name?: string;
+          style?: number;
+          size?: number;
+          fontName?: string;
+          transform?: {
+            scaleX?: number;
+            shearY?: number;
+            shearX?: number;
+            scaleY?: number;
+            translateX?: number;
+            translateY?: number;
+            toRotation?: number;
+            toQuadrantRotation?: number;
+            determinant?: number;
+            type?: number;
+            identity?: boolean;
+          };
+          bold?: boolean;
+          italic?: boolean;
+          numGlyphs?: number;
+          missingGlyphCode?: number;
+          italicAngle?: number;
+          transformed?: boolean;
+          psname?: string;
+          size2D?: number;
+          availableAttributes?: Record<string, any>[];
+          attributes?: Record<string, any>;
+          family?: string;
+          plain?: boolean;
+        };
+        color?: {
+          red?: number;
+          green?: number;
+          blue?: number;
+          alpha?: number;
+          rgb?: number;
+          colorSpace?: { type?: number; numComponents?: number; cs_sRGB?: boolean };
+          transparency?: number;
+        };
+        fontMetrics?: {
+          font?: {
+            name?: string;
+            style?: number;
+            size?: number;
+            fontName?: string;
+            transform?: {
+              scaleX?: number;
+              shearY?: number;
+              shearX?: number;
+              scaleY?: number;
+              translateX?: number;
+              translateY?: number;
+              toRotation?: number;
+              toQuadrantRotation?: number;
+              determinant?: number;
+              type?: number;
+              identity?: boolean;
+            };
+            bold?: boolean;
+            italic?: boolean;
+            numGlyphs?: number;
+            missingGlyphCode?: number;
+            italicAngle?: number;
+            transformed?: boolean;
+            psname?: string;
+            size2D?: number;
+            availableAttributes?: Record<string, any>[];
+            attributes?: Record<string, any>;
+            family?: string;
+            plain?: boolean;
+          };
+          fontRenderContext?: {
+            transform?: {
+              scaleX?: number;
+              shearY?: number;
+              shearX?: number;
+              scaleY?: number;
+              translateX?: number;
+              translateY?: number;
+              toRotation?: number;
+              toQuadrantRotation?: number;
+              determinant?: number;
+              type?: number;
+              identity?: boolean;
+            };
+            antiAliasingHint?: Record<string, any>;
+            fractionalMetricsHint?: Record<string, any>;
+            transformed?: boolean;
+            antiAliased?: boolean;
+            transformType?: number;
+          };
+          leading?: number;
+          ascent?: number;
+          descent?: number;
+          maxDescent?: number;
+          widths?: number[];
+          maxAscent?: number;
+          maxDecent?: number;
+          maxAdvance?: number;
+          height?: number;
+        };
+        clipBounds?: {
+          x?: number;
+          y?: number;
+          width?: number;
+          height?: number;
+          bounds2D?: {
+            minX?: number;
+            minY?: number;
+            maxX?: number;
+            maxY?: number;
+            centerX?: number;
+            centerY?: number;
+            x?: number;
+            y?: number;
+            empty?: boolean;
+            width?: number;
+            height?: number;
+          };
+          empty?: boolean;
+          location?: { x?: number; y?: number };
+          size?: { width?: number; height?: number };
+          rect?: {
+            minX?: number;
+            minY?: number;
+            maxX?: number;
+            maxY?: number;
+            centerX?: number;
+            centerY?: number;
+            x?: number;
+            y?: number;
+            empty?: boolean;
+            width?: number;
+            height?: number;
+          };
+          minX?: number;
+          minY?: number;
+          maxX?: number;
+          maxY?: number;
+          centerX?: number;
+          centerY?: number;
+        };
+        xormode?: {
+          red?: number;
+          green?: number;
+          blue?: number;
+          alpha?: number;
+          rgb?: number;
+          colorSpace?: { type?: number; numComponents?: number; cs_sRGB?: boolean };
+          transparency?: number;
+        };
+        clip?: {
+          bounds2D?: {
+            minX?: number;
+            minY?: number;
+            maxX?: number;
+            maxY?: number;
+            centerX?: number;
+            centerY?: number;
+            x?: number;
+            y?: number;
+            empty?: boolean;
+            width?: number;
+            height?: number;
+          };
+          bounds?: {
+            x?: number;
+            y?: number;
+            width?: number;
+            height?: number;
+            bounds2D?: {
+              minX?: number;
+              minY?: number;
+              maxX?: number;
+              maxY?: number;
+              centerX?: number;
+              centerY?: number;
+              x?: number;
+              y?: number;
+              empty?: boolean;
+              width?: number;
+              height?: number;
+            };
+            empty?: boolean;
+            location?: { x?: number; y?: number };
+            size?: { width?: number; height?: number };
+            rect?: {
+              minX?: number;
+              minY?: number;
+              maxX?: number;
+              maxY?: number;
+              centerX?: number;
+              centerY?: number;
+              x?: number;
+              y?: number;
+              empty?: boolean;
+              width?: number;
+              height?: number;
+            };
+            minX?: number;
+            minY?: number;
+            maxX?: number;
+            maxY?: number;
+            centerX?: number;
+            centerY?: number;
+          };
+        };
+        clipRect?: {
+          x?: number;
+          y?: number;
+          width?: number;
+          height?: number;
+          bounds2D?: {
+            minX?: number;
+            minY?: number;
+            maxX?: number;
+            maxY?: number;
+            centerX?: number;
+            centerY?: number;
+            x?: number;
+            y?: number;
+            empty?: boolean;
+            width?: number;
+            height?: number;
+          };
+          empty?: boolean;
+          location?: { x?: number; y?: number };
+          size?: { width?: number; height?: number };
+          rect?: {
+            minX?: number;
+            minY?: number;
+            maxX?: number;
+            maxY?: number;
+            centerX?: number;
+            centerY?: number;
+            x?: number;
+            y?: number;
+            empty?: boolean;
+            width?: number;
+            height?: number;
+          };
+          minX?: number;
+          minY?: number;
+          maxX?: number;
+          maxY?: number;
+          centerX?: number;
+          centerY?: number;
+        };
+      };
+      writableTileIndices?: { x?: number; y?: number }[];
+      data?: {
+        sampleModel?: {
+          width?: number;
+          height?: number;
+          numBands?: number;
+          dataType?: number;
+          transferType?: number;
+          sampleSize?: number[];
+          numDataElements?: number;
+        };
+        dataBuffer?: {
+          dataType?: number;
+          offset?: number;
+          size?: number;
+          offsets?: number[];
+          numBanks?: number;
+        };
+        minX?: number;
+        minY?: number;
+        width?: number;
+        height?: number;
+        sampleModelTranslateX?: number;
+        sampleModelTranslateY?: number;
+        numBands?: number;
+        numDataElements?: number;
+        transferType?: number;
+        bounds?: {
+          x?: number;
+          y?: number;
+          width?: number;
+          height?: number;
+          bounds2D?: {
+            minX?: number;
+            minY?: number;
+            maxX?: number;
+            maxY?: number;
+            centerX?: number;
+            centerY?: number;
+            x?: number;
+            y?: number;
+            empty?: boolean;
+            width?: number;
+            height?: number;
+          };
+          empty?: boolean;
+          location?: { x?: number; y?: number };
+          size?: { width?: number; height?: number };
+          rect?: {
+            minX?: number;
+            minY?: number;
+            maxX?: number;
+            maxY?: number;
+            centerX?: number;
+            centerY?: number;
+            x?: number;
+            y?: number;
+            empty?: boolean;
+            width?: number;
+            height?: number;
+          };
+          minX?: number;
+          minY?: number;
+          maxX?: number;
+          maxY?: number;
+          centerX?: number;
+          centerY?: number;
+        };
+      };
+      type?: number;
+      source?: Record<string, any>;
+      propertyNames?: string[];
+      width?: number;
+      sources?: {
+        colorModel?: {
+          transparency?: number;
+          numComponents?: number;
+          numColorComponents?: number;
+          colorSpace?: { type?: number; numComponents?: number; cs_sRGB?: boolean };
+          transferType?: number;
+          alphaPremultiplied?: boolean;
+          componentSize?: number[];
+          pixelSize?: number;
+        };
+        sampleModel?: {
+          width?: number;
+          height?: number;
+          numBands?: number;
+          dataType?: number;
+          transferType?: number;
+          sampleSize?: number[];
+          numDataElements?: number;
+        };
+        minX?: number;
+        minY?: number;
+        numXTiles?: number;
+        numYTiles?: number;
+        minTileX?: number;
+        minTileY?: number;
+        tileWidth?: number;
+        tileHeight?: number;
+        tileGridXOffset?: number;
+        tileGridYOffset?: number;
+        data?: {
+          sampleModel?: {
+            width?: number;
+            height?: number;
+            numBands?: number;
+            dataType?: number;
+            transferType?: number;
+            sampleSize?: number[];
+            numDataElements?: number;
+          };
+          dataBuffer?: {
+            dataType?: number;
+            offset?: number;
+            size?: number;
+            offsets?: number[];
+            numBanks?: number;
+          };
+          minX?: number;
+          minY?: number;
+          width?: number;
+          height?: number;
+          sampleModelTranslateX?: number;
+          sampleModelTranslateY?: number;
+          numBands?: number;
+          numDataElements?: number;
+          transferType?: number;
+          bounds?: {
+            x?: number;
+            y?: number;
+            width?: number;
+            height?: number;
+            bounds2D?: {
+              minX?: number;
+              minY?: number;
+              maxX?: number;
+              maxY?: number;
+              centerX?: number;
+              centerY?: number;
+              x?: number;
+              y?: number;
+              empty?: boolean;
+              width?: number;
+              height?: number;
+            };
+            empty?: boolean;
+            location?: { x?: number; y?: number };
+            size?: { width?: number; height?: number };
+            rect?: {
+              minX?: number;
+              minY?: number;
+              maxX?: number;
+              maxY?: number;
+              centerX?: number;
+              centerY?: number;
+              x?: number;
+              y?: number;
+              empty?: boolean;
+              width?: number;
+              height?: number;
+            };
+            minX?: number;
+            minY?: number;
+            maxX?: number;
+            maxY?: number;
+            centerX?: number;
+            centerY?: number;
+          };
+        };
+        propertyNames?: string[];
+        width?: number;
+        height?: number;
+      }[];
+      height?: number;
+    };
   };
 
-  type checkCaptchaCodeUsingPOSTParams = {
-    /** code */
+  type checkCaptchaCodeParams = {
     code: string;
   };
 
-  type checkUsingGETParams = {
-    /** echostr */
-    echostr?: string;
-    /** nonce */
-    nonce?: string;
-    /** signature */
-    signature?: string;
-    /** timestamp */
-    timestamp?: string;
-  };
-
-  type Color = {
-    alpha?: number;
-    blue?: number;
-    colorSpace?: ColorSpace;
-    green?: number;
-    red?: number;
-    rgb?: number;
-    transparency?: number;
-  };
-
-  type ColorModel = {
-    alphaPremultiplied?: boolean;
-    colorSpace?: ColorSpace;
-    componentSize?: number[];
-    numColorComponents?: number;
-    numComponents?: number;
-    pixelSize?: number;
-    transferType?: number;
-    transparency?: number;
-  };
-
-  type ColorSpace = {
-    cs_sRGB?: boolean;
-    numComponents?: number;
-    type?: number;
-  };
-
-  type Conversion = {
-    createTime?: string;
-    id?: number;
-    isDelete?: number;
-    title?: string;
-    updateTime?: string;
-    userId?: number;
-  };
-
-  type ConversionAddRequest = {
-    title?: string;
-  };
-
-  type ConversionEditRequest = {
-    id?: number;
-    title?: string;
-  };
-
-  type ConversionQueryRequest = {
-    current?: number;
-    id?: number;
-    notId?: number;
-    pageSize?: number;
-    searchText?: string;
-    sortField?: string;
-    sortOrder?: string;
-    title?: string;
-    userId?: number;
-  };
-
-  type ConversionUpdateRequest = {
-    id?: number;
-    title?: string;
-  };
-
-  type ConversionVO = {
-    createTime?: string;
-    id?: number;
-    title?: string;
-    updateTime?: string;
-    userId?: number;
-    userVO?: UserVO;
-  };
-
-  type DataBuffer = {
-    dataType?: number;
-    numBanks?: number;
-    offset?: number;
-    offsets?: number[];
-    size?: number;
+  type checkParams = {
+    timestamp: string;
+    nonce: string;
+    signature: string;
+    echostr: string;
   };
 
   type DeleteRequest = {
     id?: number;
   };
 
-  type Dimension = {
-    height?: number;
-    width?: number;
+  type getPostVOByIdParams = {
+    id: number;
   };
 
-  type Font = {
-    attributes?: Record<string, any>;
-    availableAttributes?: Attribute[];
-    bold?: boolean;
-    family?: string;
-    fontName?: string;
-    italic?: boolean;
-    italicAngle?: number;
-    missingGlyphCode?: number;
-    name?: string;
-    numGlyphs?: number;
-    plain?: boolean;
-    psname?: string;
-    size?: number;
-    size2D?: number;
-    style?: number;
-    transform?: AffineTransform;
-    transformed?: boolean;
+  type getTagVOByIdParams = {
+    id: number;
   };
 
-  type FontMetrics = {
-    ascent?: number;
-    descent?: number;
-    font?: Font;
-    fontRenderContext?: FontRenderContext;
-    height?: number;
-    leading?: number;
-    maxAdvance?: number;
-    maxAscent?: number;
-    maxDecent?: number;
-    maxDescent?: number;
-    widths?: number[];
+  type getUserByIdParams = {
+    id: number;
   };
 
-  type FontRenderContext = {
-    antiAliased?: boolean;
-    antiAliasingHint?: Record<string, any>;
-    fractionalMetricsHint?: Record<string, any>;
-    transform?: AffineTransform;
-    transformType?: number;
-    transformed?: boolean;
+  type getUserVOByIdParams = {
+    id: number;
   };
-
-  type getAuthVOByIdUsingGETParams = {
-    /** id */
-    id?: number;
-  };
-
-  type getConversionVOByIdUsingGETParams = {
-    /** id */
-    id?: number;
-  };
-
-  type getMessageVOByIdUsingGETParams = {
-    /** id */
-    id?: number;
-  };
-
-  type getPostVOByIdUsingGETParams = {
-    /** id */
-    id?: number;
-  };
-
-  type getTagVOByIdUsingGETParams = {
-    /** id */
-    id?: number;
-  };
-
-  type getUserByIdUsingGETParams = {
-    /** id */
-    id?: number;
-  };
-
-  type getUserVOByIdUsingGETParams = {
-    /** id */
-    id?: number;
-  };
-
-  type Graphics = {
-    clip?: Shape;
-    clipBounds?: Rectangle;
-    clipRect?: Rectangle;
-    color?: Color;
-    font?: Font;
-    fontMetrics?: FontMetrics;
-  };
-
-  type ImageProducer = true;
 
   type LoginUserVO = {
-    createTime?: string;
     id?: number;
-    token?: string;
-    updateTime?: string;
-    userAvatar?: string;
-    userEmail?: string;
     userName?: string;
+    userAvatar?: string;
     userRole?: string;
-  };
-
-  type Message = {
-    content?: string;
-    conversionId?: number;
+    userEmail?: string;
     createTime?: string;
-    id?: number;
-    senderType?: number;
-    userId?: number;
-  };
-
-  type MessageAddRequest = {
-    content?: string;
-    conversionId?: number;
-    senderType?: number;
-  };
-
-  type MessageEditRequest = {
-    content?: string;
-    conversionId?: number;
-    id?: number;
-    senderType?: number;
-  };
-
-  type MessageQueryRequest = {
-    content?: string;
-    conversionId?: number;
-    current?: number;
-    id?: number;
-    notId?: number;
-    pageSize?: number;
-    searchText?: string;
-    senderType?: number;
-    sortField?: string;
-    sortOrder?: string;
-    userId?: number;
-  };
-
-  type MessageUpdateRequest = {
-    content?: string;
-    id?: number;
-    senderType?: number;
-  };
-
-  type MessageVO = {
-    content?: string;
-    conversionId?: number;
-    createTime?: string;
-    id?: number;
-    senderType?: number;
-    userId?: number;
-    userVO?: UserVO;
+    updateTime?: string;
+    token?: string;
   };
 
   type OrderItem = {
-    asc?: boolean;
     column?: string;
+    asc?: boolean;
   };
 
-  type PageAuth_ = {
-    countId?: string;
-    current?: number;
-    maxLimit?: number;
-    optimizeCountSql?: boolean;
-    orders?: OrderItem[];
-    pages?: number;
-    records?: Auth[];
-    searchCount?: boolean;
-    size?: number;
-    total?: number;
-  };
-
-  type PageAuthVO_ = {
-    countId?: string;
-    current?: number;
-    maxLimit?: number;
-    optimizeCountSql?: boolean;
-    orders?: OrderItem[];
-    pages?: number;
-    records?: AuthVO[];
-    searchCount?: boolean;
-    size?: number;
-    total?: number;
-  };
-
-  type PageConversion_ = {
-    countId?: string;
-    current?: number;
-    maxLimit?: number;
-    optimizeCountSql?: boolean;
-    orders?: OrderItem[];
-    pages?: number;
-    records?: Conversion[];
-    searchCount?: boolean;
-    size?: number;
-    total?: number;
-  };
-
-  type PageConversionVO_ = {
-    countId?: string;
-    current?: number;
-    maxLimit?: number;
-    optimizeCountSql?: boolean;
-    orders?: OrderItem[];
-    pages?: number;
-    records?: ConversionVO[];
-    searchCount?: boolean;
-    size?: number;
-    total?: number;
-  };
-
-  type PageMessage_ = {
-    countId?: string;
-    current?: number;
-    maxLimit?: number;
-    optimizeCountSql?: boolean;
-    orders?: OrderItem[];
-    pages?: number;
-    records?: Message[];
-    searchCount?: boolean;
-    size?: number;
-    total?: number;
-  };
-
-  type PageMessageVO_ = {
-    countId?: string;
-    current?: number;
-    maxLimit?: number;
-    optimizeCountSql?: boolean;
-    orders?: OrderItem[];
-    pages?: number;
-    records?: MessageVO[];
-    searchCount?: boolean;
-    size?: number;
-    total?: number;
-  };
-
-  type PagePost_ = {
-    countId?: string;
-    current?: number;
-    maxLimit?: number;
-    optimizeCountSql?: boolean;
-    orders?: OrderItem[];
-    pages?: number;
+  type PagePost = {
     records?: Post[];
-    searchCount?: boolean;
-    size?: number;
     total?: number;
+    size?: number;
+    current?: number;
+    orders?: OrderItem[];
+    optimizeCountSql?: PagePost;
+    searchCount?: PagePost;
+    optimizeJoinOfCountSql?: boolean;
+    maxLimit?: number;
+    countId?: string;
+    pages?: number;
   };
 
-  type PagePostVO_ = {
-    countId?: string;
-    current?: number;
-    maxLimit?: number;
-    optimizeCountSql?: boolean;
-    orders?: OrderItem[];
-    pages?: number;
+  type PagePostVO = {
     records?: PostVO[];
-    searchCount?: boolean;
-    size?: number;
     total?: number;
+    size?: number;
+    current?: number;
+    orders?: OrderItem[];
+    optimizeCountSql?: PagePostVO;
+    searchCount?: PagePostVO;
+    optimizeJoinOfCountSql?: boolean;
+    maxLimit?: number;
+    countId?: string;
+    pages?: number;
   };
 
-  type PageTag_ = {
-    countId?: string;
-    current?: number;
-    maxLimit?: number;
-    optimizeCountSql?: boolean;
-    orders?: OrderItem[];
-    pages?: number;
+  type PageTag = {
     records?: Tag[];
-    searchCount?: boolean;
-    size?: number;
     total?: number;
+    size?: number;
+    current?: number;
+    orders?: OrderItem[];
+    optimizeCountSql?: PageTag;
+    searchCount?: PageTag;
+    optimizeJoinOfCountSql?: boolean;
+    maxLimit?: number;
+    countId?: string;
+    pages?: number;
   };
 
-  type PageTagVO_ = {
-    countId?: string;
-    current?: number;
-    maxLimit?: number;
-    optimizeCountSql?: boolean;
-    orders?: OrderItem[];
-    pages?: number;
+  type PageTagVO = {
     records?: TagVO[];
-    searchCount?: boolean;
-    size?: number;
     total?: number;
+    size?: number;
+    current?: number;
+    orders?: OrderItem[];
+    optimizeCountSql?: PageTagVO;
+    searchCount?: PageTagVO;
+    optimizeJoinOfCountSql?: boolean;
+    maxLimit?: number;
+    countId?: string;
+    pages?: number;
   };
 
-  type PageUser_ = {
-    countId?: string;
-    current?: number;
-    maxLimit?: number;
-    optimizeCountSql?: boolean;
-    orders?: OrderItem[];
-    pages?: number;
+  type PageUser = {
     records?: User[];
-    searchCount?: boolean;
-    size?: number;
     total?: number;
-  };
-
-  type PageUserVO_ = {
-    countId?: string;
+    size?: number;
     current?: number;
-    maxLimit?: number;
-    optimizeCountSql?: boolean;
     orders?: OrderItem[];
+    optimizeCountSql?: PageUser;
+    searchCount?: PageUser;
+    optimizeJoinOfCountSql?: boolean;
+    maxLimit?: number;
+    countId?: string;
     pages?: number;
-    records?: UserVO[];
-    searchCount?: boolean;
-    size?: number;
-    total?: number;
   };
 
-  type Point = {
-    x?: number;
-    y?: number;
+  type PageUserVO = {
+    records?: UserVO[];
+    total?: number;
+    size?: number;
+    current?: number;
+    orders?: OrderItem[];
+    optimizeCountSql?: PageUserVO;
+    searchCount?: PageUserVO;
+    optimizeJoinOfCountSql?: boolean;
+    maxLimit?: number;
+    countId?: string;
+    pages?: number;
   };
 
   type Post = {
+    id?: number;
+    title?: string;
     content?: string;
     cover?: string;
-    createTime?: string;
-    favourNum?: number;
-    id?: number;
-    isDelete?: number;
     tags?: string;
     thumbNum?: number;
-    title?: string;
-    updateTime?: string;
+    favourNum?: number;
     userId?: number;
+    createTime?: string;
+    updateTime?: string;
+    isDelete?: number;
   };
 
   type PostAddRequest = {
+    title?: string;
     content?: string;
     cover?: string;
     tags?: string[];
-    title?: string;
   };
 
   type PostEditRequest = {
+    id?: number;
+    title?: string;
     content?: string;
     cover?: string;
-    id?: number;
     tags?: string[];
-    title?: string;
   };
 
   type PostFavourAddRequest = {
@@ -714,26 +1143,26 @@ declare namespace API {
   type PostFavourQueryRequest = {
     current?: number;
     pageSize?: number;
-    postQueryRequest?: PostQueryRequest;
     sortField?: string;
     sortOrder?: string;
+    postQueryRequest?: PostQueryRequest;
     userId?: number;
   };
 
   type PostQueryRequest = {
-    content?: string;
     current?: number;
-    favourUserId?: number;
-    id?: number;
-    notId?: number;
-    orTags?: string[];
     pageSize?: number;
-    searchText?: string;
     sortField?: string;
     sortOrder?: string;
-    tags?: string[];
+    id?: number;
+    notId?: number;
+    searchText?: string;
     title?: string;
+    content?: string;
+    tags?: string[];
+    orTags?: string[];
     userId?: number;
+    favourUserId?: number;
   };
 
   type PostThumbAddRequest = {
@@ -741,153 +1170,57 @@ declare namespace API {
   };
 
   type PostUpdateRequest = {
+    id?: number;
+    title?: string;
     content?: string;
     cover?: string;
-    id?: number;
     tags?: string[];
-    title?: string;
   };
 
   type PostVO = {
+    id?: number;
+    title?: string;
     content?: string;
     cover?: string;
-    createTime?: string;
-    favourNum?: number;
-    hasFavour?: boolean;
-    hasThumb?: boolean;
-    id?: number;
-    tags?: string[];
     thumbNum?: number;
-    title?: string;
-    updateTime?: string;
+    favourNum?: number;
     userId?: number;
+    createTime?: string;
+    updateTime?: string;
+    tags?: string[];
     userVO?: UserVO;
-  };
-
-  type Raster = {
-    bounds?: Rectangle;
-    dataBuffer?: DataBuffer;
-    height?: number;
-    minX?: number;
-    minY?: number;
-    numBands?: number;
-    numDataElements?: number;
-    parent?: Raster;
-    sampleModel?: SampleModel;
-    sampleModelTranslateX?: number;
-    sampleModelTranslateY?: number;
-    transferType?: number;
-    width?: number;
-  };
-
-  type Rectangle = {
-    bounds2D?: Rectangle2D;
-    centerX?: number;
-    centerY?: number;
-    empty?: boolean;
-    height?: number;
-    location?: Point;
-    maxX?: number;
-    maxY?: number;
-    minX?: number;
-    minY?: number;
-    size?: Dimension;
-    width?: number;
-    x?: number;
-    y?: number;
-  };
-
-  type Rectangle2D = {
-    bounds?: Rectangle;
-    bounds2D?: Rectangle2D;
-    centerX?: number;
-    centerY?: number;
-    empty?: boolean;
-    height?: number;
-    maxX?: number;
-    maxY?: number;
-    minX?: number;
-    minY?: number;
-    width?: number;
-    x?: number;
-    y?: number;
-  };
-
-  type RenderedImage = {
-    colorModel?: ColorModel;
-    data?: Raster;
-    height?: number;
-    minTileX?: number;
-    minTileY?: number;
-    minX?: number;
-    minY?: number;
-    numXTiles?: number;
-    numYTiles?: number;
-    propertyNames?: string[];
-    sampleModel?: SampleModel;
-    sources?: RenderedImage[];
-    tileGridXOffset?: number;
-    tileGridYOffset?: number;
-    tileHeight?: number;
-    tileWidth?: number;
-    width?: number;
-  };
-
-  type SampleModel = {
-    dataType?: number;
-    height?: number;
-    numBands?: number;
-    numDataElements?: number;
-    sampleSize?: number[];
-    transferType?: number;
-    width?: number;
+    hasThumb?: boolean;
+    hasFavour?: boolean;
   };
 
   type SearchRequest = {
     current?: number;
     pageSize?: number;
-    searchText?: string;
     sortField?: string;
     sortOrder?: string;
+    searchText?: string;
     type?: string;
   };
 
-  type SearchVOObject_ = {
+  type SearchVOObject = {
     dataList?: Record<string, any>[];
   };
 
-  type Shape = {
-    bounds?: Rectangle;
-    bounds2D?: Rectangle2D;
-  };
-
   type Tag = {
-    createTime?: string;
     id?: number;
-    isDelete?: number;
-    isParent?: number;
-    parentId?: number;
     tagName?: string;
-    updateTime?: string;
     userId?: number;
+    parentId?: number;
+    isParent?: number;
+    createTime?: string;
+    updateTime?: string;
+    isDelete?: number;
   };
 
   type TagAddRequest = {
-    isParent?: number;
+    tagName?: string;
     parentId?: number;
-    tagName?: string;
-  };
-
-  type TagChildren = {
-    children?: TagChildren[];
-    id?: number;
-    tagName?: string;
-  };
-
-  type TagDTO = {
-    children?: TagChildren[];
-    id?: number;
-    tagName?: string;
+    isParent?: number;
   };
 
   type TagEditRequest = {
@@ -897,71 +1230,74 @@ declare namespace API {
 
   type TagQueryRequest = {
     current?: number;
-    id?: number;
-    isParent?: number;
     pageSize?: number;
-    parentId?: number;
     sortField?: string;
     sortOrder?: string;
+    id?: number;
     tagName?: string;
     userId?: number;
+    parentId?: number;
+    isParent?: number;
   };
 
   type TagUpdateRequest = {
     id?: number;
-    idList?: number[];
-    isParent?: number;
-    parentId?: number;
     tagName?: string;
+    parentId?: number;
+    isParent?: number;
+    idList?: number[];
   };
 
   type TagVO = {
-    createTime?: string;
     id?: number;
-    isParent?: number;
-    parentId?: number;
     tagName?: string;
-    updateTime?: string;
     userId?: number;
+    parentId?: number;
+    isParent?: number;
+    createTime?: string;
+    updateTime?: string;
     userVO?: UserVO;
   };
 
-  type uploadFileUsingPOSTParams = {
+  type uploadFileParams = {
+    uploadFileRequest: UploadFileRequest;
+  };
+
+  type UploadFileRequest = {
     biz?: string;
   };
 
   type User = {
-    createTime?: string;
     id?: number;
-    isDelete?: number;
-    mpOpenId?: string;
-    unionId?: string;
-    updateTime?: string;
     userAccount?: string;
-    userAvatar?: string;
-    userEmail?: string;
-    userName?: string;
     userPassword?: string;
+    unionId?: string;
+    mpOpenId?: string;
+    userName?: string;
+    userAvatar?: string;
     userRole?: string;
+    userEmail?: string;
+    createTime?: string;
+    updateTime?: string;
+    isDelete?: number;
   };
 
   type UserAddRequest = {
+    userName?: string;
     userAccount?: string;
     userAvatar?: string;
-    userEmail?: string;
-    userName?: string;
     userRole?: string;
+    userEmail?: string;
   };
 
   type UserEditRequest = {
-    userAvatar?: string;
-    userEmail?: string;
     userName?: string;
     userPassword?: string;
+    userAvatar?: string;
+    userEmail?: string;
   };
 
-  type userLoginByWxOpenUsingGETParams = {
-    /** code */
+  type userLoginByWxOpenParams = {
     code: string;
   };
 
@@ -972,60 +1308,43 @@ declare namespace API {
 
   type UserQueryRequest = {
     current?: number;
-    id?: number;
-    mpOpenId?: string;
-    notId?: number;
     pageSize?: number;
-    searchText?: string;
     sortField?: string;
     sortOrder?: string;
+    id?: number;
+    notId?: number;
     unionId?: string;
-    userEmail?: string;
+    mpOpenId?: string;
     userName?: string;
     userRole?: string;
+    userEmail?: string;
+    searchText?: string;
   };
 
   type UserRegisterRequest = {
-    checkPassword?: string;
     userAccount?: string;
     userPassword?: string;
+    checkPassword?: string;
   };
 
   type UserUpdateRequest = {
     id?: number;
-    userAvatar?: string;
-    userEmail?: string;
     userName?: string;
     userPassword?: string;
+    userAvatar?: string;
     userRole?: string;
+    userEmail?: string;
   };
 
   type UserVO = {
-    createTime?: string;
     id?: number;
-    mpOpenId?: string;
-    unionId?: string;
-    updateTime?: string;
-    userAvatar?: string;
-    userEmail?: string;
     userName?: string;
+    unionId?: string;
+    mpOpenId?: string;
+    userAvatar?: string;
     userRole?: string;
-  };
-
-  type WritableRaster = {
-    bounds?: Rectangle;
-    dataBuffer?: DataBuffer;
-    height?: number;
-    minX?: number;
-    minY?: number;
-    numBands?: number;
-    numDataElements?: number;
-    parent?: Raster;
-    sampleModel?: SampleModel;
-    sampleModelTranslateX?: number;
-    sampleModelTranslateY?: number;
-    transferType?: number;
-    width?: number;
-    writableParent?: WritableRaster;
+    userEmail?: string;
+    createTime?: string;
+    updateTime?: string;
   };
 }

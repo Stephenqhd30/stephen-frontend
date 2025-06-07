@@ -1,7 +1,7 @@
 import { ProColumns, ProTable } from '@ant-design/pro-components';
 import { message, Modal } from 'antd';
 import React from 'react';
-import { updateTagUsingPost } from '@/services/stephen-backend/tagController';
+import {updateTag} from '@/services/stephen-backend/tagController';
 
 interface UpdateProps {
   oldData?: API.TagVO;
@@ -19,7 +19,7 @@ interface UpdateProps {
 const handleUpdate = async (fields: API.TagUpdateRequest) => {
   const hide = message.loading('正在更新');
   try {
-    const res = await updateTagUsingPost(fields);
+    const res = await updateTag(fields);
     if (res.code === 0 && res.data) {
       message.success('更新成功');
       return true;
@@ -48,7 +48,7 @@ const UpdateTagModal: React.FC<UpdateProps> = (props) => {
 
   return (
     <Modal
-      destroyOnClose
+      destroyOnHidden
       title={'更新标签信息'}
       open={visible}
       onCancel={() => onCancel?.()}

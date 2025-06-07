@@ -8,10 +8,9 @@ import {
   ProFormUploadButton,
 } from '@ant-design/pro-components';
 import { AntDesignOutlined } from '@ant-design/icons';
-import { updateMyUserUsingPost } from '@/services/stephen-backend/userController';
-import { uploadFileUsingPost } from '@/services/stephen-backend/fileController';
 import { FileUploadBiz } from '@/enums/FileUploadBizEnum';
-import { TagTreeSelect } from '@/components';
+import { updateUser } from '@/services/stephen-backend/userController';
+import { uploadFile } from '@/services/stephen-backend/fileController';
 
 interface BaseViewProps {
   user: API.UserVO;
@@ -36,7 +35,7 @@ const BaseView: React.FC<BaseViewProps> = (props) => {
   const handleUpdate = async (values: API.UserUpdateRequest) => {
     const hide = message.loading('正在更新');
     try {
-      const res = await updateMyUserUsingPost({
+      const res = await updateUser({
         ...values,
         userAvatar: userAvatar,
       });
@@ -62,7 +61,7 @@ const BaseView: React.FC<BaseViewProps> = (props) => {
     customRequest: async (options: any) => {
       const { onSuccess, onError, file } = options;
       try {
-        const res = await uploadFileUsingPost(
+        const res = await uploadFile(
           {
             biz: FileUploadBiz.USER_AVATAR,
           },
@@ -133,7 +132,6 @@ const BaseView: React.FC<BaseViewProps> = (props) => {
           }}
           name="pic"
         />
-        <TagTreeSelect initialValue={user?.tags} name={'tags'} label={"标签选择"} />
       </ProForm>
     </ProCard>
   );

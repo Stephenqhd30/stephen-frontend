@@ -2,12 +2,9 @@ import { PlusOutlined } from '@ant-design/icons';
 import { ActionType, ProColumns, ProTable } from '@ant-design/pro-components';
 import { Button, message, Popconfirm, Select, Space, Typography } from 'antd';
 import React, { useRef, useState } from 'react';
-import {
-  deleteTagUsingPost,
-  listTagByPageUsingPost,
-} from '@/services/stephen-backend/tagController';
 import { CreateTagModal, UpdateTagModal } from '@/pages/Admin/TagList/components';
 import { tagStatus, TagStatusEnum } from '@/enums/TagStatusEnum';
+import {deleteTag, listTagByPage} from '@/services/stephen-backend/tagController';
 
 /**
  * 删除节点
@@ -18,7 +15,7 @@ const handleDelete = async (row: API.DeleteRequest) => {
   const hide = message.loading('正在删除');
   if (!row) return true;
   try {
-    const res = await deleteTagUsingPost({
+    const res = await deleteTag({
       id: row.id,
     });
     if (res.code === 0 && res.data) {
@@ -171,7 +168,7 @@ const TagList: React.FC = () => {
         request={async (params, sort, filter) => {
           const sortField = Object.keys(sort)?.[0];
           const sortOrder = sort?.[sortField] ?? undefined;
-          const { data, code } = await listTagByPageUsingPost({
+          const { data, code } = await listTagByPage({
             ...params,
             ...filter,
             sortField,

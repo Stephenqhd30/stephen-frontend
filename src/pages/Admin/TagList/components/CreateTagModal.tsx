@@ -1,7 +1,7 @@
+import React from 'react';
 import { ProColumns, ProTable } from '@ant-design/pro-components';
 import { message, Modal } from 'antd';
-import React from 'react';
-import { addTagUsingPost } from '@/services/stephen-backend/tagController';
+import { addTag } from '@/services/stephen-backend/tagController';
 
 interface CreateProps {
   onCancel: () => void;
@@ -18,7 +18,7 @@ interface CreateProps {
 const handleAdd = async (fields: API.TagAddRequest) => {
   const hide = message.loading('正在添加');
   try {
-    const res = await addTagUsingPost({
+    const res = await addTag({
       ...fields,
     });
     if (res.code === 0 && res.data) {
@@ -44,7 +44,7 @@ const handleAdd = async (fields: API.TagAddRequest) => {
 const CreateTagModal: React.FC<CreateProps> = (props) => {
   const { visible, onSubmit, onCancel, columns } = props;
   return (
-    <Modal destroyOnClose title={'创建标签'} onCancel={() => onCancel?.()} open={visible} footer>
+    <Modal destroyOnHidden title={'创建标签'} onCancel={() => onCancel?.()} open={visible} footer>
       <ProTable
         columns={columns}
         onSubmit={async (values: API.TagAddRequest) => {

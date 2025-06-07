@@ -1,0 +1,4884 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Stephen的Springboot3启动模版",
+    "description": "",
+    "version": "1.0.0"
+  },
+  "tags": [],
+  "paths": {
+    "/": {
+      "post": {
+        "summary": "receiveMessage",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      },
+      "get": {
+        "summary": "check",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "timestamp",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "nonce",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "signature",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "echostr",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/setMenu": {
+      "get": {
+        "summary": "设置公众号菜单",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "description": "String"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/user/register": {
+      "post": {
+        "summary": "用户注册",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserRegisterRequest",
+                "description": "用户注册请求"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponseLong",
+                  "description": "BaseResponse<Long> 注册是否成功"
+                },
+                "example": {
+                  "code": 0,
+                  "data": 0,
+                  "message": ""
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/user/login": {
+      "post": {
+        "summary": "用户登录",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserLoginRequest",
+                "description": "userLoginRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponseLoginUserVO",
+                  "description": "BaseResponse<LoginUserVO>"
+                },
+                "example": {
+                  "code": 0,
+                  "data": {
+                    "id": 0,
+                    "userName": "",
+                    "userAvatar": "",
+                    "userRole": "",
+                    "userEmail": "",
+                    "createTime": "",
+                    "updateTime": "",
+                    "token": ""
+                  },
+                  "message": ""
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/user/login/wx_open": {
+      "get": {
+        "summary": "用户登录（微信开放平台）",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "code",
+            "in": "query",
+            "description": "code",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponseLoginUserVO",
+                  "description": "BaseResponse<LoginUserVO>"
+                },
+                "example": {
+                  "code": 0,
+                  "data": {
+                    "id": 0,
+                    "userName": "",
+                    "userAvatar": "",
+                    "userRole": "",
+                    "userEmail": "",
+                    "createTime": "",
+                    "updateTime": "",
+                    "token": ""
+                  },
+                  "message": ""
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/user/logout": {
+      "post": {
+        "summary": "用户注销",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponseBoolean",
+                  "description": "BaseResponse<Boolean>"
+                },
+                "example": {
+                  "code": 0,
+                  "data": false,
+                  "message": ""
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/user/get/login": {
+      "get": {
+        "summary": "获取当前登录用户",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponseLoginUserVO",
+                  "description": "BaseResponse<LoginUserVO>"
+                },
+                "example": {
+                  "code": 0,
+                  "data": {
+                    "id": 0,
+                    "userName": "",
+                    "userAvatar": "",
+                    "userRole": "",
+                    "userEmail": "",
+                    "createTime": "",
+                    "updateTime": "",
+                    "token": ""
+                  },
+                  "message": ""
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/user/add": {
+      "post": {
+        "summary": "创建用户",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserAddRequest",
+                "description": "userAddRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponseLong",
+                  "description": "BaseResponse<Long> 注册是否成功"
+                },
+                "example": {
+                  "code": 0,
+                  "data": 0,
+                  "message": ""
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/user/delete": {
+      "post": {
+        "summary": "删除用户",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteRequest",
+                "description": "deleteRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponseBoolean",
+                  "description": "BaseResponse<Boolean>"
+                },
+                "example": {
+                  "code": 0,
+                  "data": false,
+                  "message": ""
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/user/update": {
+      "post": {
+        "summary": "更新用户",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserUpdateRequest",
+                "description": "userUpdateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponseBoolean",
+                  "description": "BaseResponse<Boolean>"
+                },
+                "example": {
+                  "code": 0,
+                  "data": false,
+                  "message": ""
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/user/get": {
+      "get": {
+        "summary": "根据 id 获取用户（仅管理员）",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "用户id",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponseUser",
+                  "description": "BaseResponse<User>"
+                },
+                "example": {
+                  "code": 0,
+                  "data": {
+                    "id": 0,
+                    "userAccount": "",
+                    "userPassword": "",
+                    "unionId": "",
+                    "mpOpenId": "",
+                    "userName": "",
+                    "userAvatar": "",
+                    "userRole": "",
+                    "userEmail": "",
+                    "createTime": "",
+                    "updateTime": "",
+                    "isDelete": 0
+                  },
+                  "message": ""
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/user/get/vo": {
+      "get": {
+        "summary": "根据 id 获取包装类",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "用户id",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponseUserVO",
+                  "description": "查询得到的用户包装类"
+                },
+                "example": {
+                  "code": 0,
+                  "data": {
+                    "id": 0,
+                    "userName": "",
+                    "unionId": "",
+                    "mpOpenId": "",
+                    "userAvatar": "",
+                    "userRole": "",
+                    "userEmail": "",
+                    "createTime": "",
+                    "updateTime": ""
+                  },
+                  "message": ""
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/user/list/page": {
+      "post": {
+        "summary": "分页获取用户列表（仅管理员）",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserQueryRequest",
+                "description": "userQueryRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponsePageUser",
+                  "description": "BaseResponse<Page < User>>"
+                },
+                "example": {
+                  "code": 0,
+                  "data": {
+                    "records": [
+                      {
+                        "id": 0,
+                        "userAccount": "",
+                        "userPassword": "",
+                        "unionId": "",
+                        "mpOpenId": "",
+                        "userName": "",
+                        "userAvatar": "",
+                        "userRole": "",
+                        "userEmail": "",
+                        "createTime": "",
+                        "updateTime": "",
+                        "isDelete": 0
+                      }
+                    ],
+                    "total": 0,
+                    "size": 0,
+                    "current": 0,
+                    "orders": [
+                      {
+                        "column": "",
+                        "asc": false
+                      }
+                    ],
+                    "optimizeCountSql": false,
+                    "searchCount": false,
+                    "optimizeJoinOfCountSql": false,
+                    "maxLimit": 0,
+                    "countId": ""
+                  },
+                  "message": ""
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/user/list/page/vo": {
+      "post": {
+        "summary": "分页获取用户封装列表",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserQueryRequest",
+                "description": "userQueryRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponsePageUserVO",
+                  "description": "BaseResponse<Page < UserVO>>"
+                },
+                "example": {
+                  "code": 0,
+                  "data": {
+                    "records": [
+                      {
+                        "id": 0,
+                        "userName": "",
+                        "unionId": "",
+                        "mpOpenId": "",
+                        "userAvatar": "",
+                        "userRole": "",
+                        "userEmail": "",
+                        "createTime": "",
+                        "updateTime": ""
+                      }
+                    ],
+                    "total": 0,
+                    "size": 0,
+                    "current": 0,
+                    "orders": [
+                      {
+                        "column": "",
+                        "asc": false
+                      }
+                    ],
+                    "optimizeCountSql": false,
+                    "searchCount": false,
+                    "optimizeJoinOfCountSql": false,
+                    "maxLimit": 0,
+                    "countId": ""
+                  },
+                  "message": ""
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/user/update/my": {
+      "post": {
+        "summary": "更新个人信息",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserEditRequest",
+                "description": "userEditRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponseBoolean",
+                  "description": "BaseResponse<Boolean>"
+                },
+                "example": {
+                  "code": 0,
+                  "data": false,
+                  "message": ""
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/tag/add": {
+      "post": {
+        "summary": "创建标签",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TagAddRequest",
+                "description": "tagAddRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponseLong",
+                  "description": "BaseResponse<Long> 注册是否成功"
+                },
+                "example": {
+                  "code": 0,
+                  "data": 0,
+                  "message": ""
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/tag/delete": {
+      "post": {
+        "summary": "删除标签",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteRequest",
+                "description": "deleteRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponseBoolean",
+                  "description": "BaseResponse<Boolean>"
+                },
+                "example": {
+                  "code": 0,
+                  "data": false,
+                  "message": ""
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/tag/update": {
+      "post": {
+        "summary": "更新标签（仅管理员可用）",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TagUpdateRequest",
+                "description": "tagUpdateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponseBoolean",
+                  "description": "BaseResponse<Boolean>"
+                },
+                "example": {
+                  "code": 0,
+                  "data": false,
+                  "message": ""
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/tag/get/vo": {
+      "get": {
+        "summary": "根据 id 获取标签（封装类）",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "id",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponseTagVO",
+                  "description": "BaseResponse<TagVO>"
+                },
+                "example": {
+                  "code": 0,
+                  "data": {
+                    "id": 0,
+                    "tagName": "",
+                    "userId": 0,
+                    "parentId": 0,
+                    "isParent": 0,
+                    "createTime": "",
+                    "updateTime": "",
+                    "userVO": {
+                      "id": 0,
+                      "userName": "",
+                      "unionId": "",
+                      "mpOpenId": "",
+                      "userAvatar": "",
+                      "userRole": "",
+                      "userEmail": "",
+                      "createTime": "",
+                      "updateTime": ""
+                    }
+                  },
+                  "message": ""
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/tag/list/page": {
+      "post": {
+        "summary": "分页获取标签列表（仅管理员可用）",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TagQueryRequest",
+                "description": "tagQueryRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponsePageTag",
+                  "description": "BaseResponse<Page < Tag>>"
+                },
+                "example": {
+                  "code": 0,
+                  "data": {
+                    "records": [
+                      {
+                        "id": 0,
+                        "tagName": "",
+                        "userId": 0,
+                        "parentId": 0,
+                        "isParent": 0,
+                        "createTime": "",
+                        "updateTime": "",
+                        "isDelete": 0
+                      }
+                    ],
+                    "total": 0,
+                    "size": 0,
+                    "current": 0,
+                    "orders": [
+                      {
+                        "column": "",
+                        "asc": false
+                      }
+                    ],
+                    "optimizeCountSql": false,
+                    "searchCount": false,
+                    "optimizeJoinOfCountSql": false,
+                    "maxLimit": 0,
+                    "countId": ""
+                  },
+                  "message": ""
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/tag/list/page/vo": {
+      "post": {
+        "summary": "分页获取标签列表（封装类）",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TagQueryRequest",
+                "description": "tagQueryRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponsePageTagVO",
+                  "description": "BaseResponse<Page < TagVO>>"
+                },
+                "example": {
+                  "code": 0,
+                  "data": {
+                    "records": [
+                      {
+                        "id": 0,
+                        "tagName": "",
+                        "userId": 0,
+                        "parentId": 0,
+                        "isParent": 0,
+                        "createTime": "",
+                        "updateTime": "",
+                        "userVO": {
+                          "id": 0,
+                          "userName": "",
+                          "unionId": "",
+                          "mpOpenId": "",
+                          "userAvatar": "",
+                          "userRole": "",
+                          "userEmail": "",
+                          "createTime": "",
+                          "updateTime": ""
+                        }
+                      }
+                    ],
+                    "total": 0,
+                    "size": 0,
+                    "current": 0,
+                    "orders": [
+                      {
+                        "column": "",
+                        "asc": false
+                      }
+                    ],
+                    "optimizeCountSql": false,
+                    "searchCount": false,
+                    "optimizeJoinOfCountSql": false,
+                    "maxLimit": 0,
+                    "countId": ""
+                  },
+                  "message": ""
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/tag/my/list/page/vo": {
+      "post": {
+        "summary": "分页获取当前登录用户创建的标签列表",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TagQueryRequest",
+                "description": "tagQueryRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponsePageTagVO",
+                  "description": "BaseResponse<Page < TagVO>>"
+                },
+                "example": {
+                  "code": 0,
+                  "data": {
+                    "records": [
+                      {
+                        "id": 0,
+                        "tagName": "",
+                        "userId": 0,
+                        "parentId": 0,
+                        "isParent": 0,
+                        "createTime": "",
+                        "updateTime": "",
+                        "userVO": {
+                          "id": 0,
+                          "userName": "",
+                          "unionId": "",
+                          "mpOpenId": "",
+                          "userAvatar": "",
+                          "userRole": "",
+                          "userEmail": "",
+                          "createTime": "",
+                          "updateTime": ""
+                        }
+                      }
+                    ],
+                    "total": 0,
+                    "size": 0,
+                    "current": 0,
+                    "orders": [
+                      {
+                        "column": "",
+                        "asc": false
+                      }
+                    ],
+                    "optimizeCountSql": false,
+                    "searchCount": false,
+                    "optimizeJoinOfCountSql": false,
+                    "maxLimit": 0,
+                    "countId": ""
+                  },
+                  "message": ""
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/tag/edit": {
+      "post": {
+        "summary": "编辑标签（给用户使用）",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TagEditRequest",
+                "description": "tagEditRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponseBoolean",
+                  "description": "BaseResponse<Boolean>"
+                },
+                "example": {
+                  "code": 0,
+                  "data": false,
+                  "message": ""
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/post_thumb/": {
+      "post": {
+        "summary": "点赞 / 取消点赞",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostThumbAddRequest",
+                "description": "postThumbAddRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponseInteger",
+                  "description": "BaseResponse<Integer> resultNum 本次点赞变化数"
+                },
+                "example": {
+                  "code": 0,
+                  "data": 0,
+                  "message": ""
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/post_thumb/my/list/page": {
+      "post": {
+        "summary": "获取我点赞的帖子列表",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostQueryRequest",
+                "description": "帖子查询请求"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponsePagePostVO",
+                  "description": "BaseResponse<Page < PostVO>>"
+                },
+                "example": {
+                  "code": 0,
+                  "data": {
+                    "records": [
+                      {
+                        "id": 0,
+                        "title": "",
+                        "content": "",
+                        "cover": "",
+                        "thumbNum": 0,
+                        "favourNum": 0,
+                        "userId": 0,
+                        "createTime": "",
+                        "updateTime": "",
+                        "tags": [
+                          ""
+                        ],
+                        "userVO": {
+                          "id": 0,
+                          "userName": "",
+                          "unionId": "",
+                          "mpOpenId": "",
+                          "userAvatar": "",
+                          "userRole": "",
+                          "userEmail": "",
+                          "createTime": "",
+                          "updateTime": ""
+                        },
+                        "hasThumb": false,
+                        "hasFavour": false
+                      }
+                    ],
+                    "total": 0,
+                    "size": 0,
+                    "current": 0,
+                    "orders": [
+                      {
+                        "column": "",
+                        "asc": false
+                      }
+                    ],
+                    "optimizeCountSql": false,
+                    "searchCount": false,
+                    "optimizeJoinOfCountSql": false,
+                    "maxLimit": 0,
+                    "countId": ""
+                  },
+                  "message": ""
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/post_thumb/list/page": {
+      "post": {
+        "summary": "获取用户收藏的帖子列表",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostFavourQueryRequest",
+                "description": "postFavourQueryRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponsePagePostVO",
+                  "description": "BaseResponse<Page < PostVO>>"
+                },
+                "example": {
+                  "code": 0,
+                  "data": {
+                    "records": [
+                      {
+                        "id": 0,
+                        "title": "",
+                        "content": "",
+                        "cover": "",
+                        "thumbNum": 0,
+                        "favourNum": 0,
+                        "userId": 0,
+                        "createTime": "",
+                        "updateTime": "",
+                        "tags": [
+                          ""
+                        ],
+                        "userVO": {
+                          "id": 0,
+                          "userName": "",
+                          "unionId": "",
+                          "mpOpenId": "",
+                          "userAvatar": "",
+                          "userRole": "",
+                          "userEmail": "",
+                          "createTime": "",
+                          "updateTime": ""
+                        },
+                        "hasThumb": false,
+                        "hasFavour": false
+                      }
+                    ],
+                    "total": 0,
+                    "size": 0,
+                    "current": 0,
+                    "orders": [
+                      {
+                        "column": "",
+                        "asc": false
+                      }
+                    ],
+                    "optimizeCountSql": false,
+                    "searchCount": false,
+                    "optimizeJoinOfCountSql": false,
+                    "maxLimit": 0,
+                    "countId": ""
+                  },
+                  "message": ""
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/post_favour/": {
+      "post": {
+        "summary": "收藏 / 取消收藏",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostFavourAddRequest",
+                "description": "postFavourAddRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponseInteger",
+                  "description": "BaseResponse<Integer> resultNum 本次点赞变化数"
+                },
+                "example": {
+                  "code": 0,
+                  "data": 0,
+                  "message": ""
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/post_favour/my/list/page": {
+      "post": {
+        "summary": "获取我收藏的帖子列表",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostQueryRequest",
+                "description": "帖子查询请求"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponsePagePostVO",
+                  "description": "BaseResponse<Page < PostVO>>"
+                },
+                "example": {
+                  "code": 0,
+                  "data": {
+                    "records": [
+                      {
+                        "id": 0,
+                        "title": "",
+                        "content": "",
+                        "cover": "",
+                        "thumbNum": 0,
+                        "favourNum": 0,
+                        "userId": 0,
+                        "createTime": "",
+                        "updateTime": "",
+                        "tags": [
+                          ""
+                        ],
+                        "userVO": {
+                          "id": 0,
+                          "userName": "",
+                          "unionId": "",
+                          "mpOpenId": "",
+                          "userAvatar": "",
+                          "userRole": "",
+                          "userEmail": "",
+                          "createTime": "",
+                          "updateTime": ""
+                        },
+                        "hasThumb": false,
+                        "hasFavour": false
+                      }
+                    ],
+                    "total": 0,
+                    "size": 0,
+                    "current": 0,
+                    "orders": [
+                      {
+                        "column": "",
+                        "asc": false
+                      }
+                    ],
+                    "optimizeCountSql": false,
+                    "searchCount": false,
+                    "optimizeJoinOfCountSql": false,
+                    "maxLimit": 0,
+                    "countId": ""
+                  },
+                  "message": ""
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/post_favour/list/page": {
+      "post": {
+        "summary": "获取用户收藏的帖子列表",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostFavourQueryRequest",
+                "description": "postFavourQueryRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponsePagePostVO",
+                  "description": "BaseResponse<Page < PostVO>>"
+                },
+                "example": {
+                  "code": 0,
+                  "data": {
+                    "records": [
+                      {
+                        "id": 0,
+                        "title": "",
+                        "content": "",
+                        "cover": "",
+                        "thumbNum": 0,
+                        "favourNum": 0,
+                        "userId": 0,
+                        "createTime": "",
+                        "updateTime": "",
+                        "tags": [
+                          ""
+                        ],
+                        "userVO": {
+                          "id": 0,
+                          "userName": "",
+                          "unionId": "",
+                          "mpOpenId": "",
+                          "userAvatar": "",
+                          "userRole": "",
+                          "userEmail": "",
+                          "createTime": "",
+                          "updateTime": ""
+                        },
+                        "hasThumb": false,
+                        "hasFavour": false
+                      }
+                    ],
+                    "total": 0,
+                    "size": 0,
+                    "current": 0,
+                    "orders": [
+                      {
+                        "column": "",
+                        "asc": false
+                      }
+                    ],
+                    "optimizeCountSql": false,
+                    "searchCount": false,
+                    "optimizeJoinOfCountSql": false,
+                    "maxLimit": 0,
+                    "countId": ""
+                  },
+                  "message": ""
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/post/add": {
+      "post": {
+        "summary": "创建",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostAddRequest",
+                "description": "postAddRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponseLong",
+                  "description": "BaseResponse<Long> 注册是否成功"
+                },
+                "example": {
+                  "code": 0,
+                  "data": 0,
+                  "message": ""
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/post/delete": {
+      "post": {
+        "summary": "删除",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteRequest",
+                "description": "deleteRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponseBoolean",
+                  "description": "BaseResponse<Boolean>"
+                },
+                "example": {
+                  "code": 0,
+                  "data": false,
+                  "message": ""
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/post/update": {
+      "post": {
+        "summary": "更新（仅管理员）",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostUpdateRequest",
+                "description": "postUpdateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponseBoolean",
+                  "description": "BaseResponse<Boolean>"
+                },
+                "example": {
+                  "code": 0,
+                  "data": false,
+                  "message": ""
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/post/get/vo": {
+      "get": {
+        "summary": "根据 id 获取",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "id",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponsePostVO",
+                  "description": "BaseResponse<PostVO>"
+                },
+                "example": {
+                  "code": 0,
+                  "data": {
+                    "id": 0,
+                    "title": "",
+                    "content": "",
+                    "cover": "",
+                    "thumbNum": 0,
+                    "favourNum": 0,
+                    "userId": 0,
+                    "createTime": "",
+                    "updateTime": "",
+                    "tags": [
+                      ""
+                    ],
+                    "userVO": {
+                      "id": 0,
+                      "userName": "",
+                      "unionId": "",
+                      "mpOpenId": "",
+                      "userAvatar": "",
+                      "userRole": "",
+                      "userEmail": "",
+                      "createTime": "",
+                      "updateTime": ""
+                    },
+                    "hasThumb": false,
+                    "hasFavour": false
+                  },
+                  "message": ""
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/post/list/page": {
+      "post": {
+        "summary": "分页获取列表（仅管理员）",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostQueryRequest",
+                "description": "帖子查询请求"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponsePagePost",
+                  "description": "BaseResponse<Page < Post>>"
+                },
+                "example": {
+                  "code": 0,
+                  "data": {
+                    "records": [
+                      {
+                        "id": 0,
+                        "title": "",
+                        "content": "",
+                        "cover": "",
+                        "tags": "",
+                        "thumbNum": 0,
+                        "favourNum": 0,
+                        "userId": 0,
+                        "createTime": "",
+                        "updateTime": "",
+                        "isDelete": 0
+                      }
+                    ],
+                    "total": 0,
+                    "size": 0,
+                    "current": 0,
+                    "orders": [
+                      {
+                        "column": "",
+                        "asc": false
+                      }
+                    ],
+                    "optimizeCountSql": false,
+                    "searchCount": false,
+                    "optimizeJoinOfCountSql": false,
+                    "maxLimit": 0,
+                    "countId": ""
+                  },
+                  "message": ""
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/post/list/page/vo": {
+      "post": {
+        "summary": "分页获取列表（封装类）",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostQueryRequest",
+                "description": "帖子查询请求"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponsePagePostVO",
+                  "description": "BaseResponse<Page < PostVO>>"
+                },
+                "example": {
+                  "code": 0,
+                  "data": {
+                    "records": [
+                      {
+                        "id": 0,
+                        "title": "",
+                        "content": "",
+                        "cover": "",
+                        "thumbNum": 0,
+                        "favourNum": 0,
+                        "userId": 0,
+                        "createTime": "",
+                        "updateTime": "",
+                        "tags": [
+                          ""
+                        ],
+                        "userVO": {
+                          "id": 0,
+                          "userName": "",
+                          "unionId": "",
+                          "mpOpenId": "",
+                          "userAvatar": "",
+                          "userRole": "",
+                          "userEmail": "",
+                          "createTime": "",
+                          "updateTime": ""
+                        },
+                        "hasThumb": false,
+                        "hasFavour": false
+                      }
+                    ],
+                    "total": 0,
+                    "size": 0,
+                    "current": 0,
+                    "orders": [
+                      {
+                        "column": "",
+                        "asc": false
+                      }
+                    ],
+                    "optimizeCountSql": false,
+                    "searchCount": false,
+                    "optimizeJoinOfCountSql": false,
+                    "maxLimit": 0,
+                    "countId": ""
+                  },
+                  "message": ""
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/post/my/list/page/vo": {
+      "post": {
+        "summary": "分页获取当前用户创建的资源列表",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostQueryRequest",
+                "description": "帖子查询请求"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponsePagePostVO",
+                  "description": "BaseResponse<Page < PostVO>>"
+                },
+                "example": {
+                  "code": 0,
+                  "data": {
+                    "records": [
+                      {
+                        "id": 0,
+                        "title": "",
+                        "content": "",
+                        "cover": "",
+                        "thumbNum": 0,
+                        "favourNum": 0,
+                        "userId": 0,
+                        "createTime": "",
+                        "updateTime": "",
+                        "tags": [
+                          ""
+                        ],
+                        "userVO": {
+                          "id": 0,
+                          "userName": "",
+                          "unionId": "",
+                          "mpOpenId": "",
+                          "userAvatar": "",
+                          "userRole": "",
+                          "userEmail": "",
+                          "createTime": "",
+                          "updateTime": ""
+                        },
+                        "hasThumb": false,
+                        "hasFavour": false
+                      }
+                    ],
+                    "total": 0,
+                    "size": 0,
+                    "current": 0,
+                    "orders": [
+                      {
+                        "column": "",
+                        "asc": false
+                      }
+                    ],
+                    "optimizeCountSql": false,
+                    "searchCount": false,
+                    "optimizeJoinOfCountSql": false,
+                    "maxLimit": 0,
+                    "countId": ""
+                  },
+                  "message": ""
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/post/edit": {
+      "post": {
+        "summary": "编辑（用户）",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostEditRequest",
+                "description": "postEditRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponseBoolean",
+                  "description": "BaseResponse<Boolean>"
+                },
+                "example": {
+                  "code": 0,
+                  "data": false,
+                  "message": ""
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/file/upload": {
+      "post": {
+        "summary": "文件上传",
+        "deprecated": false,
+        "description": "文件上传(使用COS对象存储)\n文件上传\n文件上传(使用COS对象存储)",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "biz",
+            "in": "query",
+            "description": "业务",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "description": "multipartFile",
+                    "type": "string",
+                    "format": "binary"
+                  }
+                },
+                "required": [
+                  "file"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponseString",
+                  "description": "BaseResponse<String>"
+                },
+                "example": {
+                  "code": 0,
+                  "data": "",
+                  "message": ""
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/captcha/create": {
+      "get": {
+        "summary": "生成验证码并返回图片",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/captcha/captcha": {
+      "post": {
+        "summary": "获取验证码（返回 Base64 编码）",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponseCaptcha",
+                  "description": "返回验证码信息，包括 UUID 和 Base64 编码的验证码图片"
+                },
+                "example": {
+                  "code": 0,
+                  "data": {
+                    "code": "",
+                    "uuid": "",
+                    "image": "",
+                    "imageBuffer": {
+                      "accelerationPriority": 0,
+                      "surfaceManager": {
+                        "cacheMap": {
+                          "{}": {}
+                        }
+                      },
+                      "imageType": 0,
+                      "colorModel": {
+                        "pData": 0,
+                        "pixel_bits": 0,
+                        "nBits": [
+                          0
+                        ],
+                        "transparency": 0,
+                        "supportsAlpha": false,
+                        "isAlphaPremultiplied": false,
+                        "numComponents": 0,
+                        "numColorComponents": 0,
+                        "colorSpace": {
+                          "type": 0,
+                          "numComponents": 0
+                        },
+                        "colorSpaceType": 0,
+                        "maxBits": 0,
+                        "is_sRGB": false,
+                        "transferType": 0
+                      },
+                      "raster": {
+                        "sampleModel": {
+                          "width": 0,
+                          "height": 0,
+                          "numBands": 0,
+                          "dataType": 0
+                        },
+                        "dataBuffer": {
+                          "dataType": 0,
+                          "banks": 0,
+                          "offset": 0,
+                          "size": 0,
+                          "offsets": [
+                            0
+                          ],
+                          "theTrackable": {
+                            "theState": "",
+                            "theTracker": {},
+                            "numDynamicAgents": 0
+                          }
+                        },
+                        "minX": 0,
+                        "minY": 0,
+                        "width": 0,
+                        "height": 0,
+                        "sampleModelTranslateX": 0,
+                        "sampleModelTranslateY": 0,
+                        "numBands": 0,
+                        "numDataElements": 0,
+                        "parent": {
+                          "sampleModel": {
+                            "width": 0,
+                            "height": 0,
+                            "numBands": 0,
+                            "dataType": 0
+                          },
+                          "dataBuffer": {
+                            "dataType": 0,
+                            "banks": 0,
+                            "offset": 0,
+                            "size": 0,
+                            "offsets": [
+                              0
+                            ],
+                            "theTrackable": {
+                              "theState": "",
+                              "theTracker": {},
+                              "numDynamicAgents": 0
+                            }
+                          },
+                          "minX": 0,
+                          "minY": 0,
+                          "width": 0,
+                          "height": 0,
+                          "sampleModelTranslateX": 0,
+                          "sampleModelTranslateY": 0,
+                          "numBands": 0,
+                          "numDataElements": 0,
+                          "parent": {
+                            "sampleModel": {
+                              "width": 0,
+                              "height": 0,
+                              "numBands": 0,
+                              "dataType": 0
+                            },
+                            "dataBuffer": {
+                              "dataType": 0,
+                              "banks": 0,
+                              "offset": 0,
+                              "size": 0,
+                              "offsets": [
+                                0
+                              ],
+                              "theTrackable": {
+                                "theState": "",
+                                "theTracker": {},
+                                "numDynamicAgents": 0
+                              }
+                            },
+                            "minX": 0,
+                            "minY": 0,
+                            "width": 0,
+                            "height": 0,
+                            "sampleModelTranslateX": 0,
+                            "sampleModelTranslateY": 0,
+                            "numBands": 0,
+                            "numDataElements": 0,
+                            "parent": {}
+                          }
+                        }
+                      },
+                      "osis": {
+                        "image": {
+                          "accelerationPriority": 0,
+                          "surfaceManager": {
+                            "cacheMap": {
+                              "{}": {}
+                            }
+                          },
+                          "imageType": 0,
+                          "colorModel": {
+                            "pData": 0,
+                            "pixel_bits": 0,
+                            "nBits": [
+                              0
+                            ],
+                            "transparency": 0,
+                            "supportsAlpha": false,
+                            "isAlphaPremultiplied": false,
+                            "numComponents": 0,
+                            "numColorComponents": 0,
+                            "colorSpace": {
+                              "type": 0,
+                              "numComponents": 0
+                            },
+                            "colorSpaceType": 0,
+                            "maxBits": 0,
+                            "is_sRGB": false,
+                            "transferType": 0
+                          },
+                          "raster": {
+                            "sampleModel": {
+                              "width": 0,
+                              "height": 0,
+                              "numBands": 0,
+                              "dataType": 0
+                            },
+                            "dataBuffer": {
+                              "dataType": 0,
+                              "banks": 0,
+                              "offset": 0,
+                              "size": 0,
+                              "offsets": [
+                                0
+                              ],
+                              "theTrackable": {
+                                "theState": "",
+                                "theTracker": {},
+                                "numDynamicAgents": 0
+                              }
+                            },
+                            "minX": 0,
+                            "minY": 0,
+                            "width": 0,
+                            "height": 0,
+                            "sampleModelTranslateX": 0,
+                            "sampleModelTranslateY": 0,
+                            "numBands": 0,
+                            "numDataElements": 0,
+                            "parent": {
+                              "sampleModel": {
+                                "width": 0,
+                                "height": 0,
+                                "numBands": 0,
+                                "dataType": 0
+                              },
+                              "dataBuffer": {
+                                "dataType": 0,
+                                "banks": 0,
+                                "offset": 0,
+                                "size": 0,
+                                "offsets": [
+                                  0
+                                ],
+                                "theTrackable": {
+                                  "theState": "",
+                                  "theTracker": {},
+                                  "numDynamicAgents": 0
+                                }
+                              },
+                              "minX": 0,
+                              "minY": 0,
+                              "width": 0,
+                              "height": 0,
+                              "sampleModelTranslateX": 0,
+                              "sampleModelTranslateY": 0,
+                              "numBands": 0,
+                              "numDataElements": 0,
+                              "parent": {
+                                "sampleModel": {
+                                  "width": 0,
+                                  "height": 0,
+                                  "numBands": 0,
+                                  "dataType": 0
+                                },
+                                "dataBuffer": {
+                                  "dataType": 0,
+                                  "banks": 0,
+                                  "offset": 0,
+                                  "size": 0,
+                                  "offsets": [
+                                    0
+                                  ],
+                                  "theTrackable": {
+                                    "theState": "",
+                                    "theTracker": {},
+                                    "numDynamicAgents": 0
+                                  }
+                                },
+                                "minX": 0,
+                                "minY": 0,
+                                "width": 0,
+                                "height": 0,
+                                "sampleModelTranslateX": 0,
+                                "sampleModelTranslateY": 0,
+                                "numBands": 0,
+                                "numDataElements": 0,
+                                "parent": {}
+                              }
+                            }
+                          },
+                          "osis": {
+                            "image": {},
+                            "width": 0,
+                            "height": 0,
+                            "properties": {
+                              "": null
+                            },
+                            "theConsumer": {}
+                          },
+                          "properties": {
+                            "": {}
+                          }
+                        },
+                        "width": 0,
+                        "height": 0,
+                        "properties": {
+                          "": null
+                        },
+                        "theConsumer": {}
+                      },
+                      "properties": {
+                        "": {}
+                      }
+                    }
+                  },
+                  "message": ""
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/captcha/check": {
+      "post": {
+        "summary": "校验验证码",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "code",
+            "in": "query",
+            "description": "用户输入的验证码",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponseBoolean",
+                  "description": "BaseResponse<Boolean>"
+                },
+                "example": {
+                  "code": 0,
+                  "data": false,
+                  "message": ""
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/es/search/post/page/vo": {
+      "post": {
+        "summary": "分页搜索帖子（从 ES 查询，封装类）",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostQueryRequest",
+                "description": "帖子查询请求"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponsePagePostVO",
+                  "description": "BaseResponse<Page < PostVO>>"
+                },
+                "example": {
+                  "code": 0,
+                  "data": {
+                    "records": [
+                      {
+                        "id": 0,
+                        "title": "",
+                        "content": "",
+                        "cover": "",
+                        "thumbNum": 0,
+                        "favourNum": 0,
+                        "userId": 0,
+                        "createTime": "",
+                        "updateTime": "",
+                        "tags": [
+                          ""
+                        ],
+                        "userVO": {
+                          "id": 0,
+                          "userName": "",
+                          "unionId": "",
+                          "mpOpenId": "",
+                          "userAvatar": "",
+                          "userRole": "",
+                          "userEmail": "",
+                          "createTime": "",
+                          "updateTime": ""
+                        },
+                        "hasThumb": false,
+                        "hasFavour": false
+                      }
+                    ],
+                    "total": 0,
+                    "size": 0,
+                    "current": 0,
+                    "orders": [
+                      {
+                        "column": "",
+                        "asc": false
+                      }
+                    ],
+                    "optimizeCountSql": false,
+                    "searchCount": false,
+                    "optimizeJoinOfCountSql": false,
+                    "maxLimit": 0,
+                    "countId": ""
+                  },
+                  "message": ""
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/es/search/user/page/vo": {
+      "post": {
+        "summary": "分页搜索用户（从 ES 查询，封装类）",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserQueryRequest",
+                "description": "userQueryRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponsePageUserVO",
+                  "description": "BaseResponse<Page < UserVO>>"
+                },
+                "example": {
+                  "code": 0,
+                  "data": {
+                    "records": [
+                      {
+                        "id": 0,
+                        "userName": "",
+                        "unionId": "",
+                        "mpOpenId": "",
+                        "userAvatar": "",
+                        "userRole": "",
+                        "userEmail": "",
+                        "createTime": "",
+                        "updateTime": ""
+                      }
+                    ],
+                    "total": 0,
+                    "size": 0,
+                    "current": 0,
+                    "orders": [
+                      {
+                        "column": "",
+                        "asc": false
+                      }
+                    ],
+                    "optimizeCountSql": false,
+                    "searchCount": false,
+                    "optimizeJoinOfCountSql": false,
+                    "maxLimit": 0,
+                    "countId": ""
+                  },
+                  "message": ""
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/es/all": {
+      "post": {
+        "summary": "使用门面模式进行重构",
+        "deprecated": false,
+        "description": "聚合搜索查询",
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SearchRequest",
+                "description": "searchRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResponseSearchVOObject",
+                  "description": "BaseResponse <{@link SearchVO  <[Class{@code Object} is the root of the class hierarchy.\nEvery class has{@code Object} as a superclass. All objects,\nincluding arrays, implement the methods of this class.]>>}"
+                },
+                "example": {
+                  "code": 0,
+                  "data": {
+                    "dataList": [
+                      {}
+                    ]
+                  },
+                  "message": ""
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "BaseResponseString": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": ""
+          },
+          "data": {
+            "type": "string",
+            "description": ""
+          },
+          "message": {
+            "type": "string",
+            "description": ""
+          }
+        }
+      },
+      "{}": {
+        "type": "object",
+        "properties": {}
+      },
+      "BaseResponseLong": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": ""
+          },
+          "data": {
+            "type": "integer",
+            "description": "",
+            "format": "int64"
+          },
+          "message": {
+            "type": "string",
+            "description": ""
+          }
+        }
+      },
+      "ConcurrentHashMapObject": {
+        "type": "object",
+        "properties": {
+          "{}": {
+            "$ref": "#/components/schemas/%7B%7D1"
+          }
+        }
+      },
+      "MessageAddRequest": {
+        "type": "object",
+        "properties": {
+          "conversionId": {
+            "type": "integer",
+            "description": "会话id",
+            "format": "int64"
+          },
+          "senderType": {
+            "type": "integer",
+            "description": "发送者类型(0-user, 1-ai)"
+          },
+          "content": {
+            "type": "string",
+            "description": "消息内容"
+          }
+        }
+      },
+      "SurfaceManager": {
+        "type": "object",
+        "properties": {
+          "cacheMap": {
+            "$ref": "#/components/schemas/ConcurrentHashMapObject",
+            "description": ""
+          }
+        }
+      },
+      "BaseResponseBoolean": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": ""
+          },
+          "data": {
+            "type": "boolean",
+            "description": ""
+          },
+          "message": {
+            "type": "string",
+            "description": ""
+          }
+        }
+      },
+      "ColorSpace": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "integer",
+            "description": "One of the{@code ColorSpace} type constants."
+          },
+          "numComponents": {
+            "type": "integer",
+            "description": "The number of components in the color space."
+          }
+        }
+      },
+      "DeleteRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "id",
+            "format": "int64"
+          }
+        }
+      },
+      "ColorModel": {
+        "type": "object",
+        "properties": {
+          "pData": {
+            "type": "integer",
+            "description": "Placeholder for data for native functions",
+            "format": "int64"
+          },
+          "pixel_bits": {
+            "type": "integer",
+            "description": "The total number of bits in the pixel."
+          },
+          "nBits": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "description": ""
+          },
+          "transparency": {
+            "type": "integer",
+            "description": "",
+            "default": 3
+          },
+          "supportsAlpha": {
+            "type": "boolean",
+            "description": "",
+            "default": true
+          },
+          "isAlphaPremultiplied": {
+            "type": "boolean",
+            "description": "",
+            "default": false
+          },
+          "numComponents": {
+            "type": "integer",
+            "description": "",
+            "default": -1
+          },
+          "numColorComponents": {
+            "type": "integer",
+            "description": "",
+            "default": -1
+          },
+          "colorSpace": {
+            "$ref": "#/components/schemas/ColorSpace",
+            "description": "",
+            "default": "ColorSpace.getInstance(ColorSpace.CS_sRGB)"
+          },
+          "colorSpaceType": {
+            "type": "integer",
+            "description": "",
+            "default": 5
+          },
+          "maxBits": {
+            "type": "integer",
+            "description": ""
+          },
+          "is_sRGB": {
+            "type": "boolean",
+            "description": "",
+            "default": true
+          },
+          "transferType": {
+            "type": "integer",
+            "description": "Data type of the array used to represent pixel values."
+          }
+        }
+      },
+      "MessageUpdateRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "id",
+            "format": "int64"
+          },
+          "senderType": {
+            "type": "integer",
+            "description": "发送者类型(0-user, 1-ai)"
+          },
+          "content": {
+            "type": "string",
+            "description": "消息内容"
+          }
+        }
+      },
+      "SampleModel": {
+        "type": "object",
+        "properties": {
+          "width": {
+            "type": "integer",
+            "description": "Width in pixels of the region of image data that this SampleModel\n describes."
+          },
+          "height": {
+            "type": "integer",
+            "description": "Height in pixels of the region of image data that this SampleModel\n describes."
+          },
+          "numBands": {
+            "type": "integer",
+            "description": "Number of bands of the image data that this SampleModel describes."
+          },
+          "dataType": {
+            "type": "integer",
+            "description": "Data type of the DataBuffer storing the pixel data.",
+            "enum": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              32
+            ]
+          }
+        }
+      },
+      "UserVO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "id",
+            "format": "int64"
+          },
+          "userName": {
+            "type": "string",
+            "description": "用户昵称"
+          },
+          "unionId": {
+            "type": "string",
+            "description": "开放平台id"
+          },
+          "mpOpenId": {
+            "type": "string",
+            "description": "公众号openId"
+          },
+          "userAvatar": {
+            "type": "string",
+            "description": "用户头像"
+          },
+          "userRole": {
+            "type": "string",
+            "description": "用户角色：user/admin/ban"
+          },
+          "userEmail": {
+            "type": "string",
+            "description": "用户邮箱"
+          },
+          "createTime": {
+            "type": "string",
+            "description": "创建时间"
+          },
+          "updateTime": {
+            "type": "string",
+            "description": "更新时间"
+          }
+        }
+      },
+      "StateTracker": {
+        "type": "object",
+        "properties": {}
+      },
+      "MessageVO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "id",
+            "format": "int64"
+          },
+          "conversionId": {
+            "type": "integer",
+            "description": "会话id",
+            "format": "int64"
+          },
+          "userId": {
+            "type": "integer",
+            "description": "消息发送者id",
+            "format": "int64"
+          },
+          "senderType": {
+            "type": "integer",
+            "description": "发送者类型(0-user, 1-ai)"
+          },
+          "content": {
+            "type": "string",
+            "description": "消息内容"
+          },
+          "createTime": {
+            "type": "string",
+            "description": "创建时间"
+          },
+          "userVO": {
+            "$ref": "#/components/schemas/UserVO",
+            "description": "创建用户信息"
+          }
+        }
+      },
+      "StateTrackableDelegate": {
+        "type": "object",
+        "properties": {
+          "theState": {
+            "type": "string",
+            "description": "",
+            "enum": [
+              "IMMUTABLE",
+              "STABLE",
+              "DYNAMIC",
+              "UNTRACKABLE"
+            ]
+          },
+          "theTracker": {
+            "$ref": "#/components/schemas/StateTracker",
+            "description": "package private for easy access from tracker"
+          },
+          "numDynamicAgents": {
+            "type": "integer",
+            "description": ""
+          }
+        }
+      },
+      "BaseResponseMessageVO": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": ""
+          },
+          "data": {
+            "$ref": "#/components/schemas/MessageVO",
+            "description": ""
+          },
+          "message": {
+            "type": "string",
+            "description": ""
+          }
+        }
+      },
+      "DataBuffer": {
+        "type": "object",
+        "properties": {
+          "dataType": {
+            "type": "integer",
+            "description": "The data type of this DataBuffer."
+          },
+          "banks": {
+            "type": "integer",
+            "description": "The number of banks in this DataBuffer."
+          },
+          "offset": {
+            "type": "integer",
+            "description": "Offset into default (first) bank from which to get the first element."
+          },
+          "size": {
+            "type": "integer",
+            "description": "Usable size of all banks."
+          },
+          "offsets": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "description": "Offsets into all banks."
+          },
+          "theTrackable": {
+            "$ref": "#/components/schemas/StateTrackableDelegate",
+            "description": ""
+          }
+        }
+      },
+      "Message": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "id",
+            "format": "int64"
+          },
+          "conversionId": {
+            "type": "integer",
+            "description": "会话id",
+            "format": "int64"
+          },
+          "userId": {
+            "type": "integer",
+            "description": "消息发送者id",
+            "format": "int64"
+          },
+          "senderType": {
+            "type": "integer",
+            "description": "发送者类型(0-user, 1-ai)"
+          },
+          "content": {
+            "type": "string",
+            "description": "消息内容"
+          },
+          "createTime": {
+            "type": "string",
+            "description": "创建时间"
+          }
+        }
+      },
+      "Raster": {
+        "type": "object",
+        "properties": {
+          "sampleModel": {
+            "$ref": "#/components/schemas/SampleModel",
+            "description": "The SampleModel that describes how pixels from this Raster\nare stored in the DataBuffer."
+          },
+          "dataBuffer": {
+            "$ref": "#/components/schemas/DataBuffer",
+            "description": "The DataBuffer that stores the image data."
+          },
+          "minX": {
+            "type": "integer",
+            "description": "The X coordinate of the upper-left pixel of this Raster."
+          },
+          "minY": {
+            "type": "integer",
+            "description": "The Y coordinate of the upper-left pixel of this Raster."
+          },
+          "width": {
+            "type": "integer",
+            "description": "The width of this Raster."
+          },
+          "height": {
+            "type": "integer",
+            "description": "The height of this Raster."
+          },
+          "sampleModelTranslateX": {
+            "type": "integer",
+            "description": "The X translation from the coordinate space of the\nRaster's SampleModel to that of the Raster."
+          },
+          "sampleModelTranslateY": {
+            "type": "integer",
+            "description": "The Y translation from the coordinate space of the\nRaster's SampleModel to that of the Raster."
+          },
+          "numBands": {
+            "type": "integer",
+            "description": "The number of bands in the Raster."
+          },
+          "numDataElements": {
+            "type": "integer",
+            "description": "The number of DataBuffer data elements per pixel."
+          },
+          "parent": {
+            "$ref": "#/components/schemas/Raster",
+            "description": "The parent of this Raster, or null."
+          }
+        }
+      },
+      "SearchVOObject": {
+        "type": "object",
+        "properties": {
+          "dataList": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {}
+            },
+            "description": "分页数据源对象集合"
+          }
+        }
+      },
+      "OrderItem": {
+        "type": "object",
+        "properties": {
+          "column": {
+            "type": "string",
+            "description": ""
+          },
+          "asc": {
+            "type": "boolean",
+            "description": ""
+          }
+        }
+      },
+      "WritableRaster": {
+        "type": "object",
+        "properties": {
+          "sampleModel": {
+            "$ref": "#/components/schemas/SampleModel",
+            "description": "The SampleModel that describes how pixels from this Raster\nare stored in the DataBuffer."
+          },
+          "dataBuffer": {
+            "$ref": "#/components/schemas/DataBuffer",
+            "description": "The DataBuffer that stores the image data."
+          },
+          "minX": {
+            "type": "integer",
+            "description": "The X coordinate of the upper-left pixel of this Raster."
+          },
+          "minY": {
+            "type": "integer",
+            "description": "The Y coordinate of the upper-left pixel of this Raster."
+          },
+          "width": {
+            "type": "integer",
+            "description": "The width of this Raster."
+          },
+          "height": {
+            "type": "integer",
+            "description": "The height of this Raster."
+          },
+          "sampleModelTranslateX": {
+            "type": "integer",
+            "description": "The X translation from the coordinate space of the\nRaster's SampleModel to that of the Raster."
+          },
+          "sampleModelTranslateY": {
+            "type": "integer",
+            "description": "The Y translation from the coordinate space of the\nRaster's SampleModel to that of the Raster."
+          },
+          "numBands": {
+            "type": "integer",
+            "description": "The number of bands in the Raster."
+          },
+          "numDataElements": {
+            "type": "integer",
+            "description": "The number of DataBuffer data elements per pixel."
+          },
+          "parent": {
+            "$ref": "#/components/schemas/Raster",
+            "description": "The parent of this Raster, or null."
+          }
+        }
+      },
+      "BaseResponseSearchVOObject": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": ""
+          },
+          "data": {
+            "$ref": "#/components/schemas/SearchVOObject",
+            "description": ""
+          },
+          "message": {
+            "type": "string",
+            "description": ""
+          }
+        }
+      },
+      "PageMessage": {
+        "type": "object",
+        "properties": {
+          "records": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Message",
+              "description": "消息(硬删除)"
+            },
+            "description": ""
+          },
+          "total": {
+            "type": "integer",
+            "description": "",
+            "format": "int64"
+          },
+          "size": {
+            "type": "integer",
+            "description": "",
+            "format": "int64"
+          },
+          "current": {
+            "type": "integer",
+            "description": "",
+            "format": "int64"
+          },
+          "orders": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OrderItem",
+              "description": "com.baomidou.mybatisplus.core.metadata.OrderItem"
+            },
+            "description": ""
+          },
+          "optimizeCountSql": {
+            "type": "boolean",
+            "description": ""
+          },
+          "searchCount": {
+            "type": "boolean",
+            "description": ""
+          },
+          "optimizeJoinOfCountSql": {
+            "type": "boolean",
+            "description": ""
+          },
+          "maxLimit": {
+            "type": "integer",
+            "description": "",
+            "format": "int64"
+          },
+          "countId": {
+            "type": "string",
+            "description": ""
+          }
+        }
+      },
+      "{}1": {
+        "type": "object",
+        "properties": {}
+      },
+      "SearchRequest": {
+        "type": "object",
+        "properties": {
+          "current": {
+            "type": "integer",
+            "description": "当前页号",
+            "default": 1
+          },
+          "pageSize": {
+            "type": "integer",
+            "description": "页面大小",
+            "default": 10
+          },
+          "sortField": {
+            "type": "string",
+            "description": "排序字段"
+          },
+          "sortOrder": {
+            "type": "string",
+            "description": "排序顺序（默认升序）",
+            "default": "ascend"
+          },
+          "searchText": {
+            "type": "string",
+            "description": "搜索词"
+          },
+          "type": {
+            "type": "string",
+            "description": "分类"
+          }
+        }
+      },
+      "BaseResponsePageMessage": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": ""
+          },
+          "data": {
+            "$ref": "#/components/schemas/PageMessage",
+            "description": ""
+          },
+          "message": {
+            "type": "string",
+            "description": ""
+          }
+        }
+      },
+      "BufferedImage": {
+        "type": "object",
+        "properties": {
+          "accelerationPriority": {
+            "type": "number",
+            "description": "Priority for accelerating this image.  Subclasses are free to\nset different default priorities and applications are free to\nset the priority for specific images via the\n{@code setAccelerationPriority(float)} method.",
+            "default": 0.5
+          },
+          "surfaceManager": {
+            "$ref": "#/components/schemas/SurfaceManager",
+            "description": ""
+          },
+          "imageType": {
+            "type": "integer",
+            "description": "",
+            "default": 0
+          },
+          "colorModel": {
+            "$ref": "#/components/schemas/ColorModel",
+            "description": ""
+          },
+          "raster": {
+            "$ref": "#/components/schemas/WritableRaster",
+            "description": ""
+          },
+          "osis": {
+            "$ref": "#/components/schemas/OffScreenImageSource",
+            "description": ""
+          },
+          "properties": {
+            "$ref": "#/components/schemas/HashtableObject",
+            "description": ""
+          }
+        }
+      },
+      "MessageQueryRequest": {
+        "type": "object",
+        "properties": {
+          "current": {
+            "type": "integer",
+            "description": "当前页号",
+            "default": 1
+          },
+          "pageSize": {
+            "type": "integer",
+            "description": "页面大小",
+            "default": 10
+          },
+          "sortField": {
+            "type": "string",
+            "description": "排序字段"
+          },
+          "sortOrder": {
+            "type": "string",
+            "description": "排序顺序（默认升序）",
+            "default": "ascend"
+          },
+          "id": {
+            "type": "integer",
+            "description": "id",
+            "format": "int64"
+          },
+          "notId": {
+            "type": "integer",
+            "description": "id",
+            "format": "int64"
+          },
+          "searchText": {
+            "type": "string",
+            "description": "搜索词"
+          },
+          "conversionId": {
+            "type": "integer",
+            "description": "会话id",
+            "format": "int64"
+          },
+          "userId": {
+            "type": "integer",
+            "description": "消息发送者id",
+            "format": "int64"
+          },
+          "senderType": {
+            "type": "integer",
+            "description": "发送者类型(0-user, 1-ai)"
+          },
+          "content": {
+            "type": "string",
+            "description": "消息内容"
+          }
+        }
+      },
+      "Hashtable?,?": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "null"
+          }
+        }
+      },
+      "PageMessageVO": {
+        "type": "object",
+        "properties": {
+          "records": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MessageVO",
+              "description": ""
+            },
+            "description": ""
+          },
+          "total": {
+            "type": "integer",
+            "description": "",
+            "format": "int64"
+          },
+          "size": {
+            "type": "integer",
+            "description": "",
+            "format": "int64"
+          },
+          "current": {
+            "type": "integer",
+            "description": "",
+            "format": "int64"
+          },
+          "orders": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OrderItem",
+              "description": "com.baomidou.mybatisplus.core.metadata.OrderItem"
+            },
+            "description": ""
+          },
+          "optimizeCountSql": {
+            "type": "boolean",
+            "description": ""
+          },
+          "searchCount": {
+            "type": "boolean",
+            "description": ""
+          },
+          "optimizeJoinOfCountSql": {
+            "type": "boolean",
+            "description": ""
+          },
+          "maxLimit": {
+            "type": "integer",
+            "description": "",
+            "format": "int64"
+          },
+          "countId": {
+            "type": "string",
+            "description": ""
+          }
+        }
+      },
+      "ImageConsumer": {
+        "type": "object",
+        "properties": {}
+      },
+      "BaseResponsePageMessageVO": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": ""
+          },
+          "data": {
+            "$ref": "#/components/schemas/PageMessageVO",
+            "description": ""
+          },
+          "message": {
+            "type": "string",
+            "description": ""
+          }
+        }
+      },
+      "OffScreenImageSource": {
+        "type": "object",
+        "properties": {
+          "image": {
+            "$ref": "#/components/schemas/BufferedImage",
+            "description": ""
+          },
+          "width": {
+            "type": "integer",
+            "description": ""
+          },
+          "height": {
+            "type": "integer",
+            "description": ""
+          },
+          "properties": {
+            "$ref": "#/components/schemas/Hashtable%3F%2C%3F",
+            "description": ""
+          },
+          "theConsumer": {
+            "$ref": "#/components/schemas/ImageConsumer",
+            "description": "We can only have one consumer since we immediately return the data..."
+          }
+        }
+      },
+      "MessageEditRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "id",
+            "format": "int64"
+          },
+          "conversionId": {
+            "type": "integer",
+            "description": "会话id",
+            "format": "int64"
+          },
+          "senderType": {
+            "type": "integer",
+            "description": "发送者类型(0-user, 1-ai)"
+          },
+          "content": {
+            "type": "string",
+            "description": "消息内容"
+          }
+        }
+      },
+      "key": {
+        "type": "object",
+        "properties": {}
+      },
+      "PostAddRequest": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "标题"
+          },
+          "content": {
+            "type": "string",
+            "description": "内容"
+          },
+          "cover": {
+            "type": "string",
+            "description": "封面"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "标签列表"
+          }
+        }
+      },
+      "HashtableObject": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "$ref": "#/components/schemas/key2"
+          }
+        }
+      },
+      "PostUpdateRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "id",
+            "format": "int64"
+          },
+          "title": {
+            "type": "string",
+            "description": "标题"
+          },
+          "content": {
+            "type": "string",
+            "description": "内容"
+          },
+          "cover": {
+            "type": "string",
+            "description": "封面"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "标签列表"
+          }
+        }
+      },
+      "key2": {
+        "type": "object",
+        "properties": {}
+      },
+      "PostVO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "id",
+            "format": "int64"
+          },
+          "title": {
+            "type": "string",
+            "description": "标题"
+          },
+          "content": {
+            "type": "string",
+            "description": "内容"
+          },
+          "cover": {
+            "type": "string",
+            "description": "封面"
+          },
+          "thumbNum": {
+            "type": "integer",
+            "description": "点赞数"
+          },
+          "favourNum": {
+            "type": "integer",
+            "description": "收藏数"
+          },
+          "userId": {
+            "type": "integer",
+            "description": "创建用户 id",
+            "format": "int64"
+          },
+          "createTime": {
+            "type": "string",
+            "description": "创建时间"
+          },
+          "updateTime": {
+            "type": "string",
+            "description": "更新时间"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "标签列表"
+          },
+          "userVO": {
+            "$ref": "#/components/schemas/UserVO",
+            "description": "创建用户信息"
+          },
+          "hasThumb": {
+            "type": "boolean",
+            "description": "是否已点赞"
+          },
+          "hasFavour": {
+            "type": "boolean",
+            "description": "是否已收藏"
+          }
+        }
+      },
+      "Captcha": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "验证码"
+          },
+          "uuid": {
+            "type": "string",
+            "description": "验证码UUID，用于组成Redis中的键"
+          },
+          "image": {
+            "type": "string",
+            "description": "验证码图片"
+          },
+          "imageBuffer": {
+            "$ref": "#/components/schemas/BufferedImage",
+            "description": ""
+          }
+        }
+      },
+      "BaseResponsePostVO": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": ""
+          },
+          "data": {
+            "$ref": "#/components/schemas/PostVO",
+            "description": ""
+          },
+          "message": {
+            "type": "string",
+            "description": ""
+          }
+        }
+      },
+      "BaseResponseCaptcha": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": ""
+          },
+          "data": {
+            "$ref": "#/components/schemas/Captcha",
+            "description": ""
+          },
+          "message": {
+            "type": "string",
+            "description": ""
+          }
+        }
+      },
+      "Post": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "id",
+            "format": "int64"
+          },
+          "title": {
+            "type": "string",
+            "description": "标题"
+          },
+          "content": {
+            "type": "string",
+            "description": "内容"
+          },
+          "cover": {
+            "type": "string",
+            "description": "封面"
+          },
+          "tags": {
+            "type": "string",
+            "description": "标签列表 json"
+          },
+          "thumbNum": {
+            "type": "integer",
+            "description": "点赞数"
+          },
+          "favourNum": {
+            "type": "integer",
+            "description": "收藏数"
+          },
+          "userId": {
+            "type": "integer",
+            "description": "创建用户 id",
+            "format": "int64"
+          },
+          "createTime": {
+            "type": "string",
+            "description": "创建时间"
+          },
+          "updateTime": {
+            "type": "string",
+            "description": "更新时间"
+          },
+          "isDelete": {
+            "type": "integer",
+            "description": "是否删除"
+          }
+        }
+      },
+      "PagePost": {
+        "type": "object",
+        "properties": {
+          "records": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Post",
+              "description": "帖子"
+            },
+            "description": ""
+          },
+          "total": {
+            "type": "integer",
+            "description": "",
+            "format": "int64"
+          },
+          "size": {
+            "type": "integer",
+            "description": "",
+            "format": "int64"
+          },
+          "current": {
+            "type": "integer",
+            "description": "",
+            "format": "int64"
+          },
+          "orders": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OrderItem",
+              "description": "com.baomidou.mybatisplus.core.metadata.OrderItem"
+            },
+            "description": ""
+          },
+          "optimizeCountSql": {
+            "type": "boolean",
+            "description": ""
+          },
+          "searchCount": {
+            "type": "boolean",
+            "description": ""
+          },
+          "optimizeJoinOfCountSql": {
+            "type": "boolean",
+            "description": ""
+          },
+          "maxLimit": {
+            "type": "integer",
+            "description": "",
+            "format": "int64"
+          },
+          "countId": {
+            "type": "string",
+            "description": ""
+          }
+        }
+      },
+      "BaseResponsePagePost": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": ""
+          },
+          "data": {
+            "$ref": "#/components/schemas/PagePost",
+            "description": ""
+          },
+          "message": {
+            "type": "string",
+            "description": ""
+          }
+        }
+      },
+      "PostQueryRequest": {
+        "type": "object",
+        "properties": {
+          "current": {
+            "type": "integer",
+            "description": "当前页号",
+            "default": 1
+          },
+          "pageSize": {
+            "type": "integer",
+            "description": "页面大小",
+            "default": 10
+          },
+          "sortField": {
+            "type": "string",
+            "description": "排序字段"
+          },
+          "sortOrder": {
+            "type": "string",
+            "description": "排序顺序（默认升序）",
+            "default": "ascend"
+          },
+          "id": {
+            "type": "integer",
+            "description": "id",
+            "format": "int64"
+          },
+          "notId": {
+            "type": "integer",
+            "description": "id",
+            "format": "int64"
+          },
+          "searchText": {
+            "type": "string",
+            "description": "搜索词"
+          },
+          "title": {
+            "type": "string",
+            "description": "标题"
+          },
+          "content": {
+            "type": "string",
+            "description": "内容"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "标签列表"
+          },
+          "orTags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "至少有一个标签"
+          },
+          "userId": {
+            "type": "integer",
+            "description": "创建用户 id",
+            "format": "int64"
+          },
+          "favourUserId": {
+            "type": "integer",
+            "description": "收藏用户 id",
+            "format": "int64"
+          }
+        }
+      },
+      "PagePostVO": {
+        "type": "object",
+        "properties": {
+          "records": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PostVO",
+              "description": ""
+            },
+            "description": ""
+          },
+          "total": {
+            "type": "integer",
+            "description": "",
+            "format": "int64"
+          },
+          "size": {
+            "type": "integer",
+            "description": "",
+            "format": "int64"
+          },
+          "current": {
+            "type": "integer",
+            "description": "",
+            "format": "int64"
+          },
+          "orders": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OrderItem",
+              "description": "com.baomidou.mybatisplus.core.metadata.OrderItem"
+            },
+            "description": ""
+          },
+          "optimizeCountSql": {
+            "type": "boolean",
+            "description": ""
+          },
+          "searchCount": {
+            "type": "boolean",
+            "description": ""
+          },
+          "optimizeJoinOfCountSql": {
+            "type": "boolean",
+            "description": ""
+          },
+          "maxLimit": {
+            "type": "integer",
+            "description": "",
+            "format": "int64"
+          },
+          "countId": {
+            "type": "string",
+            "description": ""
+          }
+        }
+      },
+      "BaseResponsePagePostVO": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": ""
+          },
+          "data": {
+            "$ref": "#/components/schemas/PagePostVO",
+            "description": ""
+          },
+          "message": {
+            "type": "string",
+            "description": ""
+          }
+        }
+      },
+      "PostEditRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "id",
+            "format": "int64"
+          },
+          "title": {
+            "type": "string",
+            "description": "标题"
+          },
+          "content": {
+            "type": "string",
+            "description": "内容"
+          },
+          "cover": {
+            "type": "string",
+            "description": "封面"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "标签列表"
+          }
+        }
+      },
+      "BaseResponseInteger": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": ""
+          },
+          "data": {
+            "type": "integer",
+            "description": ""
+          },
+          "message": {
+            "type": "string",
+            "description": ""
+          }
+        }
+      },
+      "PostFavourAddRequest": {
+        "type": "object",
+        "properties": {
+          "postId": {
+            "type": "integer",
+            "description": "帖子 id",
+            "format": "int64"
+          }
+        }
+      },
+      "PostFavourQueryRequest": {
+        "type": "object",
+        "properties": {
+          "current": {
+            "type": "integer",
+            "description": "当前页号",
+            "default": 1
+          },
+          "pageSize": {
+            "type": "integer",
+            "description": "页面大小",
+            "default": 10
+          },
+          "sortField": {
+            "type": "string",
+            "description": "排序字段"
+          },
+          "sortOrder": {
+            "type": "string",
+            "description": "排序顺序（默认升序）",
+            "default": "ascend"
+          },
+          "postQueryRequest": {
+            "$ref": "#/components/schemas/PostQueryRequest",
+            "description": "帖子查询请求"
+          },
+          "userId": {
+            "type": "integer",
+            "description": "用户 id",
+            "format": "int64"
+          }
+        }
+      },
+      "PostThumbAddRequest": {
+        "type": "object",
+        "properties": {
+          "postId": {
+            "type": "integer",
+            "description": "帖子 id",
+            "format": "int64"
+          }
+        }
+      },
+      "TagAddRequest": {
+        "type": "object",
+        "properties": {
+          "tagName": {
+            "type": "string",
+            "description": "标签名称"
+          },
+          "parentId": {
+            "type": "integer",
+            "description": "父标签id",
+            "format": "int64"
+          },
+          "isParent": {
+            "type": "integer",
+            "description": "0-不是父标签，1-是父标签"
+          }
+        }
+      },
+      "TagUpdateRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "id",
+            "format": "int64"
+          },
+          "tagName": {
+            "type": "string",
+            "description": "标签名称"
+          },
+          "parentId": {
+            "type": "integer",
+            "description": "父标签id",
+            "format": "int64"
+          },
+          "isParent": {
+            "type": "integer",
+            "description": "0-不是父标签，1-是父标签"
+          },
+          "idList": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "description": "id列表"
+          }
+        }
+      },
+      "TagVO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "id",
+            "format": "int64"
+          },
+          "tagName": {
+            "type": "string",
+            "description": "标签名称"
+          },
+          "userId": {
+            "type": "integer",
+            "description": "用户id",
+            "format": "int64"
+          },
+          "parentId": {
+            "type": "integer",
+            "description": "父标签id",
+            "format": "int64"
+          },
+          "isParent": {
+            "type": "integer",
+            "description": "0-不是父标签，1-是父标签"
+          },
+          "createTime": {
+            "type": "string",
+            "description": "创建时间"
+          },
+          "updateTime": {
+            "type": "string",
+            "description": "更新时间"
+          },
+          "userVO": {
+            "$ref": "#/components/schemas/UserVO",
+            "description": "创建用户信息"
+          }
+        }
+      },
+      "BaseResponseTagVO": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": ""
+          },
+          "data": {
+            "$ref": "#/components/schemas/TagVO",
+            "description": ""
+          },
+          "message": {
+            "type": "string",
+            "description": ""
+          }
+        }
+      },
+      "Tag": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "id",
+            "format": "int64"
+          },
+          "tagName": {
+            "type": "string",
+            "description": "标签名称"
+          },
+          "userId": {
+            "type": "integer",
+            "description": "用户id",
+            "format": "int64"
+          },
+          "parentId": {
+            "type": "integer",
+            "description": "父标签id",
+            "format": "int64"
+          },
+          "isParent": {
+            "type": "integer",
+            "description": "0-不是父标签，1-是父标签"
+          },
+          "createTime": {
+            "type": "string",
+            "description": "创建时间"
+          },
+          "updateTime": {
+            "type": "string",
+            "description": "更新时间"
+          },
+          "isDelete": {
+            "type": "integer",
+            "description": "是否删除"
+          }
+        }
+      },
+      "PageTag": {
+        "type": "object",
+        "properties": {
+          "records": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Tag",
+              "description": "标签表"
+            },
+            "description": ""
+          },
+          "total": {
+            "type": "integer",
+            "description": "",
+            "format": "int64"
+          },
+          "size": {
+            "type": "integer",
+            "description": "",
+            "format": "int64"
+          },
+          "current": {
+            "type": "integer",
+            "description": "",
+            "format": "int64"
+          },
+          "orders": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OrderItem",
+              "description": "com.baomidou.mybatisplus.core.metadata.OrderItem"
+            },
+            "description": ""
+          },
+          "optimizeCountSql": {
+            "type": "boolean",
+            "description": ""
+          },
+          "searchCount": {
+            "type": "boolean",
+            "description": ""
+          },
+          "optimizeJoinOfCountSql": {
+            "type": "boolean",
+            "description": ""
+          },
+          "maxLimit": {
+            "type": "integer",
+            "description": "",
+            "format": "int64"
+          },
+          "countId": {
+            "type": "string",
+            "description": ""
+          }
+        }
+      },
+      "BaseResponsePageTag": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": ""
+          },
+          "data": {
+            "$ref": "#/components/schemas/PageTag",
+            "description": ""
+          },
+          "message": {
+            "type": "string",
+            "description": ""
+          }
+        }
+      },
+      "TagQueryRequest": {
+        "type": "object",
+        "properties": {
+          "current": {
+            "type": "integer",
+            "description": "当前页号",
+            "default": 1
+          },
+          "pageSize": {
+            "type": "integer",
+            "description": "页面大小",
+            "default": 10
+          },
+          "sortField": {
+            "type": "string",
+            "description": "排序字段"
+          },
+          "sortOrder": {
+            "type": "string",
+            "description": "排序顺序（默认升序）",
+            "default": "ascend"
+          },
+          "id": {
+            "type": "integer",
+            "description": "id",
+            "format": "int64"
+          },
+          "tagName": {
+            "type": "string",
+            "description": "标签名称"
+          },
+          "userId": {
+            "type": "integer",
+            "description": "用户id",
+            "format": "int64"
+          },
+          "parentId": {
+            "type": "integer",
+            "description": "父标签id",
+            "format": "int64"
+          },
+          "isParent": {
+            "type": "integer",
+            "description": "0-不是父标签，1-是父标签"
+          }
+        }
+      },
+      "PageTagVO": {
+        "type": "object",
+        "properties": {
+          "records": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TagVO",
+              "description": ""
+            },
+            "description": ""
+          },
+          "total": {
+            "type": "integer",
+            "description": "",
+            "format": "int64"
+          },
+          "size": {
+            "type": "integer",
+            "description": "",
+            "format": "int64"
+          },
+          "current": {
+            "type": "integer",
+            "description": "",
+            "format": "int64"
+          },
+          "orders": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OrderItem",
+              "description": "com.baomidou.mybatisplus.core.metadata.OrderItem"
+            },
+            "description": ""
+          },
+          "optimizeCountSql": {
+            "type": "boolean",
+            "description": ""
+          },
+          "searchCount": {
+            "type": "boolean",
+            "description": ""
+          },
+          "optimizeJoinOfCountSql": {
+            "type": "boolean",
+            "description": ""
+          },
+          "maxLimit": {
+            "type": "integer",
+            "description": "",
+            "format": "int64"
+          },
+          "countId": {
+            "type": "string",
+            "description": ""
+          }
+        }
+      },
+      "BaseResponsePageTagVO": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": ""
+          },
+          "data": {
+            "$ref": "#/components/schemas/PageTagVO",
+            "description": ""
+          },
+          "message": {
+            "type": "string",
+            "description": ""
+          }
+        }
+      },
+      "TagEditRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "id",
+            "format": "int64"
+          },
+          "tagName": {
+            "type": "string",
+            "description": "标签名称"
+          }
+        }
+      },
+      "UserRegisterRequest": {
+        "type": "object",
+        "properties": {
+          "userAccount": {
+            "type": "string",
+            "description": "账号"
+          },
+          "userPassword": {
+            "type": "string",
+            "description": "密码"
+          },
+          "checkPassword": {
+            "type": "string",
+            "description": "再次输入密码"
+          }
+        }
+      },
+      "LoginUserVO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "用户 id",
+            "format": "int64"
+          },
+          "userName": {
+            "type": "string",
+            "description": "用户昵称"
+          },
+          "userAvatar": {
+            "type": "string",
+            "description": "用户头像"
+          },
+          "userRole": {
+            "type": "string",
+            "description": "用户角色：user/admin/ban"
+          },
+          "userEmail": {
+            "type": "string",
+            "description": "用户邮箱"
+          },
+          "createTime": {
+            "type": "string",
+            "description": "创建时间"
+          },
+          "updateTime": {
+            "type": "string",
+            "description": "更新时间"
+          },
+          "token": {
+            "type": "string",
+            "description": "token"
+          }
+        }
+      },
+      "BaseResponseLoginUserVO": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": ""
+          },
+          "data": {
+            "$ref": "#/components/schemas/LoginUserVO",
+            "description": ""
+          },
+          "message": {
+            "type": "string",
+            "description": ""
+          }
+        }
+      },
+      "UserLoginRequest": {
+        "type": "object",
+        "properties": {
+          "userAccount": {
+            "type": "string",
+            "description": "账号"
+          },
+          "userPassword": {
+            "type": "string",
+            "description": "密码"
+          }
+        }
+      },
+      "UserAddRequest": {
+        "type": "object",
+        "properties": {
+          "userName": {
+            "type": "string",
+            "description": "用户昵称"
+          },
+          "userAccount": {
+            "type": "string",
+            "description": "账号"
+          },
+          "userAvatar": {
+            "type": "string",
+            "description": "用户头像"
+          },
+          "userRole": {
+            "type": "string",
+            "description": "用户角色: user, admin"
+          },
+          "userEmail": {
+            "type": "string",
+            "description": "用户邮箱"
+          }
+        }
+      },
+      "UserUpdateRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "id",
+            "format": "int64"
+          },
+          "userName": {
+            "type": "string",
+            "description": "用户昵称"
+          },
+          "userPassword": {
+            "type": "string",
+            "description": "用户密码"
+          },
+          "userAvatar": {
+            "type": "string",
+            "description": "用户头像"
+          },
+          "userRole": {
+            "type": "string",
+            "description": "用户角色：user/admin/ban"
+          },
+          "userEmail": {
+            "type": "string",
+            "description": "用户邮箱"
+          }
+        }
+      },
+      "User": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "id",
+            "format": "int64"
+          },
+          "userAccount": {
+            "type": "string",
+            "description": "用户账号"
+          },
+          "userPassword": {
+            "type": "string",
+            "description": "用户密码"
+          },
+          "unionId": {
+            "type": "string",
+            "description": "开放平台id"
+          },
+          "mpOpenId": {
+            "type": "string",
+            "description": "公众号openId"
+          },
+          "userName": {
+            "type": "string",
+            "description": "用户昵称"
+          },
+          "userAvatar": {
+            "type": "string",
+            "description": "用户头像"
+          },
+          "userRole": {
+            "type": "string",
+            "description": "用户角色：user/admin/ban"
+          },
+          "userEmail": {
+            "type": "string",
+            "description": "用户邮箱"
+          },
+          "createTime": {
+            "type": "string",
+            "description": "创建时间"
+          },
+          "updateTime": {
+            "type": "string",
+            "description": "更新时间"
+          },
+          "isDelete": {
+            "type": "integer",
+            "description": "是否删除"
+          }
+        }
+      },
+      "BaseResponseUser": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": ""
+          },
+          "data": {
+            "$ref": "#/components/schemas/User",
+            "description": ""
+          },
+          "message": {
+            "type": "string",
+            "description": ""
+          }
+        }
+      },
+      "BaseResponseUserVO": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": ""
+          },
+          "data": {
+            "$ref": "#/components/schemas/UserVO",
+            "description": "创建用户信息"
+          },
+          "message": {
+            "type": "string",
+            "description": ""
+          }
+        }
+      },
+      "PageUser": {
+        "type": "object",
+        "properties": {
+          "records": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/User",
+              "description": ""
+            },
+            "description": ""
+          },
+          "total": {
+            "type": "integer",
+            "description": "",
+            "format": "int64"
+          },
+          "size": {
+            "type": "integer",
+            "description": "",
+            "format": "int64"
+          },
+          "current": {
+            "type": "integer",
+            "description": "",
+            "format": "int64"
+          },
+          "orders": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OrderItem",
+              "description": "com.baomidou.mybatisplus.core.metadata.OrderItem"
+            },
+            "description": ""
+          },
+          "optimizeCountSql": {
+            "type": "boolean",
+            "description": ""
+          },
+          "searchCount": {
+            "type": "boolean",
+            "description": ""
+          },
+          "optimizeJoinOfCountSql": {
+            "type": "boolean",
+            "description": ""
+          },
+          "maxLimit": {
+            "type": "integer",
+            "description": "",
+            "format": "int64"
+          },
+          "countId": {
+            "type": "string",
+            "description": ""
+          }
+        }
+      },
+      "BaseResponsePageUser": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": ""
+          },
+          "data": {
+            "$ref": "#/components/schemas/PageUser",
+            "description": ""
+          },
+          "message": {
+            "type": "string",
+            "description": ""
+          }
+        }
+      },
+      "UserQueryRequest": {
+        "type": "object",
+        "properties": {
+          "current": {
+            "type": "integer",
+            "description": "当前页号",
+            "default": 1
+          },
+          "pageSize": {
+            "type": "integer",
+            "description": "页面大小",
+            "default": 10
+          },
+          "sortField": {
+            "type": "string",
+            "description": "排序字段"
+          },
+          "sortOrder": {
+            "type": "string",
+            "description": "排序顺序（默认升序）",
+            "default": "ascend"
+          },
+          "id": {
+            "type": "integer",
+            "description": "id",
+            "format": "int64"
+          },
+          "notId": {
+            "type": "integer",
+            "description": "id",
+            "format": "int64"
+          },
+          "unionId": {
+            "type": "string",
+            "description": "开放平台id"
+          },
+          "mpOpenId": {
+            "type": "string",
+            "description": "公众号openId"
+          },
+          "userName": {
+            "type": "string",
+            "description": "用户昵称"
+          },
+          "userRole": {
+            "type": "string",
+            "description": "用户角色：user/admin/ban"
+          },
+          "userEmail": {
+            "type": "string",
+            "description": "用户邮箱"
+          },
+          "searchText": {
+            "type": "string",
+            "description": "搜索关键词"
+          }
+        }
+      },
+      "PageUserVO": {
+        "type": "object",
+        "properties": {
+          "records": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UserVO",
+              "description": "创建用户信息"
+            },
+            "description": ""
+          },
+          "total": {
+            "type": "integer",
+            "description": "",
+            "format": "int64"
+          },
+          "size": {
+            "type": "integer",
+            "description": "",
+            "format": "int64"
+          },
+          "current": {
+            "type": "integer",
+            "description": "",
+            "format": "int64"
+          },
+          "orders": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OrderItem",
+              "description": "com.baomidou.mybatisplus.core.metadata.OrderItem"
+            },
+            "description": ""
+          },
+          "optimizeCountSql": {
+            "type": "boolean",
+            "description": ""
+          },
+          "searchCount": {
+            "type": "boolean",
+            "description": ""
+          },
+          "optimizeJoinOfCountSql": {
+            "type": "boolean",
+            "description": ""
+          },
+          "maxLimit": {
+            "type": "integer",
+            "description": "",
+            "format": "int64"
+          },
+          "countId": {
+            "type": "string",
+            "description": ""
+          }
+        }
+      },
+      "BaseResponsePageUserVO": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": ""
+          },
+          "data": {
+            "$ref": "#/components/schemas/PageUserVO",
+            "description": ""
+          },
+          "message": {
+            "type": "string",
+            "description": ""
+          }
+        }
+      },
+      "UserEditRequest": {
+        "type": "object",
+        "properties": {
+          "userName": {
+            "type": "string",
+            "description": "用户昵称"
+          },
+          "userPassword": {
+            "type": "string",
+            "description": "用户密码"
+          },
+          "userAvatar": {
+            "type": "string",
+            "description": "用户头像"
+          },
+          "userEmail": {
+            "type": "string",
+            "description": "用户邮箱"
+          }
+        }
+      }
+    },
+    "securitySchemes": {}
+  },
+  "servers": [],
+  "security": []
+}

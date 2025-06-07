@@ -8,11 +8,10 @@ import {
 } from '@ant-design/pro-components';
 import { message, Select, UploadProps } from 'antd';
 import React, { useState } from 'react';
-import { addUserUsingPost } from '@/services/stephen-backend/userController';
-import { uploadFileUsingPost } from '@/services/stephen-backend/fileController';
 import { userRole, UserRoleEnum } from '@/enums/UserRoleEnum';
-import { TagTreeSelect } from '@/components';
 import { FileUploadBiz } from '@/enums/FileUploadBizEnum';
+import {addUser} from '@/services/stephen-backend/userController';
+import {uploadFile} from '@/services/stephen-backend/fileController';
 
 interface Props {
   onCancel: () => void;
@@ -28,7 +27,7 @@ interface Props {
 const handleAdd = async (fields: API.UserAddRequest) => {
   const hide = message.loading('正在添加');
   try {
-    const res = await addUserUsingPost({
+    const res = await addUser({
       ...fields,
     });
     if (res.code === 0 && res.data) {
@@ -66,7 +65,7 @@ const CreateUserModal: React.FC<Props> = (props) => {
     customRequest: async (options: any) => {
       const { onSuccess, onError, file } = options;
       try {
-        const res = await uploadFileUsingPost(
+        const res = await uploadFile(
           {
             biz: FileUploadBiz.USER_AVATAR,
           },
@@ -143,7 +142,6 @@ const CreateUserModal: React.FC<Props> = (props) => {
           <Select.Option value={UserRoleEnum.BAN}>{userRole[UserRoleEnum.BAN].text}</Select.Option>
         </Select>
       </ProFormSelect>
-      <TagTreeSelect name={'tags'} label={"标签"}/>
     </ModalForm>
   );
 };

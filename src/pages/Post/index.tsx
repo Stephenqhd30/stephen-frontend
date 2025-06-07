@@ -3,8 +3,7 @@ import { useParams } from '@@/exports';
 import { PageContainer, ProCard } from '@ant-design/pro-components';
 import { Grid, message } from 'antd';
 import { MdViewer, PostTitleCard } from '@/components';
-import { getPostVoByIdUsingGet } from '@/services/stephen-backend/postController';
-import {Markdown} from '@ant-design/pro-editor';
+import {getPostVoById} from '@/services/stephen-backend/postController';
 
 const { useBreakpoint } = Grid;
 
@@ -22,7 +21,7 @@ const PostDetailsPage: React.FC = () => {
 
   const loadData = async () => {
     try {
-      const res = await getPostVoByIdUsingGet({
+      const res = await getPostVoById({
         // @ts-ignore
         id: id,
       });
